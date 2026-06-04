@@ -518,6 +518,7 @@ function buildMarketPulseRows(market) {
   const byTicker = new Map(rows.map(row => [row.ticker, row]));
   return MARKET_PULSE_TICKERS.map(([ticker, label]) => {
     const row = byTicker.get(ticker) ?? {};
+    const hasData = Number.isFinite(Number(row.latest_close));
     return {
       ticker,
       label,
@@ -525,7 +526,11 @@ function buildMarketPulseRows(market) {
       ret: row.latest_return_pct,
       date: row.latest_date,
       timing: row.timing_status,
-      _tooltip: `${ticker}: ${label}. Used as market confirmation for news, factor risk, and strategy review.`
+      hasData,
+      source: row.source ?? market.data_mode,
+      _tooltip: hasData
+        ? `${ticker}: ${label}. ${timingLabel(row.timing_status)} ${row.latest_date ?? ""}. Used as market confirmation for news, factor risk, and strategy review.`
+        : `${ticker}: ${label}. Waiting for hosted yfinance/OpenBB polling data.`
     };
   });
 }
@@ -538,8 +543,9 @@ function renderMarketPulseCards(id, market) {
     <div class="pulse-card" title="${escapeHtml(row._tooltip)}">
       <div class="pulse-label">${escapeHtml(row.label)}</div>
       <div class="pulse-ticker">${escapeHtml(row.ticker)}</div>
-      <div class="pulse-close">${fmtNum(row.close, row.ticker === "VIX" ? 2 : 2)}</div>
-      <div class="pulse-move ${signedClass(row.ret)}">${fmtPct(row.ret)}</div>
+      <div class="pulse-close">${row.hasData ? fmtNum(row.close, row.ticker === "VIX" ? 2 : 2) : "Waiting"}</div>
+      <div class="pulse-move ${row.hasData ? signedClass(row.ret) : "muted"}">${row.hasData ? fmtPct(row.ret) : "live poll"}</div>
+      <div class="pulse-source">${row.hasData ? `${timingLabel(row.timing)} ${row.date ?? ""}` : "no hard-coded price"}</div>
     </div>
   `).join("");
 }

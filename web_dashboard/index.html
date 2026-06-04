@@ -141,7 +141,7 @@
           <div id="factor-exposure-table"></div>
         </div>
         <div class="card">
-          <div class="section-title"><h2>Correlation Matrix (Key Assets)</h2><span class="small">static proxy view</span></div>
+          <div class="section-title"><h2>Correlation Evidence</h2><span class="small">requires rolling price history</span></div>
           <div id="correlation-matrix"></div>
         </div>
         <div class="card">
@@ -386,7 +386,7 @@
       const dailyReturn = dailyPnl / PORTFOLIO_BASE;
       const var95 = Math.sqrt(positions.reduce((sum, row) => sum + row.var95 ** 2, 0)) * 1.22;
       const es95 = var95 * 1.32;
-      const maxDrawdown = -0.0361;
+      const maxDrawdown = 0;
       const riskUtil = var95 / riskProfile.varLimit;
       return {
         positions,
@@ -398,18 +398,6 @@
         maxDrawdown,
         riskUtil
       };
-    }
-
-    function demoPath(anchorReturn) {
-      const base = [-0.4, -0.9, -1.25, -0.65, -0.95, -0.28, 0.15, 0.55, 0.35, 0.92, 1.32, 1.05, 1.72, 2.18, 1.86, 2.55, 3.05, 2.74, 2.21, 3.01, 3.63, 4.06];
-      const shift = anchorReturn * 100 * 0.35;
-      const values = base.map((value, index) => value + shift * (index / Math.max(1, base.length - 1)));
-      return values.map((value, index) => ({ label: String(index + 1), value }));
-    }
-
-    function drawdownsFromPath(path) {
-      const values = [-1.2, -2.4, -3.1, -2.0, -2.7, -1.4, -0.8, -1.1, -0.6, -0.5, -0.9, -0.4, -0.4, -1.0, -0.3, -0.3, -0.8, -1.6, -3.0, -0.9, -0.5, -0.5];
-      return values.map((value, index) => ({ label: path[index]?.label ?? String(index + 1), value }));
     }
 
     function sampleCurve(rows, maxPoints = 140) {
@@ -515,7 +503,11 @@
 
     function renderLineChart(id, rows, options = {}) {
       const target = byId(id);
-      if (!target || !rows.length) return;
+      if (!target) return;
+      if (!rows.length) {
+        target.innerHTML = `<div class="empty-chart">No simulation chart data. Run the no-look-ahead portfolio simulation before presenting this panel.</div>`;
+        return;
+      }
       const width = 680;
       const height = 240;
       const pad = 34;
@@ -788,15 +780,15 @@
       setText("asset-focus-title", focus.title);
       setText("asset-focus-detail", focus.detail);
 
-      const perfPath = simulationReady ? performancePathFromSimulation(simulation) : demoPath(snap.dailyReturn);
-      const ddPath = simulationReady ? drawdownPathFromSimulation(simulation) : drawdownsFromPath(perfPath);
+      const perfPath = simulationReady ? performancePathFromSimulation(simulation) : [];
+      const ddPath = simulationReady ? drawdownPathFromSimulation(simulation) : [];
       renderLineChart("performance-chart", perfPath, {
-        title: simulationReady ? "Cumulative return since initial investment" : "Cumulative P&L / Return proxy",
-        footer: simulationReady ? `Total ${fmtPct(Number(simulation.current.total_return) * 100)}` : `Today ${fmtPct(snap.dailyReturn * 100)}`
+        title: simulationReady ? "Cumulative return since initial investment" : "No simulated path",
+        footer: simulationReady ? `Total ${fmtPct(Number(simulation.current.total_return) * 100)}` : "simulation missing"
       });
-      const chartMaxDrawdown = simulationReady ? Number(simulation.current.max_drawdown) * 100 : Math.min(...ddPath.map(x => x.value));
-      renderLineChart("drawdown-chart", ddPath, { color: "#ff5164", area: "rgba(255, 81, 100, 0.18)", title: simulationReady ? "Simulation drawdown" : "Drawdown proxy", footer: `Max ${fmtPct(chartMaxDrawdown)}` });
-      setText("drawdown-label", `max ${fmtPct(chartMaxDrawdown)}`);
+      const chartMaxDrawdown = simulationReady ? Number(simulation.current.max_drawdown) * 100 : null;
+      renderLineChart("drawdown-chart", ddPath, { color: "#ff5164", area: "rgba(255, 81, 100, 0.18)", title: simulationReady ? "Simulation drawdown" : "No drawdown path", footer: simulationReady ? `Max ${fmtPct(chartMaxDrawdown)}` : "simulation missing" });
+      setText("drawdown-label", simulationReady ? `max ${fmtPct(chartMaxDrawdown)}` : "simulation missing");
       renderHeatmap("risk-heatmap", riskHeatmapRows(positions, riskProfile));
 
       const stressRows = [
@@ -877,16 +869,13 @@
         { label: "Interpretation", key: "risk" }
       ], 8);
 
-      const corrRows = [
-        { asset: "SPY", SPY: "1.00", TLT: "-0.28", HYG: "0.63", USD: "-0.41", GLD: "-0.12" },
-        { asset: "TLT", SPY: "-0.28", TLT: "1.00", HYG: "-0.28", USD: "0.61", GLD: "0.24" },
-        { asset: "HYG", SPY: "0.63", TLT: "-0.28", HYG: "1.00", USD: "-0.31", GLD: "-0.08" },
-        { asset: "USD", SPY: "-0.41", TLT: "0.61", HYG: "-0.31", USD: "1.00", GLD: "0.18" },
-        { asset: "GLD", SPY: "-0.12", TLT: "0.24", HYG: "-0.08", USD: "0.18", GLD: "1.00" }
-      ];
-      renderTable("correlation-matrix", corrRows, [
-        { label: "", key: "asset" }, { label: "SPY", key: "SPY" }, { label: "TLT", key: "TLT" }, { label: "HYG", key: "HYG" }, { label: "USD", key: "USD" }, { label: "GLD", key: "GLD" }
-      ], 8);
+      byId("correlation-matrix").innerHTML = `
+        <div class="method-box">
+          <strong>Not shown as live data.</strong>
+          Correlation should be computed from the rolling price-history artifact, not typed into the dashboard.
+          Use this panel only after the rolling correlation job is wired to the hosted data pipeline.
+        </div>
+      `;
       const equityWeight = positions.filter(p => p.asset_class === "Equity").reduce((sum, p) => sum + Number(p.target_weight || 0), 0);
       const profileAlerts = {
         signals: [
@@ -932,7 +921,7 @@
       safeOverviewRender("strategy simulation cards", () => renderStrategySimulationCards(simulation, filteredPositions.length ? filteredPositions : positions));
       safeOverviewRender("methodology", () => renderTable("methodology-table", [
         { item: "Portfolio base", value: simulationReady ? `$1,000,000 invested from ${simulation.simulation_start_actual}; current value ${money(snap.portfolioValue)}` : "$1,000,000 simulated initial portfolio" },
-        { item: "Strategy selection rule", value: simulationReady ? simulation.selection_rule : "Static fallback when simulation snapshot is missing" },
+        { item: "Strategy selection rule", value: simulationReady ? simulation.selection_rule : "No simulation snapshot available; no fake fallback chart is shown." },
         { item: "No-look-ahead control", value: simulationReady ? "Monthly selection uses only the prior training window; future test returns are not used for selection." : "N/A" },
         { item: "Market data source", value: market.data_mode ?? "snapshot fallback" },
         { item: "News data source", value: news.data_mode ?? "friend API snapshot" },
