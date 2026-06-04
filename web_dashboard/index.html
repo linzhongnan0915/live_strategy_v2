@@ -128,7 +128,25 @@
         </div>
       </section>
 
-      <section class="overview-grid-bottom section">
+      <section class="strategy-framework-strip section">
+        <div class="card strategy-framework-card">
+          <div class="metric-label">Strategy universe</div>
+          <div id="overview-strategy-count" class="metric-value accent">...</div>
+          <div id="overview-strategy-categories" class="metric-sub"></div>
+        </div>
+        <div class="card strategy-framework-card">
+          <div class="metric-label">Selection hierarchy</div>
+          <div class="framework-main">Market fit first</div>
+          <div class="metric-sub">Current ETF/factor moves -> WFO evidence -> news/risk confirmation -> human review gate.</div>
+        </div>
+        <div class="card strategy-framework-card">
+          <div class="metric-label">Current strategy candidate</div>
+          <div id="overview-current-strategy" class="framework-main">...</div>
+          <div id="overview-strategy-evidence" class="metric-sub"></div>
+        </div>
+      </section>
+
+      <section class="overview-grid-bottom overview-strategy-row section">
         <div class="card">
           <div class="section-title"><h2>Current Strategy Sleeve</h2><span class="small">selected by no-look-ahead simulation</span></div>
           <div id="current-strategy-card"></div>
@@ -472,14 +490,44 @@
       ], 8);
     }
 
+    function renderOverviewStrategyFramework({ simulation, wfo, strategyLibrary, dailyReview }) {
+      const strategyCount = Number(wfo.strategy_count) || strategyLibrary.length || Number(dailyReview.strategy_count) || 0;
+      const categories = [...new Set(strategyLibrary.map(row => row.category).filter(Boolean))];
+      const currentId = simulation.current?.current_strategy ?? "N/A";
+      const currentName = simulation.current?.current_strategy_name ?? currentId;
+      const topWfo = (wfo.items ?? []).slice(0, 3);
+      const selectedWfo = (wfo.items ?? []).find(row => row.strategy_id === currentId) ?? topWfo[0] ?? {};
+      const windowText = Number(wfo.window_count)
+        ? `${wfo.window_count} rolling windows | ${wfo.train_years}y train / ${wfo.test_months}m test`
+        : "WFO snapshot loading";
+      const topText = topWfo.length
+        ? topWfo.map(row => `#${row.wfo_rank} ${row.strategy_id}`).join(" | ")
+        : "Top WFO candidates loading";
+
+      setText("overview-strategy-count", `${strategyCount || "N/A"} ETF sleeves`);
+      setText("overview-strategy-categories", categories.length
+        ? `${categories.length} categories: ${categories.slice(0, 5).join(", ")}`
+        : "Macro factor, sector rotation, smart beta, hedge/stress, completion/liquidity"
+      );
+      setText("overview-current-strategy", currentName);
+      byId("overview-strategy-evidence").innerHTML = `
+        <span class="decision-key">WFO:</span> ${escapeHtml(windowText)}
+        <br><span class="decision-key">Current candidate rank:</span> ${escapeHtml(selectedWfo.wfo_rank ? `#${selectedWfo.wfo_rank}` : "N/A")}
+        <br><span class="decision-key">Top candidates:</span> ${escapeHtml(topText)}
+      `;
+    }
+
     async function updateOverview() {
-      const [status, market, news, metrics, backtest, simulation] = await Promise.all([
+      const [status, market, news, metrics, backtest, simulation, wfo, strategyLibrary, dailyReview] = await Promise.all([
         loadJson(PATHS.liveStatus, {}),
         loadJson(PATHS.market, { items: [] }),
         loadJson(PATHS.news, { items: [] }),
         loadJson(PATHS.metrics, { metrics: {} }),
         loadJson(PATHS.backtest, { items: [] }),
-        loadJson(PATHS.simulation, {})
+        loadJson(PATHS.simulation, {}),
+        loadJson(PATHS.wfo, { items: [] }),
+        loadCsv(PATHS.strategyLibrary),
+        loadJson(PATHS.dailyReview, { items: [] })
       ]);
       const rows = market.items ?? [];
       populateAssetFilter(rows);
@@ -604,6 +652,7 @@
       const riskGroupTotal = riskGroups.reduce((sum, row) => sum + Number(row.value || 0), 0) || 1;
       const riskContrib = riskGroups.map(row => ({ name: row.name, value: row.value / riskGroupTotal * 100 }));
       renderBars("risk-contribution-bars", riskContrib, 8);
+      renderOverviewStrategyFramework({ simulation, wfo, strategyLibrary, dailyReview });
       renderStrategySimulationCards(simulation, filteredPositions.length ? filteredPositions : positions);
       renderTable("methodology-table", [
         { item: "Portfolio base", value: simulationReady ? `$1,000,000 invested from ${simulation.simulation_start_actual}; current value ${money(snap.portfolioValue)}` : "$1,000,000 simulated initial portfolio" },
