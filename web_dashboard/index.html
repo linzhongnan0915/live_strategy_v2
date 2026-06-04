@@ -279,11 +279,11 @@
       return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: digits });
     }
 
-    function positionRows(rows) {
+    function positionRows(rows, portfolioValue = PORTFOLIO_BASE) {
       return investableRows(rows).map(row => {
         const weight = Number(row.target_weight) || 0;
         const ret = Number(row.latest_return_pct) || 0;
-        const mv = PORTFOLIO_BASE * weight;
+        const mv = portfolioValue * weight;
         const pnl = mv * ret / 100;
         const vol = BUCKET_VOL[row.risk_bucket] ?? (row.asset_class === "Equity" ? 0.015 : 0.008);
         const var95 = 1.65 * mv * vol;
@@ -747,7 +747,8 @@
       populateAssetFilter(rows);
       const riskProfile = selectedRiskProfile();
       const simulationReady = hasSimulation(simulation);
-      const positions = simulationReady ? simulationPositionRows(simulation, market) : positionRows(rows);
+      const simulationPortfolioValue = Number(simulation.current?.portfolio_value) || PORTFOLIO_BASE;
+      const positions = simulationReady ? simulationPositionRows(simulation, market) : positionRows(rows, simulationPortfolioValue);
       const filteredPositions = applyAssetFilter(positions);
       const snap = simulationReady
         ? simulationSnapshot(simulation, positions, riskProfile)
@@ -907,9 +908,9 @@
         ]
       };
       renderAlerts(newsTriage, profileAlerts);
-      safeOverviewRender("overview allocation", () => renderAllocationPie("overview-allocation", groupAllocation(filteredPositions, "asset_class", "target_weight"), { label: "asset class allocation" }));
-      setText("allocation-caption", simulationReady ? `${money(snap.portfolioValue)} current selected sleeve` : "$1M simulated portfolio");
-      const fullPortfolioPositions = applyAssetFilter(positionRows(rows));
+      const fullPortfolioPositions = applyAssetFilter(positionRows(rows, snap.portfolioValue));
+      safeOverviewRender("overview allocation", () => renderAllocationPie("overview-allocation", groupAllocation(fullPortfolioPositions, "asset_class", "target_weight"), { label: "overall portfolio asset class allocation" }));
+      setText("allocation-caption", `${money(snap.portfolioValue)} overall portfolio`);
       const positionTableRows = fullPortfolioPositions.map(row => ({
         ...row,
         _tooltip: `${row.ticker}: ${row.asset_class} | ${row.risk_bucket} | weight ${fmtPct(Number(row.target_weight) * 100)} | market value ${money(row.market_value)} | P&L ${money(row.daily_pnl)} | VaR ${money(row.var95)} | utilization ${fmtPct(row.utilization * 100)}`
