@@ -40,6 +40,7 @@ DEFAULT_INTERVAL_SECONDS = 30
 DEFAULT_LOOKBACK_DAYS = 10
 DEFAULT_LIVE_RAW_PATH = _ROOT / "data" / "raw" / "openbb_live_price_history.csv"
 DEFAULT_PROCESSED_PATH = _ROOT / "data" / "processed" / "openbb_price_history_aligned.csv"
+DEFAULT_EOD_ANCHOR_PATH = _ROOT / "data" / "samples" / "openbb_eod_anchor.csv"
 DEFAULT_MONITOR_PATH = _ROOT / "output" / "openbb_market_monitor_snapshot.json"
 DEFAULT_WATCHLIST_PATH = _ROOT / "output" / "openbb_overnight_watchlist.json"
 DEFAULT_STATUS_PATH = _ROOT / "output" / "live_polling_status.json"
@@ -85,6 +86,15 @@ def _write_json(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8") as handle:
         json.dump(payload, handle, indent=2)
+
+
+def _resolve_processed_anchor(processed_path: Path) -> Path:
+    """Use full processed EOD panel locally, or committed EOD anchor on hosted deploys."""
+    if processed_path.exists():
+        return processed_path
+    if DEFAULT_EOD_ANCHOR_PATH.exists():
+        return DEFAULT_EOD_ANCHOR_PATH
+    return processed_path
 
 
 def _status_payload(
@@ -180,7 +190,7 @@ def run_poll_cycle(
 
             monitor = build_market_monitor_snapshot(
                 raw_price_path=live_raw_path,
-                processed_price_path=processed_path,
+                processed_price_path=_resolve_processed_anchor(processed_path),
                 monitor_tickers=tickers,
             )
             monitor_payload = snapshot_to_jsonable(monitor)
