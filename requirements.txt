@@ -3,3 +3,4 @@ pytest
 streamlit
 plotly
 openbb
+yfinance

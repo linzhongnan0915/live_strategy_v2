@@ -453,7 +453,7 @@
         const x = scaleX(i);
         const y = scaleY(Number(row.value));
         const tooltip = row.tooltip ?? `${row.label}\n${options.title ?? "Value"}: ${fmtPct(row.value)}`;
-        return `<circle class="chart-hover-point" cx="${x}" cy="${y}" r="7"><title>${escapeHtml(tooltip)}</title></circle>`;
+        return `<circle class="chart-hover-point" cx="${x}" cy="${y}" r="7" data-tip="${escapeHtml(tooltip)}"></circle>`;
       }).join("");
       target.innerHTML = `
         <svg class="svg-chart terminal-chart" viewBox="0 0 ${width} ${height}">
@@ -467,6 +467,28 @@
           <text class="chart-label" x="${width - 170}" y="18">${escapeHtml(options.footer ?? "")}</text>
         </svg>
       `;
+    }
+
+    function installFastChartTooltip() {
+      if (window.fastChartTooltipInstalled) return;
+      window.fastChartTooltipInstalled = true;
+      const tip = document.createElement("div");
+      tip.className = "chart-fast-tooltip";
+      document.body.appendChild(tip);
+      document.addEventListener("mousemove", event => {
+        const target = event.target.closest?.(".chart-hover-point");
+        if (!target) {
+          tip.style.display = "none";
+          return;
+        }
+        tip.textContent = target.dataset.tip ?? "";
+        tip.style.left = `${event.clientX + 12}px`;
+        tip.style.top = `${event.clientY + 12}px`;
+        tip.style.display = "block";
+      });
+      document.addEventListener("mouseleave", () => {
+        tip.style.display = "none";
+      });
     }
 
     function riskHeatmapRows(positions) {
@@ -761,6 +783,7 @@
     }
     ["risk-profile", "asset-filter", "risk-limit-input"].forEach(id => {
       window.addEventListener("DOMContentLoaded", () => {
+        installFastChartTooltip();
         const node = byId(id);
         if (node) node.addEventListener("change", updateOverview);
         if (id === "risk-limit-input" && node) node.addEventListener("input", updateOverview);

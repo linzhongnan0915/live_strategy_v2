@@ -16,6 +16,7 @@ from typing import Any
 import pandas as pd
 
 OPENBB_IMPORT_ERROR = "OpenBB is not installed. Install with: pip install openbb"
+YFINANCE_IMPORT_ERROR = "Neither OpenBB nor yfinance is installed. Install with: pip install yfinance"
 
 PRICE_HISTORY_COLUMNS = ["date", "ticker", "close", "source"]
 
@@ -34,6 +35,45 @@ def _import_openbb() -> Any:
     except ImportError as exc:
         raise ImportError(OPENBB_IMPORT_ERROR) from exc
     return obb
+
+
+def _fetch_yfinance_price_history(
+    symbols: list[str],
+    start_date: str,
+    end_date: str,
+    provider: str,
+) -> pd.DataFrame:
+    """Fallback daily close fetch when OpenBB is unavailable."""
+    try:
+        import yfinance as yf  # type: ignore import-not-found
+    except ImportError as exc:
+        raise ImportError(YFINANCE_IMPORT_ERROR) from exc
+
+    source = _source_label(provider)
+    frames: list[pd.DataFrame] = []
+    for ticker in [str(s).strip().upper() for s in symbols]:
+        fetch_symbol = _map_symbol_for_provider(ticker, provider)
+        try:
+            raw = yf.download(
+                fetch_symbol,
+                start=start_date,
+                end=pd.Timestamp(end_date) + pd.Timedelta(days=1),
+                progress=False,
+                auto_adjust=False,
+                threads=False,
+            )
+        except Exception:
+            continue
+        chunk = _normalize_historical_frame(raw, ticker, source)
+        if not chunk.empty:
+            frames.append(chunk)
+
+    if not frames:
+        return pd.DataFrame(columns=PRICE_HISTORY_COLUMNS)
+    combined = pd.concat(frames, ignore_index=True)
+    combined = combined.sort_values(["date", "ticker"]).reset_index(drop=True)
+    validate_price_history_output(combined)
+    return combined[PRICE_HISTORY_COLUMNS]
 
 
 def _source_label(provider: str) -> str:
@@ -60,14 +100,23 @@ def _normalize_historical_frame(
     frame = raw.copy()
     if "date" not in frame.columns and "datetime" not in frame.columns:
         frame = frame.reset_index()
-    if frame.columns.dtype == object:
-        frame.columns = [str(col).lower() for col in frame.columns]
+    if isinstance(frame.columns, pd.MultiIndex):
+        frame.columns = [
+            "_".join(str(part) for part in col if str(part) and str(part) != "nan")
+            for col in frame.columns
+        ]
+    frame.columns = [str(col).lower() for col in frame.columns]
 
     date_col = None
     for candidate in ("date", "datetime", "index"):
         if candidate in frame.columns:
             date_col = candidate
             break
+    if date_col is None:
+        for candidate in frame.columns:
+            if str(candidate).startswith("date"):
+                date_col = candidate
+                break
     if date_col is None:
         raise ValueError(f"OpenBB historical output missing date column: {list(frame.columns)}")
 
@@ -76,6 +125,11 @@ def _normalize_historical_frame(
         if candidate in frame.columns:
             close_col = candidate
             break
+    if close_col is None:
+        for candidate in frame.columns:
+            if str(candidate).startswith("close"):
+                close_col = candidate
+                break
     if close_col is None:
         raise ValueError(f"OpenBB historical output missing close column: {list(frame.columns)}")
 
@@ -197,12 +251,23 @@ def fetch_openbb_price_history(
     if not symbols:
         return pd.DataFrame(columns=PRICE_HISTORY_COLUMNS)
 
-    obb = _import_openbb()
     source = _source_label(provider)
     requested = [str(s).strip().upper() for s in symbols]
 
     if "VIX" in requested and provider.strip().lower() == "yfinance":
         warnings.warn(VIX_MAPPING_NOTE, stacklevel=2)
+
+    try:
+        obb = _import_openbb()
+    except ImportError:
+        if provider.strip().lower() == "yfinance":
+            return _fetch_yfinance_price_history(
+                symbols=requested,
+                start_date=start_date,
+                end_date=end_date,
+                provider=provider,
+            )
+        raise
 
     frames: list[pd.DataFrame] = []
     for ticker in requested:

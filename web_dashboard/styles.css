@@ -858,6 +858,9 @@ tr[title],
   border-radius: 6px;
   padding: 10px 12px;
   line-height: 1.38;
+}
+
+.overview-strategy-row .decision-card {
   height: 100%;
 }
 
@@ -959,6 +962,23 @@ tr[title],
   fill: rgba(78, 161, 255, 0.22);
   stroke: rgba(216, 236, 255, 0.85);
   stroke-width: 1.2;
+}
+
+.chart-fast-tooltip {
+  position: fixed;
+  z-index: 9999;
+  display: none;
+  max-width: 320px;
+  white-space: pre-line;
+  pointer-events: none;
+  color: #eaf2fb;
+  background: rgba(7, 17, 28, 0.96);
+  border: 1px solid rgba(78, 161, 255, 0.72);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 12px;
+  line-height: 1.35;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.38);
 }
 
 .error {
