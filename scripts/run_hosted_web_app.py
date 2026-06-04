@@ -8,32 +8,18 @@ binding to 0.0.0.0:$PORT.
 from __future__ import annotations
 
 import os
+import subprocess
 import sys
-import threading
-import time
 from datetime import datetime, timezone
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from typing import Any
+from urllib.parse import urlparse
 
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-
-from scripts.run_live_polling import (  # noqa: E402
-    DEFAULT_FRIEND_API_BASE,
-    DEFAULT_LIVE_RAW_PATH,
-    DEFAULT_MACRO_CONTEXT_PATH,
-    DEFAULT_MONITOR_PATH,
-    DEFAULT_NEWS_RISK_PATH,
-    DEFAULT_PROCESSED_PATH,
-    DEFAULT_STATUS_PATH,
-    DEFAULT_WATCHLIST_PATH,
-    run_poll_cycle,
-)
-
 
 def _env_bool(name: str, default: bool) -> bool:
     raw = os.getenv(name)
@@ -52,56 +38,43 @@ def _env_int(name: str, default: int, minimum: int | None = None) -> int:
     return value
 
 
-def _polling_config() -> dict[str, Any]:
-    return {
-        "provider": os.getenv("OPENBB_PROVIDER", "yfinance"),
-        "interval_seconds": _env_int("POLLING_INTERVAL_SECONDS", 60, minimum=1),
-        "lookback_days": _env_int("LOOKBACK_DAYS", 10, minimum=2),
-        "live_raw_path": Path(os.getenv("LIVE_RAW_PATH", str(DEFAULT_LIVE_RAW_PATH))),
-        "processed_path": Path(os.getenv("PROCESSED_PATH", str(DEFAULT_PROCESSED_PATH))),
-        "monitor_path": Path(os.getenv("MONITOR_PATH", str(DEFAULT_MONITOR_PATH))),
-        "watchlist_path": Path(os.getenv("WATCHLIST_PATH", str(DEFAULT_WATCHLIST_PATH))),
-        "status_path": Path(os.getenv("STATUS_PATH", str(DEFAULT_STATUS_PATH))),
-        "news_risk_path": Path(os.getenv("NEWS_RISK_PATH", str(DEFAULT_NEWS_RISK_PATH))),
-        "macro_context_path": Path(os.getenv("MACRO_CONTEXT_PATH", str(DEFAULT_MACRO_CONTEXT_PATH))),
-        "news_api_url": os.getenv("NEWS_API_URL") or None,
-        "friend_api_base_url": os.getenv("FRIEND_API_BASE_URL", DEFAULT_FRIEND_API_BASE),
-        "market_data_mode": os.getenv("MARKET_DATA_MODE", "openbb").strip().lower(),
-    }
+def _polling_command() -> list[str]:
+    cmd = [
+        sys.executable,
+        "scripts/run_live_polling.py",
+        "--provider",
+        os.getenv("OPENBB_PROVIDER", "yfinance"),
+        "--interval-seconds",
+        str(_env_int("POLLING_INTERVAL_SECONDS", 60, minimum=1)),
+        "--lookback-days",
+        str(_env_int("LOOKBACK_DAYS", 10, minimum=2)),
+        "--market-data-mode",
+        os.getenv("MARKET_DATA_MODE", "openbb").strip().lower(),
+        "--friend-api-base-url",
+        os.getenv("FRIEND_API_BASE_URL", "https://news.tcx086.com"),
+    ]
+    news_api_url = os.getenv("NEWS_API_URL")
+    if news_api_url:
+        cmd.extend(["--news-api-url", news_api_url])
+    return cmd
 
 
-def _polling_loop() -> None:
-    config = _polling_config()
-    cycle = 1
-    interval = int(config["interval_seconds"])
-    market_data_mode = str(config["market_data_mode"])
-    if interval < 15 and market_data_mode == "openbb":
-        print(
-            "warning: hosted OpenBB/yfinance polling below 15s may be rate-limited; "
-            "prefer MARKET_DATA_MODE=none for 1s news-only demos.",
-            flush=True,
-        )
-
-    while True:
-        status = run_poll_cycle(cycle=cycle, **config)
-        print(
-            f"hosted_poll cycle={cycle} status={status.get('status')} "
-            f"latest={status.get('latest_observed_date')} rows={status.get('row_count')} "
-            f"news={status.get('news_status')} severity={status.get('news_max_severity')}",
-            flush=True,
-        )
-        cycle += 1
-        time.sleep(interval)
+def _start_polling_process() -> subprocess.Popen:
+    """Run polling as a child process so yfinance/OpenBB can use main-thread signals."""
+    cmd = _polling_command()
+    print("hosted polling subprocess command:", " ".join(cmd), flush=True)
+    return subprocess.Popen(cmd, cwd=str(ROOT))
 
 
 class DashboardHandler(SimpleHTTPRequestHandler):
     def do_GET(self) -> None:  # noqa: N802
-        if self.path in {"/", ""}:
+        path = urlparse(self.path).path
+        if path in {"/", ""}:
             self.send_response(302)
             self.send_header("Location", "/web_dashboard/index.html")
             self.end_headers()
             return
-        if self.path == "/healthz":
+        if path == "/healthz":
             payload = (
                 "{"
                 f'"status":"ok","generated_at_utc":"{datetime.now(timezone.utc).isoformat()}"'
@@ -122,9 +95,8 @@ def main() -> None:
     polling_enabled = _env_bool("ENABLE_POLLING", True)
 
     if polling_enabled:
-        thread = threading.Thread(target=_polling_loop, name="live-polling", daemon=True)
-        thread.start()
-        print("hosted polling started", flush=True)
+        _start_polling_process()
+        print("hosted polling started in child process", flush=True)
     else:
         print("hosted polling disabled; serving committed/static artifacts only", flush=True)
 
