@@ -79,7 +79,26 @@
         </div>
       </section>
 
-      <section class="overview-grid-main section">
+      <section class="overview-decision-map section">
+        <a class="decision-step-card" href="#market-risk-section">
+          <span class="step-number">1</span>
+          <div><strong>Market risk read</strong><span>Performance path, drawdown, heatmap, factor stress.</span></div>
+        </a>
+        <a class="decision-step-card" href="#portfolio-section">
+          <span class="step-number">2</span>
+          <div><strong>Portfolio exposure</strong><span>Asset allocation, top positions, VaR contribution.</span></div>
+        </a>
+        <a class="decision-step-card focus" href="#strategy-section">
+          <span class="step-number">3</span>
+          <div><strong>Strategy decision</strong><span>Current sleeve, WFO support, next-day review plan.</span></div>
+        </a>
+        <a class="decision-step-card" href="#methodology-section">
+          <span class="step-number">4</span>
+          <div><strong>Governance</strong><span>Data source, no-look-ahead rule, human review limits.</span></div>
+        </a>
+      </section>
+
+      <section id="market-risk-section" class="overview-grid-main section">
         <div class="card">
           <div class="section-title"><h2>Portfolio Performance Path</h2><span class="small">2025 initial investment simulation</span></div>
           <div id="performance-chart"></div>
@@ -113,7 +132,7 @@
         </div>
       </section>
 
-      <section class="overview-grid-bottom section">
+      <section id="portfolio-section" class="overview-grid-bottom section">
         <div class="card">
           <div class="section-title"><h2>Portfolio Allocation By Asset Class</h2><span id="allocation-caption" class="small">$1M simulated portfolio</span></div>
           <div id="overview-allocation"></div>
@@ -128,7 +147,7 @@
         </div>
       </section>
 
-      <section class="strategy-framework-strip section">
+      <section id="strategy-section" class="strategy-framework-strip section">
         <div class="card strategy-framework-card">
           <div class="metric-label">Strategy universe</div>
           <div id="overview-strategy-count" class="metric-value accent">...</div>
@@ -161,7 +180,7 @@
         </div>
       </section>
 
-      <section class="card section">
+      <section id="methodology-section" class="card section">
         <div class="section-title"><h2>Data Quality & Methodology</h2><span class="small">prototype governance</span></div>
         <div id="methodology-table"></div>
       </section>

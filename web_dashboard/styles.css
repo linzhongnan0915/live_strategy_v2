@@ -255,6 +255,69 @@ h1 {
   min-height: 104px;
 }
 
+.overview-decision-map {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.decision-step-card {
+  min-height: 82px;
+  text-decoration: none;
+  color: var(--text);
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent),
+    linear-gradient(145deg, #101c2b, #0b1724);
+  box-shadow: var(--shadow);
+}
+
+.decision-step-card:hover {
+  border-color: rgba(78, 161, 255, 0.72);
+  background:
+    linear-gradient(180deg, rgba(45, 140, 255, 0.08), transparent),
+    linear-gradient(145deg, #101c2b, #0b1724);
+}
+
+.decision-step-card.focus {
+  border-color: rgba(78, 161, 255, 0.82);
+  box-shadow: 0 0 0 1px rgba(45, 140, 255, 0.12), var(--shadow);
+}
+
+.step-number {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #d9ecff;
+  background: rgba(45, 140, 255, 0.18);
+  border: 1px solid rgba(78, 161, 255, 0.54);
+  font-weight: 820;
+}
+
+.decision-step-card strong,
+.decision-step-card span:last-child {
+  display: block;
+}
+
+.decision-step-card strong {
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+
+.decision-step-card span:last-child {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.28;
+}
+
 .overview-grid-main {
   display: grid;
   grid-template-columns: minmax(360px, 1.15fr) minmax(340px, 1fr) minmax(320px, 0.95fr);
@@ -913,6 +976,7 @@ th {
     grid-template-columns: repeat(3, 1fr);
   }
   .kpi-grid,
+  .overview-decision-map,
   .overview-grid-main,
   .overview-grid-mid,
   .overview-grid-bottom,
