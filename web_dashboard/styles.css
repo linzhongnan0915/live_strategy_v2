@@ -265,6 +265,52 @@ h1 {
   min-height: 88px;
 }
 
+.market-pulse-grid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(90px, 1fr));
+  gap: 8px;
+}
+
+.pulse-card {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(7, 13, 20, 0.42);
+  padding: 8px 9px;
+  min-height: 86px;
+}
+
+.pulse-card:hover {
+  border-color: rgba(78, 161, 255, 0.72);
+}
+
+.pulse-label {
+  color: var(--muted);
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pulse-ticker {
+  margin-top: 3px;
+  color: #d9ecff;
+  font-weight: 760;
+  font-size: 13px;
+}
+
+.pulse-close {
+  margin-top: 5px;
+  font-size: 16px;
+  font-weight: 760;
+  font-variant-numeric: tabular-nums;
+}
+
+.pulse-move {
+  margin-top: 2px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
 .overview-decision-map {
   display: grid;
   grid-template-columns: repeat(4, minmax(160px, 1fr));
@@ -1060,6 +1106,7 @@ tr[title],
   }
   .kpi-grid,
   .focus-lens-grid,
+  .market-pulse-grid,
   .overview-decision-map,
   .overview-grid-main,
   .overview-grid-mid,

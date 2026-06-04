@@ -79,6 +79,11 @@
         </div>
       </section>
 
+      <section class="card section">
+        <div class="section-title"><h2>Global Market Pulse</h2><span class="small">live price confirmation for news, macro, and strategy review</span></div>
+        <div id="overview-market-pulse" class="market-pulse-grid"></div>
+      </section>
+
       <section class="focus-lens-grid section">
         <div class="card lens-card">
           <div class="metric-label">Risk Profile Lens</div>
@@ -753,6 +758,7 @@
       const strategyAsOf = simulation.as_of_date ?? metrics.as_of_date ?? "N/A";
 
       setText("date-chip", `Live ${liveAsOf}`);
+      renderMarketPulseCards("overview-market-pulse", market);
       setText("overview-subtitle", simulationReady
         ? `Live monitor ${liveAsOf} | strategy simulation ${strategyAsOf} | invested ${simulation.simulation_start_actual} | no-look-ahead monthly strategy simulation`
         : `Live monitor ${liveAsOf} | source: ${market.data_mode ?? "snapshot"} | $1,000,000 simulated ETF portfolio`

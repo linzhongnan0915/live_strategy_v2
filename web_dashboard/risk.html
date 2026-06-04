@@ -146,9 +146,10 @@
       const investable = investableRows(rows);
       const risk = calculateRiskSignals(market, news, metrics);
       setText("overall-risk", risk.overall.toUpperCase());
-      byId("overall-risk").className = `metric-value ${risk.overall === "red" ? "neg" : risk.overall === "green" ? "pos" : ""}`;
+      byId("overall-risk").className = `metric-value ${signalClass(risk.overall)}`;
       setText("red-count", risk.red);
       setText("yellow-count", risk.yellow);
+      byId("yellow-count").className = `metric-value ${risk.yellow > 0 ? "warn" : "pos"}`;
       const vix = rows.find(x => x.ticker === "VIX") ?? {};
       const hyg = rows.find(x => x.ticker === "HYG") ?? {};
       const lqd = rows.find(x => x.ticker === "LQD") ?? {};
@@ -158,7 +159,7 @@
       const newsImpact = newsTriage;
       const newsNode = byId("risk-news");
       newsNode.textContent = `${newsImpact.level.toUpperCase()} ${fmtNum(newsImpact.severity, 1)}`;
-      newsNode.className = `metric-value ${newsImpact.level === "red" ? "neg" : newsImpact.level === "green" ? "pos" : ""}`;
+      newsNode.className = `metric-value ${signalClass(newsImpact.level)}`;
       setText("raw-news-severity", fmtNum(newsImpact.severity, 1));
       setText("news-confirmations", newsImpact.confirmations);
       setText("news-strategy-links", newsImpact.affected.length);
@@ -166,31 +167,7 @@
       setText("news-topics", `${newsTriage.top_topics}. Unique headlines: ${newsTriage.unique_count}.`);
       setText("news-portfolio-relevance", newsTriage.conclusion);
       setText("news-manager-action", newsTriage.manager_action);
-      const pulseTickers = [
-        ["SPY", "S&P 500 proxy"],
-        ["QQQ", "Nasdaq proxy"],
-        ["IWM", "Small cap"],
-        ["VIX", "Volatility"],
-        ["GLD", "Gold"],
-        ["USO", "Oil"],
-        ["UUP", "USD"],
-        ["TLT", "Long duration"],
-        ["HYG", "High yield"],
-        ["LQD", "IG credit"]
-      ];
-      const byTicker = new Map(rows.map(row => [row.ticker, row]));
-      const pulseRows = pulseTickers.map(([ticker, label]) => {
-        const row = byTicker.get(ticker) ?? {};
-        return {
-          ticker,
-          label,
-          close: row.latest_close,
-          ret: row.latest_return_pct,
-          date: row.latest_date,
-          timing: row.timing_status,
-          _tooltip: `${ticker}: ${label}. Used as market confirmation for news and macro/factor risk.`
-        };
-      });
+      const pulseRows = buildMarketPulseRows(market);
       renderTable("global-market-pulse", pulseRows, [
         { label: "Ticker", key: "ticker" },
         { label: "Lens", key: "label" },

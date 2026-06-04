@@ -150,6 +150,14 @@ function signedClass(value) {
   return n > 0 ? "pos" : "neg";
 }
 
+function signalClass(level) {
+  const v = String(level ?? "").toLowerCase();
+  if (v === "red" || v === "urgent" || v === "failed") return "neg";
+  if (v === "yellow" || v === "watch" || v === "warning" || v === "starting") return "warn";
+  if (v === "green" || v === "success" || v === "info") return "pos";
+  return "";
+}
+
 function scoreBadge(value) {
   const n = Number(value);
   if (!Number.isFinite(n)) return `<span class="score-badge low">N/A</span>`;
@@ -433,6 +441,50 @@ function renderBars(id, rows, maxRows = 12) {
       </div>
     `;
   }).join("");
+}
+
+const MARKET_PULSE_TICKERS = [
+  ["SPY", "S&P 500"],
+  ["QQQ", "Nasdaq"],
+  ["IWM", "Small Cap"],
+  ["VIX", "VIX"],
+  ["GLD", "Gold"],
+  ["USO", "Oil"],
+  ["UUP", "USD"],
+  ["TLT", "US 20Y"],
+  ["HYG", "HY Credit"],
+  ["LQD", "IG Credit"]
+];
+
+function buildMarketPulseRows(market) {
+  const rows = market.items ?? [];
+  const byTicker = new Map(rows.map(row => [row.ticker, row]));
+  return MARKET_PULSE_TICKERS.map(([ticker, label]) => {
+    const row = byTicker.get(ticker) ?? {};
+    return {
+      ticker,
+      label,
+      close: row.latest_close,
+      ret: row.latest_return_pct,
+      date: row.latest_date,
+      timing: row.timing_status,
+      _tooltip: `${ticker}: ${label}. Used as market confirmation for news, factor risk, and strategy review.`
+    };
+  });
+}
+
+function renderMarketPulseCards(id, market) {
+  const target = byId(id);
+  if (!target) return;
+  const rows = buildMarketPulseRows(market);
+  target.innerHTML = rows.map(row => `
+    <div class="pulse-card" title="${escapeHtml(row._tooltip)}">
+      <div class="pulse-label">${escapeHtml(row.label)}</div>
+      <div class="pulse-ticker">${escapeHtml(row.ticker)}</div>
+      <div class="pulse-close">${fmtNum(row.close, row.ticker === "VIX" ? 2 : 2)}</div>
+      <div class="pulse-move ${signedClass(row.ret)}">${fmtPct(row.ret)}</div>
+    </div>
+  `).join("");
 }
 
 function renderScatter(id, rows, options) {
