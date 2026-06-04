@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Strategies</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">RM</div></div>
+      <nav class="side-nav">
+        <a data-icon="O" href="index.html">Overview</a>
+        <a data-icon="M" href="market.html">Market</a>
+        <a data-icon="R" href="risk.html">Risk</a>
+        <a class="active" data-icon="S" href="strategies.html">Strategies</a>
+      </nav>
+      <div class="side-footer"><div class="avatar">RM</div><div>Risk Manager</div><div>Strategy Risk</div></div>
+    </aside>
+  <main class="shell">
+    <div class="topbar">
+      <div>
+        <h1>ETF Strategy Decision Board</h1>
+        <div class="subtitle">Current market read, strategy direction, WFO evidence, and manager review actions.</div>
+      </div>
+      <div class="top-actions">
+        <div class="control-chip">WFO First</div>
+        <div class="control-chip">Human Review</div>
+      </div>
+    </div>
+
+    <section class="status-grid">
+      <div class="card"><div class="metric-label">polling</div><div id="poll-status" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">cycle</div><div id="poll-cycle" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">mode</div><div id="poll-mode" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">latest</div><div id="poll-latest" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">rows</div><div id="poll-rows" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">updated</div><div id="poll-time" class="metric-value">...</div></div>
+    </section>
+
+    <section class="status-grid">
+      <div class="card"><div class="metric-label">strategies</div><div id="strategy-count" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">WFO windows</div><div id="wfo-windows" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">best WFO</div><div id="best-wfo" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">market posture</div><div id="market-posture" class="metric-value">...</div><div class="metric-sub">from risk/news signals</div></div>
+      <div class="card"><div class="metric-label">news impact</div><div id="strategy-news" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">review candidates</div><div id="review-count" class="metric-value">...</div></div>
+    </section>
+
+    <section class="grid-3 section">
+      <div class="card"><div class="metric-label">Current market read</div><div id="market-read" class="thesis">...</div></div>
+      <div class="card"><div class="metric-label">Strategy implication</div><div id="strategy-implication" class="thesis">...</div></div>
+      <div class="card"><div class="metric-label">Manager action</div><div id="manager-action" class="thesis">...</div></div>
+    </section>
+
+    <section class="grid-3 section">
+      <div class="card"><div class="metric-label">Decision basis</div><div class="metric-value">Market fit first</div><div id="ranking-basis" class="metric-sub"></div></div>
+      <div class="card"><div class="metric-label">Evidence span</div><div id="backtest-span" class="metric-value">...</div><div class="metric-sub">backtest evidence, not primary decision driver</div></div>
+      <div class="card"><div class="metric-label">WFO setup</div><div id="wfo-setup" class="metric-value">...</div><div id="wfo-setup-sub" class="metric-sub">rolling train/test, no look-ahead within windows</div></div>
+    </section>
+
+    <section class="card section decision-card">
+      <div class="section-title"><h2>Current Strategy Review Direction</h2><span class="small">current market fit + WFO evidence, not total return alone</span></div>
+      <div class="grid-3">
+        <div>
+          <div class="metric-label">Review direction</div>
+          <div id="champion-name" class="metric-value">...</div>
+          <div id="champion-action" class="metric-sub"></div>
+        </div>
+        <div>
+          <div class="metric-label">Today sleeve move</div>
+          <div id="champion-today" class="metric-value">...</div>
+          <div class="metric-sub">equal-weight target ETF sleeve proxy</div>
+        </div>
+        <div>
+          <div class="metric-label">News impact</div>
+          <div id="champion-news" class="metric-value">...</div>
+          <div id="champion-news-reason" class="metric-sub"></div>
+        </div>
+      </div>
+      <div class="decision-grid section">
+        <div class="summary-box">
+          <div class="metric-label">Decision summary</div>
+          <ul id="champion-decision-list" class="compact-list"></ul>
+        </div>
+        <div class="summary-box">
+          <div class="metric-label">Evidence summary</div>
+          <ul id="champion-evidence-list" class="compact-list"></ul>
+        </div>
+        <div class="summary-box">
+          <div class="metric-label">Next business day preview</div>
+          <ul id="champion-preview-list" class="compact-list"></ul>
+        </div>
+      </div>
+
+      <details class="details-panel section">
+        <summary>Method and detailed rationale</summary>
+        <div class="grid-2 section">
+          <div>
+            <div class="metric-label">BlackRock-style factor-to-assets rationale</div>
+            <div id="champion-factor-rationale" class="thesis"></div>
+          </div>
+          <div>
+            <div class="metric-label">Risk-control impact</div>
+            <div id="champion-risk-impact" class="thesis"></div>
+          </div>
+        </div>
+        <div class="grid-2 section">
+          <div>
+            <div class="metric-label">Potential benefit</div>
+            <div id="champion-benefits" class="thesis"></div>
+          </div>
+          <div>
+            <div class="metric-label">Tradeoff / failure mode</div>
+            <div id="champion-tradeoffs" class="thesis"></div>
+          </div>
+        </div>
+      </details>
+      <div class="section">
+        <div class="section-title"><h2>News Impact On Selected Strategy</h2><span class="small">keywords, ETF linkage, confidence, and reasoning</span></div>
+        <div id="champion-news-table"></div>
+      </div>
+      <div class="grid-2 section">
+        <div>
+          <div class="section-title"><h2>Selected Sleeve Holdings</h2><span class="small">equal-weight ETF proxy sleeve</span></div>
+          <div id="champion-holdings"></div>
+        </div>
+        <div>
+          <div class="section-title"><h2>Selected Strategy WFO Windows</h2><span class="small">5y train -> 12m test, rolling forward</span></div>
+          <div id="champion-windows"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-title"><h2>Strategy Action Queue</h2><span id="daily-review-meta" class="small">after-market artifact</span></div>
+      <div id="daily-review-table"></div>
+    </section>
+
+    <section class="card section">
+      <div class="section-title"><h2>Current Strategy Direction Ranking</h2><span class="small">current market fit plus WFO evidence</span></div>
+      <div id="ranking-table"></div>
+    </section>
+
+    <section class="card section">
+      <div class="section-title"><h2>BlackRock-Style Factor-To-Assets Sleeve Map</h2><span class="small">factor thesis -> ETF implementation -> risk controls</span></div>
+      <div id="blackrock-sleeve-table"></div>
+    </section>
+
+    <section class="card section">
+      <div class="section-title"><h2>WFO Evidence Snapshot</h2><span class="small">rolling train/test proof layer</span></div>
+      <div id="wfo-table"></div>
+    </section>
+
+    <section class="grid-2 section">
+      <div class="card">
+        <div class="section-title"><h2>Rolling Window Schedule</h2><span class="small">train period moves forward before each test</span></div>
+        <div id="wfo-window-schedule"></div>
+      </div>
+      <div class="card">
+        <div class="section-title"><h2>Backtest Data Reliability</h2><span class="small">coverage, duplicates, and source audit</span></div>
+        <div id="wfo-data-quality"></div>
+      </div>
+    </section>
+
+    <section class="card section">
+      <div class="section-title"><h2>Selected Strategy WFO Detail</h2><span class="small">train ranks, then next test-window OOS results</span></div>
+      <div id="wfo-windows-table"></div>
+    </section>
+
+    <section class="card section">
+      <div class="section-title"><h2>Backtest Evidence Snapshot</h2><span class="small">small proof table: tested, win rate, drawdown, coverage</span></div>
+      <div id="backtest-table"></div>
+    </section>
+
+    <section class="card section">
+      <div class="section-title"><h2>Strategy Playbook</h2><span class="small">what each strategy actually is</span></div>
+      <div id="strategy-detail-table"></div>
+    </section>
+  </main>
+  </div>
+  <script src="shared.js"></script>
+  <script>
+    async function updateStrategies() {
+      const [status, wfo, backtest, ranking, news, market, strategyLibrary, dailyReviewArtifact, factorRisk] = await Promise.all([
+        loadJson(PATHS.liveStatus),
+        loadJson(PATHS.wfo, { items: [] }),
+        loadJson(PATHS.backtest, { items: [] }),
+        loadJson(PATHS.ranking, { items: [] }),
+        loadJson(PATHS.news, { items: [] }),
+        loadJson(PATHS.market, { items: [] }),
+        loadCsv(PATHS.strategyLibrary),
+        loadJson(PATHS.dailyReview, { items: [] }),
+        loadJson(PATHS.factorRisk, { blackrock_factor_sleeves: [] })
+      ]);
+      renderLiveStatus(status);
+      const wfoRows = (wfo.items ?? []).length ? wfo.items : (dailyReviewArtifact.items ?? []);
+      const backtestRows = backtest.items ?? [];
+      const rankingRows = ranking.items ?? [];
+      const wfoSetup = wfo.window_count ? wfo : (dailyReviewArtifact.wfo_setup ?? {});
+      const wfoWindows = (wfo.windows ?? []).length ? wfo.windows : (dailyReviewArtifact.wfo_windows ?? []);
+      const newsImpact = buildNewsTriage(news, market);
+      const bestWfo = [...wfoRows].sort((a, b) => Number(b.wfo_score) - Number(a.wfo_score))[0] ?? {};
+      setText("strategy-count", rankingRows.length || backtestRows.length || wfoRows.length);
+      setText("wfo-windows", wfoSetup.window_count ?? "N/A");
+      setText("best-wfo", bestWfo.strategy_id ?? "N/A");
+      const newsNode = byId("strategy-news");
+      newsNode.textContent = `${newsImpact.level.toUpperCase()} ${fmtNum(newsImpact.severity, 1)}`;
+      newsNode.className = `metric-value ${newsImpact.level === "red" ? "neg" : newsImpact.level === "green" ? "pos" : ""}`;
+      setText("review-count", newsImpact.affected.length);
+      const marketContext = buildMarketStrategyContext({ market, news });
+      setText("market-posture", marketContext.posture);
+      byId("market-posture").className = `metric-value ${marketContext.posture.includes("Defensive") ? "bad" : marketContext.posture.includes("Selective") ? "warn" : "good"}`;
+      setText("market-read", marketContext.story);
+      setText("strategy-implication", marketContext.implication);
+      setText("manager-action", marketContext.action);
+      setText("ranking-basis", "Primary decision: current market fit + portfolio/news context. Backtest/WFO proves the candidate is reviewable.");
+      setText("backtest-span", `${backtest.price_start_date ?? "N/A"} to ${backtest.price_end_date ?? "N/A"}`);
+      setText("wfo-setup", `${fmtUnit(wfoSetup.train_years, "y")} train / ${fmtUnit(wfoSetup.test_months, "m")} test / ${fmtUnit(wfoSetup.step_months, "m")} step`);
+      setText("wfo-setup-sub", wfoSetup.rolling_window_summary?.no_lookahead_rule ?? "rolling train/test, no look-ahead within windows");
+
+      const dailyReview = (dailyReviewArtifact.items ?? []).length ? dailyReviewArtifact.items : buildStrategyDailyReview({
+        wfoRows,
+        backtestRows,
+        rankingRows,
+        strategyLibrary,
+        news,
+        market
+      });
+      setText("daily-review-meta", `${dailyReviewArtifact.generated_at_utc ?? "browser preview"} | ${dailyReviewArtifact.as_of_date ?? "live context"}`);
+      const decisionRows = buildStrategyDecisionRows({
+        reviewRows: dailyReview,
+        strategyLibrary,
+        market,
+        news
+      });
+      const selected = decisionRows[0] ?? dailyReview.find(row => Number(row.wfo_rank) === 1) ?? bestWfo;
+      const selectedSummary = buildSelectedStrategySummary({
+        selected,
+        strategyLibrary,
+        backtestRows,
+        wfoWindows,
+        market,
+        news
+      });
+      setText("champion-name", selected.strategy_id ?? "N/A");
+      byId("champion-name").className = "metric-value accent";
+      setText("champion-action", selected.action ?? "review candidate");
+      const championToday = byId("champion-today");
+      championToday.textContent = selectedSummary.avgToday === null ? "N/A" : fmtPct(selectedSummary.avgToday);
+      championToday.className = `metric-value ${signedClass(selectedSummary.avgToday)}`;
+      const championNews = byId("champion-news");
+      championNews.textContent = `${selectedSummary.newsImpact.level.toUpperCase()} ${fmtNum(selectedSummary.newsImpact.severity, 1)}`;
+      championNews.className = `metric-value ${selectedSummary.newsImpact.level === "red" ? "neg" : selectedSummary.newsImpact.level === "green" ? "pos" : ""}`;
+      setText("champion-news-reason", selectedSummary.newsImpact.reason);
+      renderList("champion-decision-list", selectedSummary.decisionBullets);
+      renderList("champion-evidence-list", selectedSummary.evidenceBullets);
+      renderList("champion-preview-list", selectedSummary.previewBullets);
+      setText("champion-risk-impact", selectedSummary.riskImpact);
+      setText("champion-benefits", selectedSummary.benefits);
+      setText("champion-tradeoffs", selectedSummary.tradeoffs);
+      setText("champion-factor-rationale", selectedSummary.factorRationale);
+      renderTable("champion-holdings", selectedSummary.holdings, [
+        { label: "ETF", key: "ticker" },
+        { label: "Sleeve weight", value: r => fmtPct(Number(r.sleeve_weight) * 100) },
+        { label: "Close", value: r => fmtNum(r.latest_close, 2) },
+        { label: "Today return", value: r => `<span class="${signedClass(r.latest_return_pct)}">${fmtPct(r.latest_return_pct)}</span>`, html: true },
+        { label: "Bucket", key: "risk_bucket" }
+      ], 10);
+      renderTable("champion-windows", selectedSummary.windows, [
+        { label: "Window", key: "window_number" },
+        { label: "Test", value: r => `${r.test_start} to ${r.test_end}` },
+        { label: "Train rank", value: r => rankBadge(r.train_rank), html: true },
+        { label: "Selected", value: r => r.selected_top_n ? `<span class="evidence-badge good">yes</span>` : `<span class="evidence-badge watch">no</span>`, html: true },
+        { label: "OOS return", value: r => fmtPct(Number(r.oos_total_return) * 100) },
+        { label: "OOS max DD", value: r => evidenceBadge(r.oos_max_drawdown, "drawdown"), html: true }
+      ], 10);
+      renderTable("champion-news-table", selectedSummary.strategyNewsRows, [
+        { label: "Signal", value: r => statusPill(r.warning_level ?? r.watch_level), html: true },
+        { label: "Keywords", value: r => (r.keywords ?? r.topics ?? []).join(", ") || "none" },
+        { label: "Affected ETFs", value: r => (r.affected_tickers ?? []).join(", ") || "none" },
+        { label: "Confidence", value: r => fmtNum(Number(r.confidence) * 100, 0) + "%" },
+        { label: "Title", key: "title" },
+        { label: "Strategy link", value: r => r.strategy_link_note ?? ((r.affected_strategies ?? []).includes(selected.strategy_id) ? "direct" : "context only") },
+        { label: "Reasoning", value: r => r.reasoning ?? r.explanation ?? "N/A" }
+      ], 6);
+
+      renderTable("daily-review-table", dailyReview, [
+        { label: "Action", value: r => statusPill(r.action), html: true },
+        { label: "Strategy", key: "strategy_id" },
+        { label: "Decision score", value: r => scoreBadge((decisionRows.find(x => x.strategy_id === r.strategy_id) ?? {}).decision_score), html: true },
+        { label: "Current sleeve move", value: r => {
+          const d = decisionRows.find(x => x.strategy_id === r.strategy_id) ?? {};
+          return `<span class="${signedClass(d.current_sleeve_move_pct)}">${fmtPct(d.current_sleeve_move_pct)}</span>`;
+        }, html: true },
+        { label: "WFO rank", value: r => rankBadge(r.wfo_rank), html: true },
+        { label: "OOS positive windows", value: r => evidenceBadge(r.oos_positive_window_rate), html: true },
+        { label: "Core signal", key: "core_signal" },
+        { label: "Risk controls", key: "risk_controls" }
+      ], 12);
+
+      renderTable("wfo-table", wfoRows, [
+        { label: "Rank", value: r => rankBadge(r.wfo_rank), html: true },
+        { label: "Strategy", key: "strategy_id" },
+        { label: "Category", key: "category" },
+        { label: "WFO score", value: r => scoreBadge(r.wfo_score), html: true },
+        { label: "Top5 hit", value: r => evidenceBadge(r.train_top5_hit_rate), html: true },
+        { label: "OOS return", value: r => `<span class="${signedClass(Number(r.oos_avg_total_return))}">${fmtPct(Number(r.oos_avg_total_return) * 100)}</span>`, html: true },
+        { label: "OOS Sharpe", value: r => fmtNum(r.oos_avg_sharpe, 2) },
+        { label: "Max DD", value: r => evidenceBadge(r.oos_avg_max_drawdown, "drawdown"), html: true },
+        { label: "Status", key: "wfo_status" }
+      ], 12);
+
+      renderTable("wfo-window-schedule", wfo.window_schedule ?? dailyReviewArtifact.window_schedule ?? [], [
+        { label: "Window", key: "window_number" },
+        { label: "Train", value: r => `${r.train_start} to ${r.train_end}` },
+        { label: "Test", value: r => `${r.test_start} to ${r.test_end}` }
+      ], 12);
+
+      renderTable("wfo-data-quality", [
+        { item: "Price source", value: wfo.price_source ?? "N/A" },
+        { item: "Price span", value: `${wfo.price_start_date ?? "N/A"} to ${wfo.price_end_date ?? "N/A"} (${wfo.approx_years ?? "N/A"}y)` },
+        { item: "Ticker / rows", value: `${wfo.price_ticker_count ?? "N/A"} tickers / ${wfo.price_row_count ?? "N/A"} rows` },
+        { item: "Unique ticker-date", value: `${wfo.unique_ticker_date_count ?? "N/A"} unique observations` },
+        { item: "Duplicates", value: `${wfo.duplicate_ticker_date_count ?? 0} | ${wfo.duplicate_ticker_date_policy ?? "N/A"}` },
+        { item: "Observation range", value: `${wfo.min_observations_per_ticker ?? "N/A"} to ${wfo.max_observations_per_ticker ?? "N/A"} observations per ticker` },
+        { item: "Source values", value: (wfo.source_values ?? []).join(", ") || "N/A" },
+        { item: "Minimum WFO observations", value: `${wfo.min_train_observations ?? "N/A"} train / ${wfo.min_test_observations ?? "N/A"} test` }
+      ], [
+        { label: "Audit item", key: "item" },
+        { label: "Value", key: "value" }
+      ], 12);
+
+      renderTable("wfo-windows-table", selectedSummary.windows, [
+        { label: "Window", key: "window_number" },
+        { label: "Train", value: r => `${r.train_start} to ${r.train_end}` },
+        { label: "Test", value: r => `${r.test_start} to ${r.test_end}` },
+        { label: "Train rank", value: r => rankBadge(r.train_rank), html: true },
+        { label: "Selected top5", value: r => r.selected_top_n ? `<span class="evidence-badge good">yes</span>` : `<span class="evidence-badge watch">no</span>`, html: true },
+        { label: "OOS return", value: r => fmtPct(Number(r.oos_total_return) * 100) },
+        { label: "OOS Sharpe", value: r => fmtNum(r.oos_sharpe, 2) },
+        { label: "OOS max DD", value: r => evidenceBadge(r.oos_max_drawdown, "drawdown"), html: true }
+      ], 10);
+
+      renderTable("backtest-table", backtestRows, [
+        { label: "Rank", key: "final_backtest_rank" },
+        { label: "Strategy", key: "strategy_id" },
+        { label: "Win rate", value: r => evidenceBadge(r.win_rate_monthly), html: true },
+        { label: "Sharpe", value: r => fmtNum(r.sharpe_proxy, 2) },
+        { label: "Max DD", value: r => evidenceBadge(r.max_drawdown, "drawdown"), html: true },
+        { label: "Ann return", value: r => `<span class="${signedClass(Number(r.annualized_return))}">${fmtPct(Number(r.annualized_return) * 100)}</span>`, html: true },
+        { label: "Coverage", key: "price_coverage_status" }
+      ], 8);
+
+      renderTable("ranking-table", decisionRows, [
+        { label: "Rank", value: (_r, i) => i + 1 },
+        { label: "Strategy", key: "strategy_id" },
+        { label: "Decision score", value: r => scoreBadge(r.decision_score), html: true },
+        { label: "Current sleeve move", value: r => `<span class="${signedClass(r.current_sleeve_move_pct)}">${fmtPct(r.current_sleeve_move_pct)}</span>`, html: true },
+        { label: "WFO rank", value: r => rankBadge(r.wfo_rank), html: true },
+        { label: "WFO score", value: r => scoreBadge(r.wfo_score), html: true },
+        { label: "Stability", value: r => evidenceBadge(r.train_top5_hit_rate), html: true },
+        { label: "News linked", value: r => r.news_linked ? `<span class="evidence-badge good">yes</span>` : `<span class="evidence-badge watch">no</span>`, html: true },
+        { label: "Basis", key: "decision_basis" }
+      ], 12);
+
+      renderTable("blackrock-sleeve-table", factorRisk.blackrock_factor_sleeves ?? strategyLibrary, [
+        { label: "Strategy", key: "strategy_id" },
+        { label: "Factor thesis", value: r => `${r.primary_factor ?? ""} / ${r.secondary_factor ?? ""}` },
+        { label: "ETF sleeve", key: "target_etfs" },
+        { label: "Core signal", key: "core_signal" },
+        { label: "Risk controls", key: "risk_controls" },
+        { label: "Failure mode", key: "failure_mode" }
+      ], 20);
+
+      renderTable("strategy-detail-table", strategyLibrary, [
+        { label: "Strategy", key: "strategy_id" },
+        { label: "Category", key: "category" },
+        { label: "Objective", key: "objective" },
+        { label: "Target ETFs", key: "target_etfs" },
+        { label: "Core signal", key: "core_signal" },
+        { label: "Valid regime", key: "valid_regime" },
+        { label: "Invalid regime", key: "invalid_regime" },
+        { label: "Risk controls", key: "risk_controls" }
+      ], 20);
+    }
+    startLoop(updateStrategies, 5);
+  </script>
+</body>
+</html>

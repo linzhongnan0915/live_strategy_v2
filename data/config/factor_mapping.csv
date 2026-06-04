@@ -1,0 +1,14 @@
+factor_id,factor_name,proxy_ticker,factor_group,interpretation,notes
+equity_beta,Equity Beta,SPY,equity,US large-cap market beta proxy,Observable ETF proxy; not Barra
+growth_tech,Growth Tech,QQQ,equity,Growth and mega-cap technology beta proxy,Correlated with equity beta; prototype only
+small_cap_cyclical,Small Cap Cyclical,IWM,equity,Small-cap and cyclical risk proxy,May overlap with equity beta sleeve
+duration_rates,Duration Rates,TLT,rates,Long-duration Treasury rate sensitivity,Rate shock and duration risk monitor
+intermediate_rates,Intermediate Rates,IEF,rates,Intermediate Treasury duration proxy,Bridge between short and long rates
+short_rates_cash,Short Rates Cash,SHY,rates,Short-duration Treasury cash proxy,Liquidity and front-end rates
+high_yield_credit,High Yield Credit,HYG,credit,High-yield credit spread risk proxy,Credit cycle sensitivity
+investment_grade_credit,Investment Grade Credit,LQD,credit,Investment-grade credit exposure proxy,Spread and carry monitor
+inflation_linked,Inflation Linked,TIP,inflation,Inflation-linked real rate proxy,Breakeven and inflation sensitivity
+safe_haven_gold,Safe Haven Gold,GLD,alternatives,Gold safe-haven and real-asset proxy,Defensive store-of-value monitor
+oil_energy,Oil Energy,USO,commodities,Energy and oil price shock proxy,Commodity roll risk not modeled here
+usd_factor,USD Factor,UUP,fx,US dollar strength proxy,FX and global liquidity sensitivity
+volatility,Volatility,VIX,volatility,Implied volatility level proxy,VIX is not a held asset; return uses percent change in VIX level

@@ -1,0 +1,499 @@
+{
+  "generated_at_utc": "2026-06-04T00:59:23+00:00",
+  "status": "success",
+  "data_mode": "news_monitor_friend_api",
+  "api_url_configured": true,
+  "headline_count": 18,
+  "max_severity": 6.7,
+  "urgent_review_count": 0,
+  "watch_count": 18,
+  "warning_count": 0,
+  "urgent_warning_count": 0,
+  "affected_strategies": [],
+  "official_risk_decision_allowed": false,
+  "note": "News severity is context for human review and strategy monitoring. It does not authorize execution.",
+  "items": [
+    {
+      "timestamp": null,
+      "title": "Spencer Pratt stops at iconic LA restaurant on Election Day, vows to make city 'streets safe again'",
+      "summary": "Topic gaining mainstream traction",
+      "url": "https://www.foxnews.com/politics/spencer-pratt-stops-iconic-la-restaurant-election-day-vows-make-city-streets-safe",
+      "source": "Fox News",
+      "published_at": null,
+      "severity": 6.7,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "election"
+      ],
+      "topics": [
+        "election",
+        "politics"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "No direct portfolio or strategy mapping; context only.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Who will lead California schools? Voters choose next state superintendent",
+      "summary": "Topic gaining mainstream traction",
+      "url": "https://www.kpbs.org/news/politics/2026/06/02/who-will-lead-california-schools-voters-choose-next-state-superintendent",
+      "source": "KPBS",
+      "published_at": null,
+      "severity": 6.7,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [],
+      "topics": [
+        "election",
+        "politics"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "No direct portfolio or strategy mapping; context only.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Sen. Bernie Moreno: 'We Can Learn' from Colombia Election System with Voter ID, No Mail-In Vote",
+      "summary": "Topic gaining mainstream traction",
+      "url": "https://www.breitbart.com/latin-america/2026/06/02/sen-bernie-moreno-colombia-election-voter-id-no-mailin-votes-biometric-checks/",
+      "source": "Breitbart News",
+      "published_at": null,
+      "severity": 6.7,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "election"
+      ],
+      "topics": [
+        "election",
+        "politics"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "No direct portfolio or strategy mapping; context only.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "The Democrat flops in governor\u2019s race \u2014 and why Eric Swalwell could still play a role (perp still on the ballot)",
+      "summary": "Topic gaining mainstream traction",
+      "url": "https://freerepublic.com/focus/f-chat/4382116/posts",
+      "source": "Freerepublic.com",
+      "published_at": null,
+      "severity": 6.7,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [],
+      "topics": [
+        "election",
+        "politics"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "No direct portfolio or strategy mapping; context only.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Tinubu\u2019s re-election my priority project, Oborevwori declares",
+      "summary": "Topic gaining mainstream traction",
+      "url": "https://punchng.com/tinubus-re-election-my-priority-project-oborevwori-declares/",
+      "source": "The Punch",
+      "published_at": null,
+      "severity": 6.7,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "election"
+      ],
+      "topics": [
+        "election",
+        "politics"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "No direct portfolio or strategy mapping; context only.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Spencer Pratt stops at iconic LA restaurant on Election Day, vows to make city 'streets safe again'",
+      "summary": "Source count=6 level=high",
+      "url": "https://www.foxnews.com/politics/spencer-pratt-stops-iconic-la-restaurant-election-day-vows-make-city-streets-safe",
+      "source": "Fox News",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "election"
+      ],
+      "topics": [
+        "election",
+        "politics"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "No direct portfolio or strategy mapping; context only.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Who will lead California schools? Voters choose next state superintendent",
+      "summary": "Source count=6 level=high",
+      "url": "https://www.kpbs.org/news/politics/2026/06/02/who-will-lead-california-schools-voters-choose-next-state-superintendent",
+      "source": "KPBS",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [],
+      "topics": [
+        "election",
+        "politics"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "No direct portfolio or strategy mapping; context only.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Sen. Bernie Moreno: 'We Can Learn' from Colombia Election System with Voter ID, No Mail-In Vote",
+      "summary": "Source count=6 level=high",
+      "url": "https://www.breitbart.com/latin-america/2026/06/02/sen-bernie-moreno-colombia-election-voter-id-no-mailin-votes-biometric-checks/",
+      "source": "Breitbart News",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "election"
+      ],
+      "topics": [
+        "election",
+        "politics"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "No direct portfolio or strategy mapping; context only.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "The Democrat flops in governor\u2019s race \u2014 and why Eric Swalwell could still play a role (perp still on the ballot)",
+      "summary": "Source count=6 level=high",
+      "url": "https://freerepublic.com/focus/f-chat/4382116/posts",
+      "source": "Freerepublic.com",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [],
+      "topics": [
+        "election",
+        "politics"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "No direct portfolio or strategy mapping; context only.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Tinubu\u2019s re-election my priority project, Oborevwori declares",
+      "summary": "Source count=6 level=high",
+      "url": "https://punchng.com/tinubus-re-election-my-priority-project-oborevwori-declares/",
+      "source": "The Punch",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "election"
+      ],
+      "topics": [
+        "election",
+        "politics"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "No direct portfolio or strategy mapping; context only.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Bitcoin ETFs Sell $500M During BTC Implosion To $67,000: How Low Can Crypto Go?",
+      "summary": "Regulatory news directly impacts crypto markets impact within 1h (RELEASE) - BEARISH",
+      "url": "https://www.benzinga.com/crypto/cryptocurrency/26/06/52967781/bitcoin-etfs-sell-500m-during-btc-implosion-to-67000-how-low-can-crypto-go",
+      "source": "Benzinga",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "crypto"
+      ],
+      "topics": [
+        "bearish",
+        "crypto",
+        "finance"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Bitcoin spot ETFs record 12 consecutive days of outflows",
+      "summary": "Regulatory news directly impacts crypto markets impact within 1h (RELEASE) - BEARISH",
+      "url": "https://finbold.com/bitcoin-spot-etfs-record-12-consecutive-days-of-outflows/",
+      "source": "Finbold",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "crypto"
+      ],
+      "topics": [
+        "bearish",
+        "crypto",
+        "finance"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Morning Minute: Bitcoin Falls Below $67k as MSTR Plummets",
+      "summary": "Regulatory news directly impacts crypto markets impact within 1h (RELEASE) - BEARISH",
+      "url": "https://decrypt.co/369839/morning-minute-bitcoin-falls-below-67k-as-mstr-plummets",
+      "source": "Decrypt",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "crypto"
+      ],
+      "topics": [
+        "bearish",
+        "crypto",
+        "finance"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "How To Avoid The Major Trap That Bitcoin Is Setting Up For Traders",
+      "summary": "Regulatory news directly impacts crypto markets impact within 1h (RELEASE) - BEARISH",
+      "url": "https://bitcoinist.com/bitcoin-setting-major-trap/",
+      "source": "Bitcoinist",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "crypto"
+      ],
+      "topics": [
+        "bearish",
+        "crypto",
+        "finance"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Bitcoin ETFs Sell $500M During BTC Implosion To $67,000: How Low Can Crypto Go?",
+      "summary": "Source count=4 level=elevated",
+      "url": "https://www.benzinga.com/crypto/cryptocurrency/26/06/52967781/bitcoin-etfs-sell-500m-during-btc-implosion-to-67000-how-low-can-crypto-go",
+      "source": "Benzinga",
+      "published_at": null,
+      "severity": 6.0,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "crypto"
+      ],
+      "topics": [
+        "crypto",
+        "finance"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
+      "confidence": 0.57,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Bitcoin spot ETFs record 12 consecutive days of outflows",
+      "summary": "Source count=4 level=elevated",
+      "url": "https://finbold.com/bitcoin-spot-etfs-record-12-consecutive-days-of-outflows/",
+      "source": "Finbold",
+      "published_at": null,
+      "severity": 6.0,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "crypto"
+      ],
+      "topics": [
+        "crypto",
+        "finance"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
+      "confidence": 0.57,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Morning Minute: Bitcoin Falls Below $67k as MSTR Plummets",
+      "summary": "Source count=4 level=elevated",
+      "url": "https://decrypt.co/369839/morning-minute-bitcoin-falls-below-67k-as-mstr-plummets",
+      "source": "Decrypt",
+      "published_at": null,
+      "severity": 6.0,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "crypto"
+      ],
+      "topics": [
+        "crypto",
+        "finance"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
+      "confidence": 0.57,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "How To Avoid The Major Trap That Bitcoin Is Setting Up For Traders",
+      "summary": "Source count=4 level=elevated",
+      "url": "https://bitcoinist.com/bitcoin-setting-major-trap/",
+      "source": "Bitcoinist",
+      "published_at": null,
+      "severity": 6.0,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "crypto"
+      ],
+      "topics": [
+        "crypto",
+        "finance"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
+      "confidence": 0.57,
+      "requires_human_review": false
+    }
+  ]
+}

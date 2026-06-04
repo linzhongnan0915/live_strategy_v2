@@ -1,0 +1,23 @@
+{
+  "copied_count": 13,
+  "preserved_count": 0,
+  "missing_count": 0,
+  "copied": [
+    "live_polling_status.json",
+    "openbb_market_monitor_snapshot.json",
+    "openbb_overnight_watchlist.json",
+    "news_risk_snapshot.json",
+    "macro_context_snapshot.json",
+    "openbb_metrics_snapshot.json",
+    "strategy_ranking_snapshot.json",
+    "strategy_backtest_snapshot.json",
+    "strategy_walk_forward_snapshot.json",
+    "daily_strategy_review_snapshot.json",
+    "portfolio_strategy_simulation_snapshot.json",
+    "factor_risk_snapshot.json",
+    "strategy_library.csv"
+  ],
+  "preserved": [],
+  "missing": [],
+  "note": "Static fallback only. Live hosted deployments should prefer output/ artifacts."
+}

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Market Monitor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">RM</div></div>
+      <nav class="side-nav">
+        <a data-icon="O" href="index.html">Overview</a>
+        <a class="active" data-icon="M" href="market.html">Market</a>
+        <a data-icon="R" href="risk.html">Risk</a>
+        <a data-icon="S" href="strategies.html">Strategies</a>
+      </nav>
+      <div class="side-footer"><div class="avatar">RM</div><div>Risk Manager</div><div>Market Risk</div></div>
+    </aside>
+  <main class="shell">
+    <div class="topbar">
+      <div>
+        <h1>Bloomberg-Style Market Monitor</h1>
+        <div class="subtitle">Live-style ETF tape from OpenBB/yfinance artifacts. Data cells update without page reload.</div>
+      </div>
+      <div class="top-actions">
+        <div class="control-chip">ETF Universe</div>
+        <div class="control-chip">Live-Style Polling</div>
+      </div>
+    </div>
+
+    <section class="status-grid">
+      <div class="card"><div class="metric-label">polling</div><div id="poll-status" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">cycle</div><div id="poll-cycle" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">mode</div><div id="poll-mode" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">latest</div><div id="poll-latest" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">rows</div><div id="poll-rows" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">updated</div><div id="poll-time" class="metric-value">...</div></div>
+    </section>
+
+    <section class="status-grid">
+      <div class="card"><div class="metric-label">investable ETFs</div><div id="ticker-count" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">advancers</div><div id="advancers" class="metric-value pos">...</div></div>
+      <div class="card"><div class="metric-label">decliners</div><div id="decliners" class="metric-value neg">...</div></div>
+      <div class="card"><div class="metric-label">VIX</div><div id="vix-level" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">SPY</div><div id="spy-return" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">news impact</div><div id="news-severity" class="metric-value">...</div></div>
+    </section>
+
+    <section class="grid-2">
+      <div class="card">
+        <div class="section-title"><h2>Top Movers</h2><span class="small">latest return %</span></div>
+        <div id="top-movers"></div>
+      </div>
+      <div class="card">
+        <div class="section-title"><h2>Worst Movers</h2><span class="small">latest return %</span></div>
+        <div id="worst-movers"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card">
+        <div class="section-title"><h2>Asset Class Performance</h2><span class="small">average latest return</span></div>
+        <div id="asset-bars"></div>
+      </div>
+    </section>
+
+    <section class="card section">
+      <div class="section-title"><h2>Portfolio Weight vs Latest Return</h2><span class="small">investable ETF scatter</span></div>
+      <div id="weight-return-scatter"></div>
+      <div class="small">Labels show the largest absolute movers and largest portfolio weights. Other points show details on hover.</div>
+    </section>
+
+    <section class="card section">
+      <div class="section-title"><h2>Live ETF Tape</h2><span id="market-note" class="small"></span></div>
+      <div id="etf-tape"></div>
+    </section>
+
+    <section class="card section">
+      <div class="section-title"><h2>Monitor-Only Instruments</h2><span class="small">context, not portfolio asset class exposure</span></div>
+      <div id="monitor-table"></div>
+    </section>
+  </main>
+  </div>
+  <script src="shared.js"></script>
+  <script>
+    async function updateMarket() {
+      const [status, market, news] = await Promise.all([
+        loadJson(PATHS.liveStatus),
+        loadJson(PATHS.market, { items: [] }),
+        loadJson(PATHS.news, { items: [] })
+      ]);
+      renderLiveStatus(status);
+      const rows = market.items ?? [];
+      const investable = investableRows(rows);
+      const monitors = monitorRows(rows);
+      const vix = rows.find(x => x.ticker === "VIX") ?? {};
+      const spy = rows.find(x => x.ticker === "SPY") ?? {};
+      const newsImpact = buildNewsTriage(news, market);
+      setText("ticker-count", investable.length);
+      setText("advancers", investable.filter(x => Number(x.latest_return_pct) > 0).length);
+      setText("decliners", investable.filter(x => Number(x.latest_return_pct) < 0).length);
+      setText("vix-level", fmtNum(vix.latest_close));
+      const spyNode = byId("spy-return");
+      spyNode.textContent = fmtPct(spy.latest_return_pct);
+      spyNode.className = `metric-value ${signedClass(spy.latest_return_pct)}`;
+      const newsNode = byId("news-severity");
+      newsNode.textContent = `${newsImpact.level.toUpperCase()} ${fmtNum(newsImpact.severity, 1)}`;
+      newsNode.className = `metric-value ${newsImpact.level === "red" ? "neg" : newsImpact.level === "green" ? "pos" : ""}`;
+      setText("market-note", `${market.data_mode ?? ""} | ${market.generated_at_utc ?? ""}`);
+
+      const columns = [
+        { label: "Ticker", key: "ticker" },
+        { label: "Asset", key: "asset_class" },
+        { label: "Bucket", key: "risk_bucket" },
+        { label: "Close", value: r => fmtNum(r.latest_close) },
+        { label: "Return", value: r => `<span class="${signedClass(r.latest_return_pct)}">${fmtPct(r.latest_return_pct)}</span>`, html: true },
+        { label: "Date", key: "latest_date" },
+        { label: "Timing", key: "timing_status" }
+      ];
+      renderTable("top-movers", [...investable].sort((a, b) => Number(b.latest_return_pct) - Number(a.latest_return_pct)), columns, 8);
+      renderTable("worst-movers", [...investable].sort((a, b) => Number(a.latest_return_pct) - Number(b.latest_return_pct)), columns, 8);
+      renderTable("etf-tape", [...investable].sort((a, b) => Number(b.latest_return_pct) - Number(a.latest_return_pct)), columns, 80);
+      renderBars("asset-bars", groupAverage(investable, "asset_class", "latest_return_pct"), 10);
+      renderScatter("weight-return-scatter", investable, {
+        labelKey: "ticker",
+        xKey: "target_weight",
+        yKey: "latest_return_pct",
+        xLabel: "target weight",
+        yLabel: "latest return %",
+        color: row => Number(row.latest_return_pct) >= 0 ? "#29b36a" : "#e04f5f",
+        labelPredicate: (point, index, data) => {
+          const byMove = [...data].sort((a, b) => Math.abs(b.y) - Math.abs(a.y)).slice(0, 6);
+          const byWeight = [...data].sort((a, b) => b.x - a.x).slice(0, 4);
+          return [...byMove, ...byWeight].some(item => item.label === point.label);
+        }
+      });
+      renderTable("monitor-table", monitors, columns, 10);
+    }
+    startLoop(updateMarket, 3);
+  </script>
+</body>
+</html>

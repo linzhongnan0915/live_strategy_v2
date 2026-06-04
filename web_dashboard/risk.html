@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Risk Factors</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">RM</div></div>
+      <nav class="side-nav">
+        <a data-icon="O" href="index.html">Overview</a>
+        <a data-icon="M" href="market.html">Market</a>
+        <a class="active" data-icon="R" href="risk.html">Risk</a>
+        <a data-icon="S" href="strategies.html">Strategies</a>
+      </nav>
+      <div class="side-footer"><div class="avatar">RM</div><div>Risk Manager</div><div>Factor Risk</div></div>
+    </aside>
+  <main class="shell">
+    <div class="topbar">
+      <div>
+        <h1>Risk Factor & Signal Board</h1>
+        <div class="subtitle">Barra-style proxy lens: market beta, style, sector, rates, credit, commodity, USD, volatility, and news risk.</div>
+      </div>
+      <div class="top-actions">
+        <div class="control-chip">Factor Proxy</div>
+        <div class="control-chip">News Confirmed</div>
+      </div>
+    </div>
+
+    <section class="status-grid">
+      <div class="card"><div class="metric-label">polling</div><div id="poll-status" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">cycle</div><div id="poll-cycle" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">mode</div><div id="poll-mode" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">latest</div><div id="poll-latest" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">rows</div><div id="poll-rows" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">updated</div><div id="poll-time" class="metric-value">...</div></div>
+    </section>
+
+    <section class="status-grid">
+      <div class="card"><div class="metric-label">overall signal</div><div id="overall-risk" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">red signals</div><div id="red-count" class="metric-value neg">...</div></div>
+      <div class="card"><div class="metric-label">yellow signals</div><div id="yellow-count" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">VIX</div><div id="risk-vix" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">HYG-LQD</div><div id="risk-credit" class="metric-value">...</div></div>
+      <div class="card"><div class="metric-label">news impact</div><div id="risk-news" class="metric-value">...</div></div>
+    </section>
+
+    <section class="grid-2">
+      <div class="card">
+        <div class="section-title"><h2>Live Risk Signals</h2><span class="small">updates from market + news artifacts</span></div>
+        <div id="risk-signals"></div>
+      </div>
+      <div class="card">
+        <div class="section-title"><h2>Factor Proxy Map</h2><span class="small">not Barra, but Barra-style framing</span></div>
+        <div id="factor-map"></div>
+      </div>
+    </section>
+
+    <section class="grid-2 section">
+      <div class="card">
+        <div class="section-title"><h2>Portfolio Allocation By Asset Class</h2><span class="small">hover slices for ETF details</span></div>
+        <div id="asset-pie"></div>
+      </div>
+      <div class="card">
+        <div class="section-title"><h2>Portfolio Allocation By Risk Bucket</h2><span class="small">sector/factor concentration lens</span></div>
+        <div id="bucket-pie"></div>
+      </div>
+    </section>
+
+    <section class="card section">
+      <div class="section-title"><h2>Risk Story</h2><span class="small">how to read the two lenses together</span></div>
+      <div id="risk-story" class="thesis"></div>
+    </section>
+
+    <section class="grid-3 section">
+      <div class="card"><div class="metric-label">raw news severity</div><div id="raw-news-severity" class="metric-value">...</div><div class="metric-sub">from friend API</div></div>
+      <div class="card"><div class="metric-label">market confirmations</div><div id="news-confirmations" class="metric-value">...</div><div class="metric-sub">equity, credit, vol, haven/energy</div></div>
+      <div class="card"><div class="metric-label">strategy links</div><div id="news-strategy-links" class="metric-value">...</div><div id="news-impact-reason" class="metric-sub"></div></div>
+    </section>
+
+    <section class="grid-3 section">
+      <div class="card"><div class="metric-label">dominant news topics</div><div id="news-topics" class="thesis">...</div></div>
+      <div class="card"><div class="metric-label">portfolio relevance</div><div id="news-portfolio-relevance" class="thesis">...</div></div>
+      <div class="card"><div class="metric-label">manager news action</div><div id="news-manager-action" class="thesis">...</div></div>
+    </section>
+
+    <section class="section">
+      <div class="card">
+        <div class="section-title"><h2>Risk Bucket Moves</h2><span class="small">average latest return</span></div>
+        <div id="risk-bucket-bars"></div>
+      </div>
+    </section>
+
+    <section class="grid-2 section">
+      <div class="card">
+        <div class="section-title"><h2>Barra-Style Factor Risk Contribution</h2><span class="small">observable ETF proxy model</span></div>
+        <div id="factor-risk-contribution"></div>
+      </div>
+      <div class="card">
+        <div class="section-title"><h2>ETF Factor Loading Matrix</h2><span class="small">primary=1.0, secondary=0.5</span></div>
+        <div id="factor-loading-matrix"></div>
+      </div>
+    </section>
+
+    <section class="card section">
+      <div class="section-title"><h2>News/Event Risk Queue</h2><span class="small">human review context</span></div>
+      <div id="risk-news-table"></div>
+    </section>
+  </main>
+  </div>
+  <script src="shared.js"></script>
+  <script>
+    const factorRows = [
+      { family: "Market beta", proxy: "SPY / VTI", use: "Broad equity drawdown and beta pressure" },
+      { family: "Style", proxy: "QUAL / VLUE / MTUM / USMV", use: "Quality, value, momentum, minimum-vol tilts" },
+      { family: "Sector", proxy: "XLK / XLF / XLE / XLV / XLP", use: "Sector concentration and rotation risk" },
+      { family: "Rates", proxy: "SHY / IEF / TLT / TIP", use: "Duration, real rates, inflation-linked exposure" },
+      { family: "Credit", proxy: "HYG / LQD / EMB", use: "Spread stress and liquidity proxy" },
+      { family: "Macro shock", proxy: "VIX / GLD / USO / UUP", use: "Volatility, safe-haven, energy, USD pressure" }
+    ];
+
+    async function updateRisk() {
+      const [status, market, news, metrics, factorRisk] = await Promise.all([
+        loadJson(PATHS.liveStatus),
+        loadJson(PATHS.market, { items: [] }),
+        loadJson(PATHS.news, { items: [] }),
+        loadJson(PATHS.metrics, { metrics: {} }),
+        loadJson(PATHS.factorRisk, { factor_risk_contribution: [], factor_loading_matrix: [] })
+      ]);
+      renderLiveStatus(status);
+      const rows = market.items ?? [];
+      const investable = investableRows(rows);
+      const risk = calculateRiskSignals(market, news, metrics);
+      setText("overall-risk", risk.overall.toUpperCase());
+      byId("overall-risk").className = `metric-value ${risk.overall === "red" ? "neg" : risk.overall === "green" ? "pos" : ""}`;
+      setText("red-count", risk.red);
+      setText("yellow-count", risk.yellow);
+      const vix = rows.find(x => x.ticker === "VIX") ?? {};
+      const hyg = rows.find(x => x.ticker === "HYG") ?? {};
+      const lqd = rows.find(x => x.ticker === "LQD") ?? {};
+      setText("risk-vix", fmtNum(vix.latest_close));
+      setText("risk-credit", fmtPct(Number(hyg.latest_return_pct) - Number(lqd.latest_return_pct)));
+      const newsTriage = buildNewsTriage(news, market);
+      const newsImpact = newsTriage;
+      const newsNode = byId("risk-news");
+      newsNode.textContent = `${newsImpact.level.toUpperCase()} ${fmtNum(newsImpact.severity, 1)}`;
+      newsNode.className = `metric-value ${newsImpact.level === "red" ? "neg" : newsImpact.level === "green" ? "pos" : ""}`;
+      setText("raw-news-severity", fmtNum(newsImpact.severity, 1));
+      setText("news-confirmations", newsImpact.confirmations);
+      setText("news-strategy-links", newsImpact.affected.length);
+      setText("news-impact-reason", newsImpact.reason);
+      setText("news-topics", `${newsTriage.top_topics}. Unique headlines: ${newsTriage.unique_count}.`);
+      setText("news-portfolio-relevance", newsTriage.conclusion);
+      setText("news-manager-action", newsTriage.manager_action);
+
+      renderTable("risk-signals", risk.signals, [
+        { label: "Signal", key: "name" },
+        { label: "Level", value: r => statusPill(r.level), html: true },
+        { label: "Value", value: r => r.value === null ? "N/A" : `${fmtNum(r.value, r.unit === "ratio" ? 4 : 2)} ${r.unit}` },
+        { label: "Why it matters", key: "reason" }
+      ], 20);
+      renderTable("factor-map", factorRows, [
+        { label: "Family", key: "family" },
+        { label: "ETF proxy", key: "proxy" },
+        { label: "Risk manager use", key: "use" }
+      ], 20);
+      const assetAlloc = groupAllocation(investable, "asset_class", "target_weight");
+      const bucketAlloc = topGroupsWithOther(groupAllocation(investable, "risk_bucket", "target_weight"), 10);
+      renderAllocationPie("asset-pie", assetAlloc, { label: "portfolio asset class allocation" });
+      renderAllocationPie("bucket-pie", bucketAlloc, { label: "portfolio risk bucket allocation" });
+      const assetPerf = groupAverage(investable, "asset_class", "latest_return_pct");
+      const bucketPerf = groupAverage(investable, "risk_bucket", "latest_return_pct");
+      const topAsset = assetPerf[0] ?? {};
+      const weakAsset = [...assetPerf].reverse()[0] ?? {};
+      const topBucket = bucketPerf[0] ?? {};
+      const weakBucket = [...bucketPerf].reverse()[0] ?? {};
+      setText(
+        "risk-story",
+        `Asset class performance is the broad market lens: ${topAsset.name ?? "N/A"} is leading at ${fmtPct(topAsset.value)}, while ${weakAsset.name ?? "N/A"} is lagging at ${fmtPct(weakAsset.value)}. Risk bucket moves are the factor/sector lens inside the portfolio: ${topBucket.name ?? "N/A"} is strongest at ${fmtPct(topBucket.value)}, while ${weakBucket.name ?? "N/A"} is weakest at ${fmtPct(weakBucket.value)}. They are not conflicting charts; the first answers which broad asset class moved, and the second answers which sector/factor exposure created the risk.`
+      );
+      renderBars("risk-bucket-bars", groupAverage(investable, "risk_bucket", "latest_return_pct"), 12);
+      renderTable("factor-risk-contribution", factorRisk.factor_risk_contribution ?? [], [
+        { label: "Factor", key: "factor_name" },
+        { label: "Proxy", key: "proxy_ticker" },
+        { label: "Exposure", value: r => fmtNum(r.portfolio_exposure, 3) },
+        { label: "20d vol", value: r => fmtPct(Number(r.proxy_volatility_20d) * 100) },
+        { label: "Risk contrib", value: r => `<span class="${Number(r.risk_contribution_pct) >= 25 ? "warn" : ""}">${fmtPct(r.risk_contribution_pct)}</span>`, html: true },
+        { label: "Interpretation", key: "interpretation" }
+      ], 8);
+      renderTable("factor-loading-matrix", factorRisk.factor_loading_matrix ?? [], [
+        { label: "ETF", key: "ticker" },
+        { label: "Asset class", key: "asset_class" },
+        { label: "Risk bucket", key: "risk_bucket" },
+        { label: "Factor", key: "factor_name" },
+        { label: "Loading", value: r => fmtNum(r.loading, 1) },
+        { label: "Source", key: "loading_source" }
+      ], 16);
+      renderTable("risk-news-table", newsTriage.rows, [
+        { label: "Signal", value: r => statusPill(r.warning_level ?? r.watch_level), html: true },
+        { label: "Severity", value: r => fmtNum(r.severity, 1) },
+        { label: "Keywords", value: r => (r.keywords ?? r.topics ?? []).join(", ") || "none" },
+        { label: "Exposure", key: "exposure" },
+        { label: "Affected ETFs", value: r => (r.affected_tickers ?? []).join(", ") || "none" },
+        { label: "Affected strategies", value: r => (r.affected_strategies ?? []).join(", ") || "none" },
+        { label: "Confidence", value: r => fmtNum(Number(r.confidence) * 100, 0) + "%" },
+        { label: "Title", key: "title" },
+        { label: "Reasoning", key: "explanation" }
+      ], 20);
+    }
+    startLoop(updateRisk, 3);
+  </script>
+</body>
+</html>

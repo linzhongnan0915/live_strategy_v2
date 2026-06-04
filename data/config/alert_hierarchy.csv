@@ -1,0 +1,13 @@
+environment_state,dominant_rule_id,subsumed_rule_id,priority_rank,relationship_type,rationale,dashboard_label,active_by_default
+liquidity_crisis,liquidity_stress,credit_stress,1,dominates,Severe liquidity dislocation is the dominant escalation; credit stress is supporting context only.,Liquidity dominates credit,TRUE
+liquidity_crisis,liquidity_stress,high_volatility,2,dominates,Volatility spike is secondary to liquidity crisis posture; show under liquidity primary card.,Liquidity dominates vol stress,TRUE
+credit_stress,credit_stress,high_volatility,1,dominates,Confirmed credit stress is primary; elevated vol is context unless liquidity crisis applies.,Credit dominates vol stress,TRUE
+geopolitical_event_shock,geopolitical_shock,oil_shock,1,dominates,Geopolitical headline confirmation is primary; commodity shock is supporting sleeve context.,Geo dominates oil shock,TRUE
+geopolitical_event_shock,geopolitical_shock,usd_pressure,2,dominates,FX pressure is secondary to geopolitical escalation bundle.,Geo dominates USD pressure,TRUE
+geopolitical_event_shock,geopolitical_shock,high_volatility,3,dominates,Vol stress is context under geopolitical shock not co-primary.,Geo dominates vol stress,TRUE
+rates_inflation_shock,inflation_pressure,rates_up,1,dominates,Inflation confirmation is primary; rates-up sleeve is secondary context.,Inflation dominates rates up,TRUE
+rates_inflation_shock,inflation_pressure,oil_shock,2,dominates,Oil shock is supporting inflation narrative not co-primary escalation.,Inflation dominates oil shock,TRUE
+risk_off_equity_stress,risk_off,high_volatility,1,dominates,Equity risk-off confirmation is primary; vol alert is context not separate primary.,Risk-off dominates vol stress,TRUE
+volatility_stress,high_volatility,strategy_drift,1,dominates,Vol regime is primary watch; strategy drift is secondary monitoring context.,Vol dominates strategy drift,TRUE
+normal_risk_on,risk_on,low_volatility,1,dominates,Informational risk-on context only; low-vol green rule stays subordinate in calm regime.,Risk-on context only,FALSE
+stabilization_re_risk_review,risk_on,credit_calm,1,dominates,Re-risk review window; informational calm rules are subordinate not de-escalation proof.,Stabilization context,FALSE

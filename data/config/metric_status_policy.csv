@@ -1,0 +1,21 @@
+policy_id,metric_name,status,operator,threshold_value,unit,interpretation,related_rules,display_order,notes
+vix_level_yellow,VIX level,yellow,>=,20,index,Elevated implied volatility band,high_volatility;risk_off;credit_stress,1,Prototype metric status only
+vix_level_red,VIX level,red,>=,30,index,High implied volatility stress band,high_volatility;liquidity_stress,2,Prototype metric status only
+vix_change_yellow,VIX change,yellow,>=,3,index_points,Single-day volatility spike watch,high_volatility,3,Prototype metric status only
+vix_change_red,VIX change,red,>=,7,index_points,Severe single-day volatility spike,high_volatility,4,Prototype metric status only
+spy_return_yellow,SPY return,yellow,<=,-0.02,percent,Short-horizon equity weakness,risk_off;high_volatility,5,Prototype metric status only
+spy_return_red,SPY return,red,<=,-0.05,percent,Severe short-horizon equity weakness,risk_off,6,Prototype metric status only
+spy_drawdown_yellow,SPY drawdown,yellow,<=,-0.03,percent,Equity drawdown watch,risk_off;drawdown_breach,7,Prototype metric status only
+spy_drawdown_red,SPY drawdown,red,<=,-0.05,percent,Severe equity drawdown pressure,risk_off;drawdown_breach,8,Prototype metric status only
+hyg_lqd_rel_yellow,HYG vs LQD relative return,yellow,<=,-0.015,percent,Credit spread stress watch,credit_stress;liquidity_stress,9,Prototype metric status only
+hyg_lqd_rel_red,HYG vs LQD relative return,red,<=,-0.03,percent,Severe HY vs IG underperformance,credit_stress;liquidity_stress,10,Prototype metric status only
+portfolio_drawdown_yellow,portfolio drawdown,yellow,<=,-0.05,percent,Portfolio drawdown watch,drawdown_breach,11,Prototype metric status only
+portfolio_drawdown_red,portfolio drawdown,red,<=,-0.08,percent,Portfolio drawdown stress,drawdown_breach,12,Prototype metric status only
+portfolio_var_yellow,portfolio VaR,yellow,>=,0.85,ratio_to_limit,VaR watch band versus internal limit,var_breach,13,Prototype metric status only
+portfolio_var_red,portfolio VaR,red,>=,1.0,ratio_to_limit,VaR limit breach band,var_breach,14,Prototype metric status only
+headline_severity_yellow,headline severity,yellow,>=,5,score_0_10,Elevated headline severity watch,geopolitical_shock,15,Prototype metric status only
+headline_severity_red,headline severity,red,>=,7,score_0_10,Critical headline severity gate,geopolitical_shock,16,Prototype metric status only
+cross_asset_confirm_yellow,cross-asset confirmation count,yellow,>=,3,count,Cross-asset stress confirmation watch,geopolitical_shock,17,Prototype metric status only
+cross_asset_confirm_red,cross-asset confirmation count,red,>=,5,count,Strong cross-asset stress confirmation,geopolitical_shock,18,Prototype metric status only
+strategy_drift_yellow,strategy return deviation,yellow,>=,0.02,percent,Strategy tracking drift watch,strategy_drift,19,Prototype metric status only
+strategy_drift_red,strategy return deviation,red,>=,0.04,percent,Severe strategy tracking drift,strategy_drift,20,Prototype metric status only

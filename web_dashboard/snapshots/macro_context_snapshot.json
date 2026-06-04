@@ -1,0 +1,121 @@
+{
+  "generated_at_utc": "2026-06-04T00:59:24+00:00",
+  "data_mode": "friend_api_macro_context",
+  "official_risk_decision_allowed": false,
+  "dxy": {
+    "generated_at_utc": "2026-06-04T00:59:23+00:00",
+    "status": "success",
+    "symbol": "DX.F",
+    "name": "US Dollar Index (DXY)",
+    "data_source": "STOOQ (DX.F)",
+    "current": 99.45,
+    "change": 0.015000000000000568,
+    "change_percent": 0.015085231558304992,
+    "previous": 99.435,
+    "date": "20260604",
+    "official_risk_decision_allowed": false,
+    "note": "DXY is macro factor context only; not an execution signal."
+  },
+  "upcoming_events": {
+    "generated_at_utc": "2026-06-04T00:59:24+00:00",
+    "status": "success",
+    "horizon_days": 14,
+    "event_count": 6,
+    "events": [
+      {
+        "id": "fred-retail-477-2026-05-21",
+        "date": "2026-05-21",
+        "title": "Monthly State Retail Sales",
+        "source": "FRED",
+        "release_id": 477,
+        "url": "https://www.census.gov/retail/state_retail_sales.html",
+        "tags": [
+          "consumer"
+        ],
+        "time_et": "08:30",
+        "time_zone": "ET",
+        "time_is_estimated": true
+      },
+      {
+        "id": "fred-gdp-53-2026-05-28",
+        "date": "2026-05-28",
+        "title": "Gross Domestic Product",
+        "source": "FRED",
+        "release_id": 53,
+        "url": "https://www.bea.gov/data/gdp/gross-domestic-product",
+        "tags": [
+          "gdp",
+          "bea"
+        ],
+        "time_et": "08:30",
+        "time_zone": "ET",
+        "time_is_estimated": true
+      },
+      {
+        "id": "fred-pce-54-2026-05-28",
+        "date": "2026-05-28",
+        "title": "Personal Income and Outlays",
+        "source": "FRED",
+        "release_id": 54,
+        "url": "https://www.bea.gov/data/income-saving/personal-income",
+        "tags": [
+          "pce",
+          "bea",
+          "inflation"
+        ],
+        "time_et": "08:30",
+        "time_zone": "ET",
+        "time_is_estimated": true
+      },
+      {
+        "id": "fred-fomc-101-2026-06-04",
+        "date": "2026-06-04",
+        "title": "FOMC Press Release",
+        "source": "FRED",
+        "release_id": 101,
+        "url": "http://www.federalreserve.gov/fomc/",
+        "tags": [
+          "fed",
+          "rates"
+        ],
+        "time_et": "14:00",
+        "time_zone": "ET",
+        "time_is_estimated": true
+      },
+      {
+        "id": "fred-employment-50-2026-06-05",
+        "date": "2026-06-05",
+        "title": "Employment Situation",
+        "source": "FRED",
+        "release_id": 50,
+        "url": "http://www.bls.gov/ces/",
+        "tags": [
+          "jobs",
+          "bls"
+        ],
+        "time_et": "08:30",
+        "time_zone": "ET",
+        "time_is_estimated": true
+      },
+      {
+        "id": "fred-cpi-10-2026-06-10",
+        "date": "2026-06-10",
+        "title": "Consumer Price Index",
+        "source": "FRED",
+        "release_id": 10,
+        "url": "http://www.bls.gov/cpi/",
+        "tags": [
+          "inflation",
+          "cpi",
+          "bls"
+        ],
+        "time_et": "08:30",
+        "time_zone": "ET",
+        "time_is_estimated": true
+      }
+    ],
+    "official_risk_decision_allowed": false,
+    "note": "Economic calendar is next-day/watchlist context only."
+  },
+  "note": "Macro context supports risk review; not execution."
+}

@@ -1,0 +1,28 @@
+{
+  "as_of_date": "2026-04-14",
+  "data_source": "sample_synthetic_computed_from_prices",
+  "timestamp": "2026-06-03T14:12:16+00:00",
+  "metrics": {
+    "VIX level": 24.0,
+    "VIX change": 3.5,
+    "headline severity": 0,
+    "strategy return deviation": 0.0,
+    "SPY return": -0.01860979511089611,
+    "QQQ return": -0.023034673415966544,
+    "IWM return": -0.02131589147759272,
+    "TLT return": -0.0146626639967683,
+    "IEF return": -0.0020978714602876147,
+    "SHY return": 0.00014988758431200289,
+    "HYG return": -0.01934862910358459,
+    "LQD return": 0.004608625298280433,
+    "TIP return": 0.002001056086553543,
+    "GLD return": 0.013320723966256054,
+    "USO return": 0.005261390193072257,
+    "UUP return": 0.006415809715058396,
+    "HYG vs LQD relative return": -0.023957254401865025,
+    "SPY drawdown": -0.022289993076951897,
+    "portfolio drawdown": -0.010580422021440494,
+    "portfolio VaR": 0.08856345200858307,
+    "cross-asset confirmation count": 6
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "as_of_date": "2026-06-02",
+  "data_source": "mock_prototype_snapshot",
+  "timestamp": "2026-06-02T16:30:00-04:00",
+  "metrics": {
+    "VIX level": 32.5,
+    "VIX change": 4.2,
+    "SPY return": -0.031,
+    "QQQ return": -0.042,
+    "IWM return": -0.038,
+    "TLT return": -0.028,
+    "SHY return": 0.002,
+    "HYG return": -0.022,
+    "LQD return": 0.004,
+    "GLD return": 0.025,
+    "USO return": 0.015,
+    "UUP return": 0.008,
+    "HYG vs LQD relative return": -0.028,
+    "SPY drawdown": -0.062,
+    "portfolio drawdown": -0.057,
+    "portfolio VaR": 1.05,
+    "headline severity": 8,
+    "cross-asset confirmation count": 4,
+    "strategy return deviation": 0.045
+  }
+}

@@ -1,0 +1,6 @@
+score_component,weight,description
+performance_score,0.30,Return/risk performance proxy from available price history
+risk_score,0.25,Drawdown/volatility/downside risk control
+regime_fit_score,0.25,Fit to current macro/risk regime and trigger context
+liquidity_score,0.10,ETF liquidity and implementation practicality
+implementation_score,0.10,"Cost, turnover, constraints, and operational simplicity"

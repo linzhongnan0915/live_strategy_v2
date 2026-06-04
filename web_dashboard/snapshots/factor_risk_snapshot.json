@@ -1,0 +1,1041 @@
+{
+  "data_mode": "barra_style_blackrock_factor_proxy",
+  "model_disclaimer": "Observable ETF proxy factor model. Barra-style risk lens and BlackRock-style factor-to-assets mapping; not a commercial Barra model.",
+  "factor_loading_matrix": [
+    {
+      "ticker": "AGG",
+      "asset_class": "Fixed Income",
+      "risk_bucket": "core_fixed_income",
+      "factor_id": "duration_rates",
+      "factor_name": "Duration Rates",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "AGG",
+      "asset_class": "Fixed Income",
+      "risk_bucket": "core_fixed_income",
+      "factor_id": "high_yield_credit",
+      "factor_name": "High Yield Credit",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "DBA",
+      "asset_class": "Commodity",
+      "risk_bucket": "commodity_equity",
+      "factor_id": "inflation_linked",
+      "factor_name": "Inflation Linked",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "DBA",
+      "asset_class": "Commodity",
+      "risk_bucket": "commodity_equity",
+      "factor_id": "oil_energy",
+      "factor_name": "Oil Energy",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "EEM",
+      "asset_class": "Equity",
+      "risk_bucket": "em_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "EEM",
+      "asset_class": "Equity",
+      "risk_bucket": "em_equity",
+      "factor_id": "usd_factor",
+      "factor_name": "USD Factor",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "EFA",
+      "asset_class": "Equity",
+      "risk_bucket": "intl_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "EFA",
+      "asset_class": "Equity",
+      "risk_bucket": "intl_equity",
+      "factor_id": "usd_factor",
+      "factor_name": "USD Factor",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "EMB",
+      "asset_class": "Fixed Income",
+      "risk_bucket": "em_credit",
+      "factor_id": "high_yield_credit",
+      "factor_name": "High Yield Credit",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "EMB",
+      "asset_class": "Fixed Income",
+      "risk_bucket": "em_credit",
+      "factor_id": "usd_factor",
+      "factor_name": "USD Factor",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "GLD",
+      "asset_class": "Commodity",
+      "risk_bucket": "real_assets",
+      "factor_id": "inflation_linked",
+      "factor_name": "Inflation Linked",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "GLD",
+      "asset_class": "Commodity",
+      "risk_bucket": "real_assets",
+      "factor_id": "safe_haven_gold",
+      "factor_name": "Safe Haven Gold",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "HYG",
+      "asset_class": "Fixed Income",
+      "risk_bucket": "high_yield_credit",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "HYG",
+      "asset_class": "Fixed Income",
+      "risk_bucket": "high_yield_credit",
+      "factor_id": "high_yield_credit",
+      "factor_name": "High Yield Credit",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "IEF",
+      "asset_class": "Fixed Income",
+      "risk_bucket": "intermediate_duration_rates",
+      "factor_id": "duration_rates",
+      "factor_name": "Duration Rates",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "IWD",
+      "asset_class": "Equity",
+      "risk_bucket": "value_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "IWD",
+      "asset_class": "Equity",
+      "risk_bucket": "value_equity",
+      "factor_id": "small_cap_cyclical",
+      "factor_name": "Small Cap Cyclical",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "IWF",
+      "asset_class": "Equity",
+      "risk_bucket": "growth_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "IWF",
+      "asset_class": "Equity",
+      "risk_bucket": "growth_equity",
+      "factor_id": "growth_tech",
+      "factor_name": "Growth Tech",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "IWM",
+      "asset_class": "Equity",
+      "risk_bucket": "small_cap_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "IWM",
+      "asset_class": "Equity",
+      "risk_bucket": "small_cap_equity",
+      "factor_id": "small_cap_cyclical",
+      "factor_name": "Small Cap Cyclical",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "LQD",
+      "asset_class": "Fixed Income",
+      "risk_bucket": "ig_credit",
+      "factor_id": "high_yield_credit",
+      "factor_name": "High Yield Credit",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "LQD",
+      "asset_class": "Fixed Income",
+      "risk_bucket": "ig_credit",
+      "factor_id": "short_rates_cash",
+      "factor_name": "Short Rates Cash",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "MTUM",
+      "asset_class": "Equity",
+      "risk_bucket": "momentum_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "MTUM",
+      "asset_class": "Equity",
+      "risk_bucket": "momentum_equity",
+      "factor_id": "growth_tech",
+      "factor_name": "Growth Tech",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "QQQ",
+      "asset_class": "Equity",
+      "risk_bucket": "growth_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "QQQ",
+      "asset_class": "Equity",
+      "risk_bucket": "growth_equity",
+      "factor_id": "growth_tech",
+      "factor_name": "Growth Tech",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "QUAL",
+      "asset_class": "Equity",
+      "risk_bucket": "quality_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "SHY",
+      "asset_class": "Fixed Income",
+      "risk_bucket": "short_duration_rates",
+      "factor_id": "duration_rates",
+      "factor_name": "Duration Rates",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "SHY",
+      "asset_class": "Fixed Income",
+      "risk_bucket": "short_duration_rates",
+      "factor_id": "short_rates_cash",
+      "factor_name": "Short Rates Cash",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "SLV",
+      "asset_class": "Commodity",
+      "risk_bucket": "real_assets",
+      "factor_id": "inflation_linked",
+      "factor_name": "Inflation Linked",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "SLV",
+      "asset_class": "Commodity",
+      "risk_bucket": "real_assets",
+      "factor_id": "oil_energy",
+      "factor_name": "Oil Energy",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "SPY",
+      "asset_class": "Equity",
+      "risk_bucket": "core_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "TIP",
+      "asset_class": "Fixed Income",
+      "risk_bucket": "inflation_linked",
+      "factor_id": "duration_rates",
+      "factor_name": "Duration Rates",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "TIP",
+      "asset_class": "Fixed Income",
+      "risk_bucket": "inflation_linked",
+      "factor_id": "inflation_linked",
+      "factor_name": "Inflation Linked",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "TLT",
+      "asset_class": "Fixed Income",
+      "risk_bucket": "long_duration_rates",
+      "factor_id": "duration_rates",
+      "factor_name": "Duration Rates",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "USMV",
+      "asset_class": "Equity",
+      "risk_bucket": "low_vol_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "USMV",
+      "asset_class": "Equity",
+      "risk_bucket": "low_vol_equity",
+      "factor_id": "volatility",
+      "factor_name": "Volatility",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "USO",
+      "asset_class": "Commodity",
+      "risk_bucket": "commodity_equity",
+      "factor_id": "inflation_linked",
+      "factor_name": "Inflation Linked",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "USO",
+      "asset_class": "Commodity",
+      "risk_bucket": "commodity_equity",
+      "factor_id": "oil_energy",
+      "factor_name": "Oil Energy",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "UUP",
+      "asset_class": "FX",
+      "risk_bucket": "usd_factor",
+      "factor_id": "short_rates_cash",
+      "factor_name": "Short Rates Cash",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "UUP",
+      "asset_class": "FX",
+      "risk_bucket": "usd_factor",
+      "factor_id": "usd_factor",
+      "factor_name": "USD Factor",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "VEA",
+      "asset_class": "Equity",
+      "risk_bucket": "intl_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "VEA",
+      "asset_class": "Equity",
+      "risk_bucket": "intl_equity",
+      "factor_id": "usd_factor",
+      "factor_name": "USD Factor",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "VIX",
+      "asset_class": "Volatility",
+      "risk_bucket": "volatility_monitor",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "VIX",
+      "asset_class": "Volatility",
+      "risk_bucket": "volatility_monitor",
+      "factor_id": "volatility",
+      "factor_name": "Volatility",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "VLUE",
+      "asset_class": "Equity",
+      "risk_bucket": "value_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "VTI",
+      "asset_class": "Equity",
+      "risk_bucket": "core_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "VWO",
+      "asset_class": "Equity",
+      "risk_bucket": "em_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "VWO",
+      "asset_class": "Equity",
+      "risk_bucket": "em_equity",
+      "factor_id": "usd_factor",
+      "factor_name": "USD Factor",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "XLB",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "inflation_linked",
+      "factor_name": "Inflation Linked",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "XLB",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "small_cap_cyclical",
+      "factor_name": "Small Cap Cyclical",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "XLC",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "XLC",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "growth_tech",
+      "factor_name": "Growth Tech",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "XLE",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "inflation_linked",
+      "factor_name": "Inflation Linked",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "XLE",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "oil_energy",
+      "factor_name": "Oil Energy",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "XLF",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "XLF",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "high_yield_credit",
+      "factor_name": "High Yield Credit",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "XLI",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "XLI",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "small_cap_cyclical",
+      "factor_name": "Small Cap Cyclical",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "XLK",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "XLK",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "growth_tech",
+      "factor_name": "Growth Tech",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "XLP",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "XLP",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "volatility",
+      "factor_name": "Volatility",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "XLRE",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "duration_rates",
+      "factor_name": "Duration Rates",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "XLRE",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "inflation_linked",
+      "factor_name": "Inflation Linked",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "XLU",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "duration_rates",
+      "factor_name": "Duration Rates",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "XLU",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "XLV",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "XLV",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "volatility",
+      "factor_name": "Volatility",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    },
+    {
+      "ticker": "XLY",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "loading": 1.0,
+      "loading_source": "primary_factor"
+    },
+    {
+      "ticker": "XLY",
+      "asset_class": "Equity",
+      "risk_bucket": "sector_equity",
+      "factor_id": "small_cap_cyclical",
+      "factor_name": "Small Cap Cyclical",
+      "loading": 0.5,
+      "loading_source": "secondary_factor"
+    }
+  ],
+  "factor_risk_contribution": [
+    {
+      "factor_id": "oil_energy",
+      "factor_name": "Oil Energy",
+      "factor_group": "commodities",
+      "proxy_ticker": "USO",
+      "portfolio_exposure": 0.2,
+      "proxy_volatility_20d": 0.0325537590192735,
+      "risk_score": 0.0065107518038547,
+      "risk_contribution_pct": 56.393338408452976,
+      "interpretation": "Energy and oil price shock proxy"
+    },
+    {
+      "factor_id": "inflation_linked",
+      "factor_name": "Inflation Linked",
+      "factor_group": "inflation",
+      "proxy_ticker": "TIP",
+      "portfolio_exposure": 0.8,
+      "proxy_volatility_20d": 0.003167152658759719,
+      "risk_score": 0.0025337221270077754,
+      "risk_contribution_pct": 21.946013862291515,
+      "interpretation": "Inflation-linked real rate proxy"
+    },
+    {
+      "factor_id": "safe_haven_gold",
+      "factor_name": "Safe Haven Gold",
+      "factor_group": "alternatives",
+      "proxy_ticker": "GLD",
+      "portfolio_exposure": 0.1,
+      "proxy_volatility_20d": 0.012124532562815036,
+      "risk_score": 0.0012124532562815037,
+      "risk_contribution_pct": 10.501749850982263,
+      "interpretation": "Gold safe-haven and real-asset proxy"
+    },
+    {
+      "factor_id": "duration_rates",
+      "factor_name": "Duration Rates",
+      "factor_group": "rates",
+      "proxy_ticker": "TLT",
+      "portfolio_exposure": 0.1,
+      "proxy_volatility_20d": 0.006084507588711863,
+      "risk_score": 0.0006084507588711863,
+      "risk_contribution_pct": 5.270139391519735,
+      "interpretation": "Long-duration Treasury rate sensitivity"
+    },
+    {
+      "factor_id": "usd_factor",
+      "factor_name": "USD Factor",
+      "factor_group": "fx",
+      "proxy_ticker": "UUP",
+      "portfolio_exposure": 0.2,
+      "proxy_volatility_20d": 0.0028475379825083783,
+      "risk_score": 0.0005695075965016757,
+      "risk_contribution_pct": 4.932830429304508,
+      "interpretation": "US dollar strength proxy"
+    },
+    {
+      "factor_id": "short_rates_cash",
+      "factor_name": "Short Rates Cash",
+      "factor_group": "rates",
+      "proxy_ticker": "SHY",
+      "portfolio_exposure": 0.1,
+      "proxy_volatility_20d": 0.0011036428237875835,
+      "risk_score": 0.00011036428237875835,
+      "risk_contribution_pct": 0.955928057448998,
+      "interpretation": "Short-duration Treasury cash proxy"
+    },
+    {
+      "factor_id": "small_cap_cyclical",
+      "factor_name": "Small Cap Cyclical",
+      "factor_group": "equity",
+      "proxy_ticker": "IWM",
+      "portfolio_exposure": 0.0,
+      "proxy_volatility_20d": 0.012404914342529957,
+      "risk_score": 0.0,
+      "risk_contribution_pct": 0.0,
+      "interpretation": "Small-cap and cyclical risk proxy"
+    },
+    {
+      "factor_id": "growth_tech",
+      "factor_name": "Growth Tech",
+      "factor_group": "equity",
+      "proxy_ticker": "QQQ",
+      "portfolio_exposure": 0.0,
+      "proxy_volatility_20d": 0.009905276402700895,
+      "risk_score": 0.0,
+      "risk_contribution_pct": 0.0,
+      "interpretation": "Growth and mega-cap technology beta proxy"
+    },
+    {
+      "factor_id": "equity_beta",
+      "factor_name": "Equity Beta",
+      "factor_group": "equity",
+      "proxy_ticker": "SPY",
+      "portfolio_exposure": 0.0,
+      "proxy_volatility_20d": 0.006139000721702404,
+      "risk_score": 0.0,
+      "risk_contribution_pct": 0.0,
+      "interpretation": "US large-cap market beta proxy"
+    },
+    {
+      "factor_id": "intermediate_rates",
+      "factor_name": "Intermediate Rates",
+      "factor_group": "rates",
+      "proxy_ticker": "IEF",
+      "portfolio_exposure": 0.0,
+      "proxy_volatility_20d": 0.003596913190516504,
+      "risk_score": 0.0,
+      "risk_contribution_pct": 0.0,
+      "interpretation": "Intermediate Treasury duration proxy"
+    },
+    {
+      "factor_id": "high_yield_credit",
+      "factor_name": "High Yield Credit",
+      "factor_group": "credit",
+      "proxy_ticker": "HYG",
+      "portfolio_exposure": 0.0,
+      "proxy_volatility_20d": 0.0029871794788477457,
+      "risk_score": 0.0,
+      "risk_contribution_pct": 0.0,
+      "interpretation": "High-yield credit spread risk proxy"
+    },
+    {
+      "factor_id": "investment_grade_credit",
+      "factor_name": "Investment Grade Credit",
+      "factor_group": "credit",
+      "proxy_ticker": "LQD",
+      "portfolio_exposure": 0.0,
+      "proxy_volatility_20d": 0.00371991960535376,
+      "risk_score": 0.0,
+      "risk_contribution_pct": 0.0,
+      "interpretation": "Investment-grade credit exposure proxy"
+    },
+    {
+      "factor_id": "volatility",
+      "factor_name": "Volatility",
+      "factor_group": "volatility",
+      "proxy_ticker": "VIX",
+      "portfolio_exposure": 0.0,
+      "proxy_volatility_20d": 0.034057517784555236,
+      "risk_score": 0.0,
+      "risk_contribution_pct": 0.0,
+      "interpretation": "Implied volatility level proxy"
+    }
+  ],
+  "blackrock_factor_sleeves": [
+    {
+      "strategy_id": "economic_growth_beta_sleeve",
+      "strategy_name": "Economic Growth Beta Sleeve",
+      "category": "Macro Factor Allocation",
+      "objective": "Tilt toward broad and growth equity beta when macro growth signals are supportive",
+      "target_etfs": "SPY;QQQ;IWM;VTI",
+      "primary_factor": "economic_growth",
+      "secondary_factor": "equity_beta",
+      "core_signal": "Growth and earnings impulse with stable credit and vol ceiling",
+      "risk_controls": "Max sector tilt cap; vol scaling; drawdown stop; human gate before switch",
+      "failure_mode": "Growth reversal; concentration; late-cycle beta shock"
+    },
+    {
+      "strategy_id": "real_rates_duration_sleeve",
+      "strategy_name": "Real Rates Duration Sleeve",
+      "category": "Macro Factor Allocation",
+      "objective": "Manage duration exposure to real-rate and rate-shock regimes",
+      "target_etfs": "TLT;IEF;SHY;TIP",
+      "primary_factor": "real_rates",
+      "secondary_factor": "duration",
+      "core_signal": "Real-yield and breakeven pressure with curve shape confirmation",
+      "risk_controls": "Duration cap; curve shock limits; persistence filter; no daily rewrite",
+      "failure_mode": "Duration whipsaw; inflation signal noise; policy pivot risk"
+    },
+    {
+      "strategy_id": "inflation_protection_sleeve",
+      "strategy_name": "Inflation Protection Sleeve",
+      "category": "Macro Factor Allocation",
+      "objective": "Protect against inflation and commodity-linked shocks",
+      "target_etfs": "GLD;TIP;USO;XLE;DBA",
+      "primary_factor": "inflation",
+      "secondary_factor": "commodities",
+      "core_signal": "Breakeven and commodity confirmation with inflation factor score",
+      "risk_controls": "Commodity sleeve cap; inflation persistence rule; human review before activation",
+      "failure_mode": "Commodity volatility; false inflation signals; TIP vs nominal mismatch"
+    },
+    {
+      "strategy_id": "credit_risk_premium_sleeve",
+      "strategy_name": "Credit Risk Premium Sleeve",
+      "category": "Macro Factor Allocation",
+      "objective": "Harvest and monitor credit risk premium with spread discipline",
+      "target_etfs": "LQD;HYG;EMB;IEF",
+      "primary_factor": "credit_risk",
+      "secondary_factor": "liquidity",
+      "core_signal": "HYG vs LQD and EM spread stability with vol filter",
+      "risk_controls": "Spread ceiling; HY exposure cap; escalation to human review",
+      "failure_mode": "Spread widening false alarms; carry drawdown; EM contagion"
+    },
+    {
+      "strategy_id": "sector_relative_strength_rotation",
+      "strategy_name": "Sector Relative Strength Rotation",
+      "category": "Equity Sector Rotation",
+      "objective": "Rotate among GICS sectors using relative strength and macro alignment",
+      "target_etfs": "XLK;XLF;XLE;XLV;XLP;XLY;XLI;XLU;XLB;XLRE;XLC",
+      "primary_factor": "economic_growth",
+      "secondary_factor": "sector_momentum",
+      "core_signal": "Cross-sector return ranking with macro factor confirmation",
+      "risk_controls": "Sector cap; turnover band; confirmation lag; rare switch policy",
+      "failure_mode": "Sector reversal; crowded trades; macro mismatch"
+    },
+    {
+      "strategy_id": "defensive_sector_rotation",
+      "strategy_name": "Defensive Sector Rotation",
+      "category": "Equity Sector Rotation",
+      "objective": "Rotate toward defensive sectors during risk-off regimes",
+      "target_etfs": "XLV;XLP;XLU;XLC;IEF;SHY",
+      "primary_factor": "defensive_quality",
+      "secondary_factor": "low_volatility",
+      "core_signal": "Defensive sector outperformance with vol expansion confirmation",
+      "risk_controls": "Max turnover; human gate; lag confirmation; no execution commands",
+      "failure_mode": "Late re-risk; opportunity cost; false defensive signal"
+    },
+    {
+      "strategy_id": "cyclical_recovery_rotation",
+      "strategy_name": "Cyclical Recovery Rotation",
+      "category": "Equity Sector Rotation",
+      "objective": "Tilt cyclical sectors when recovery signals strengthen",
+      "target_etfs": "XLY;XLI;XLF;XLE;IWM;SPY",
+      "primary_factor": "economic_growth",
+      "secondary_factor": "cyclical_beta",
+      "core_signal": "Cyclical sector breadth and small-cap confirmation",
+      "risk_controls": "Drawdown stop; credit filter; sector concentration cap",
+      "failure_mode": "Recovery stall; cyclical drawdown; policy shock"
+    },
+    {
+      "strategy_id": "energy_inflation_shock_rotation",
+      "strategy_name": "Energy Inflation Shock Rotation",
+      "category": "Equity Sector Rotation",
+      "objective": "Emphasize energy and inflation-linked sleeves during commodity shocks",
+      "target_etfs": "XLE;USO;TIP;GLD;UUP",
+      "primary_factor": "inflation",
+      "secondary_factor": "commodities",
+      "core_signal": "Oil and breakeven impulse with energy sector confirmation",
+      "risk_controls": "Commodity cap; shock persistence rule; human review mandatory",
+      "failure_mode": "Energy reversal; geopolitical noise; wrong hedge mix"
+    },
+    {
+      "strategy_id": "quality_factor_sleeve",
+      "strategy_name": "Quality Factor Sleeve",
+      "category": "Style / Smart Beta",
+      "objective": "Implement quality factor exposure via investable ETF proxies",
+      "target_etfs": "QUAL;SPY;IWD",
+      "primary_factor": "quality",
+      "secondary_factor": "economic_growth",
+      "core_signal": "Quality spread and profitability proxy momentum",
+      "risk_controls": "Factor crowding cap; tracking error monitor; human review",
+      "failure_mode": "Quality underperformance cycles; factor reversal"
+    },
+    {
+      "strategy_id": "minimum_volatility_sleeve",
+      "strategy_name": "Minimum Volatility Sleeve",
+      "category": "Style / Smart Beta",
+      "objective": "Reduce portfolio volatility using minimum-volatility factor ETFs",
+      "target_etfs": "USMV;XLP;XLV;IEF",
+      "primary_factor": "low_volatility",
+      "secondary_factor": "defensive_quality",
+      "core_signal": "Low-vol factor relative strength and drawdown control",
+      "risk_controls": "Vol target band; beta floor monitor; rare activation",
+      "failure_mode": "Lagging upside; factor decay; crowding"
+    },
+    {
+      "strategy_id": "value_recovery_sleeve",
+      "strategy_name": "Value Recovery Sleeve",
+      "category": "Style / Smart Beta",
+      "objective": "Tilt value factor when valuation spreads widen and macro supports re-rating",
+      "target_etfs": "VLUE;IWD;XLF;IWM",
+      "primary_factor": "value",
+      "secondary_factor": "economic_growth",
+      "core_signal": "Value spread and cyclical confirmation composite",
+      "risk_controls": "Value trap filter; turnover cap; human gate",
+      "failure_mode": "Value trap; macro mismatch; sector concentration"
+    },
+    {
+      "strategy_id": "multi_factor_smart_beta_sleeve",
+      "strategy_name": "Multi-Factor Smart Beta Sleeve",
+      "category": "Style / Smart Beta",
+      "objective": "Blend quality momentum and value factor sleeves with risk controls",
+      "target_etfs": "QUAL;MTUM;VLUE;USMV",
+      "primary_factor": "multi_factor",
+      "secondary_factor": "economic_growth",
+      "core_signal": "Multi-factor scorecard with correlation-aware weights",
+      "risk_controls": "Factor correlation cap; rebalance band; human review",
+      "failure_mode": "Factor crowding; simultaneous factor drawdown"
+    },
+    {
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "strategy_name": "USD Liquidity Stress Sleeve",
+      "category": "Cross-Asset Hedge / Stress",
+      "objective": "Monitor USD strength and liquidity stress for defensive positioning",
+      "target_etfs": "UUP;SHY;IEF;GLD",
+      "primary_factor": "usd",
+      "secondary_factor": "liquidity",
+      "core_signal": "USD factor stress with short-rate and gold confirmation",
+      "risk_controls": "FX shock filter; data gap pause; human review before action",
+      "failure_mode": "False USD signals; EM spillover; hedge cost"
+    },
+    {
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "strategy_name": "Gold Geopolitical Hedge Sleeve",
+      "category": "Cross-Asset Hedge / Stress",
+      "objective": "Hedge geopolitical and safe-haven shocks using gold and defensive rates",
+      "target_etfs": "GLD;IEF;UUP;USO",
+      "primary_factor": "geopolitical",
+      "secondary_factor": "inflation",
+      "core_signal": "Headline severity with cross-asset confirmation",
+      "risk_controls": "Headline false-positive filter; confirmation lag; mandatory human review",
+      "failure_mode": "Headline false positives; short-lived shock; over-hedge cost"
+    },
+    {
+      "strategy_id": "volatility_spike_monitor_sleeve",
+      "strategy_name": "Volatility Spike Monitor Sleeve",
+      "category": "Cross-Asset Hedge / Stress",
+      "objective": "Monitor vol spikes via VIX and stress proxies; no automatic switch",
+      "target_etfs": "VIX;VXX;USMV;SHY",
+      "primary_factor": "volatility",
+      "secondary_factor": "equity_beta",
+      "core_signal": "VIX level and change with equity stress confirmation",
+      "risk_controls": "No VXX long-term hold; VIX monitor_only; human review mandatory",
+      "failure_mode": "VXX decay; vol mean reversion; false spike"
+    },
+    {
+      "strategy_id": "credit_stress_defensive_overlay",
+      "strategy_name": "Credit Stress Defensive Overlay",
+      "category": "Cross-Asset Hedge / Stress",
+      "objective": "Reduce HY and cyclical beta when credit stress triggers fire",
+      "target_etfs": "HYG;LQD;EMB;IWM;QQQ",
+      "primary_factor": "credit_risk",
+      "secondary_factor": "liquidity",
+      "core_signal": "HYG vs LQD and spread stress composite",
+      "risk_controls": "Credit ceiling; pause on missing data; human escalation",
+      "failure_mode": "False spread alarms; late re-risk"
+    },
+    {
+      "strategy_id": "risk_parity_etf_sleeve",
+      "strategy_name": "Risk Parity ETF Sleeve",
+      "category": "Portfolio Construction / Completion",
+      "objective": "Balance risk contributions across equity rates and real assets sleeves",
+      "target_etfs": "SPY;TLT;LQD;GLD;USMV",
+      "primary_factor": "multi_asset_balance",
+      "secondary_factor": "volatility",
+      "core_signal": "Risk contribution parity proxy across sleeve ETFs",
+      "risk_controls": "Risk budget cap; leverage prohibition; human review",
+      "failure_mode": "Correlation spike; leverage misunderstanding; estimation error"
+    },
+    {
+      "strategy_id": "factor_completion_portfolio",
+      "strategy_name": "Factor Completion Portfolio",
+      "category": "Portfolio Construction / Completion",
+      "objective": "Complete benchmark factor gaps using liquid ETF proxies",
+      "target_etfs": "VTI;VEA;VWO;AGG;GLD",
+      "primary_factor": "factor_completion",
+      "secondary_factor": "multi_factor",
+      "core_signal": "Factor gap analysis versus policy benchmark",
+      "risk_controls": "Tracking error budget; liquidity tier minimum; human gate",
+      "failure_mode": "Factor mismatch; over-completion; cost drag"
+    },
+    {
+      "strategy_id": "low_cost_factor_replication",
+      "strategy_name": "Low-Cost Factor Replication",
+      "category": "Portfolio Construction / Completion",
+      "objective": "Replicate target factors using low-cost broad and smart-beta ETFs",
+      "target_etfs": "VTI;QUAL;VLUE;USMV;AGG",
+      "primary_factor": "implementation_cost",
+      "secondary_factor": "multi_factor",
+      "core_signal": "Expense and tracking efficiency scorecard",
+      "risk_controls": "Expense ratio cap; trade size minimum; human review",
+      "failure_mode": "Tracking error; factor drift; cost underestimation"
+    },
+    {
+      "strategy_id": "liquidity_first_defensive_portfolio",
+      "strategy_name": "Liquidity First Defensive Portfolio",
+      "category": "Portfolio Construction / Completion",
+      "objective": "Prioritize liquid defensive assets under stress",
+      "target_etfs": "SHY;IEF;LQD;USMV;GLD",
+      "primary_factor": "liquidity",
+      "secondary_factor": "defensive_quality",
+      "core_signal": "Liquidity tier score and spread stress trigger",
+      "risk_controls": "Liquidity minimum; turnover cap; human review before shift",
+      "failure_mode": "Opportunity cost; underweight recovery; data gaps"
+    }
+  ]
+}

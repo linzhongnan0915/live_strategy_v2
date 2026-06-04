@@ -1,0 +1,47 @@
+{
+  "generated_at_utc": "2026-06-04T00:59:22+00:00",
+  "monitor_snapshot_path": "D:\\Global_Ai\\live_strategy_v2\\output\\openbb_market_monitor_snapshot.json",
+  "official_eod_date": "2026-06-03",
+  "data_mode": "overnight_watchlist_monitor_only",
+  "official_risk_decision_allowed": false,
+  "note": "Overnight watchlist is context only and does not alter official EOD risk decisions. Review flagged items before next open; no automatic strategy switch.",
+  "summary": {
+    "item_count": 39,
+    "newer_than_official_eod_count": 0,
+    "stale_count": 0,
+    "large_move_count": 2,
+    "watchlist_count": 2
+  },
+  "items": [
+    {
+      "ticker": "SLV",
+      "asset_class": "Commodity",
+      "risk_bucket": "real_assets",
+      "target_weight": 0.01,
+      "latest_date": "2026-06-03",
+      "official_eod_date": "2026-06-03",
+      "latest_close": 66.20999908447266,
+      "latest_return_pct": -2.6180303503809954,
+      "timing_status": "official_eod_aligned",
+      "is_stale": false,
+      "watch_reason": "large_move",
+      "watch_level": "watch",
+      "official_action_allowed": false
+    },
+    {
+      "ticker": "USO",
+      "asset_class": "Commodity",
+      "risk_bucket": "commodity_energy",
+      "target_weight": 0.02,
+      "latest_date": "2026-06-03",
+      "official_eod_date": "2026-06-03",
+      "latest_close": 140.86000061035156,
+      "latest_return_pct": 2.6152809981450975,
+      "timing_status": "official_eod_aligned",
+      "is_stale": false,
+      "watch_reason": "large_move",
+      "watch_level": "watch",
+      "official_action_allowed": false
+    }
+  ]
+}

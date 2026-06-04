@@ -1,0 +1,3737 @@
+{
+  "generated_at_utc": "2026-06-04T01:30:03+00:00",
+  "data_mode": "no_lookahead_strategy_guided_portfolio_simulation",
+  "official_risk_decision_allowed": false,
+  "initial_capital": 1000000.0,
+  "simulation_start_requested": "2025-01-01",
+  "simulation_start_actual": "2025-01-02",
+  "as_of_date": "2026-06-03",
+  "price_path": "D:\\Global_Ai\\live_strategy_v2\\data\\raw\\openbb_price_history.csv",
+  "train_years": 5,
+  "rebalance_frequency": "monthly_first_trading_day",
+  "selection_rule": "Monthly strategy selection ranks candidates using only prior 5-year data. Conservative score weights Sharpe, drawdown, total return, monthly win rate, and volatility.",
+  "current": {
+    "portfolio_value": 1337912.588059622,
+    "previous_value": 1329194.7966541687,
+    "daily_pnl": 8717.791405453347,
+    "daily_return": 0.00655870112296375,
+    "total_return": 0.3379125880596221,
+    "max_drawdown": -0.10412447217340826,
+    "current_strategy": "energy_inflation_shock_rotation",
+    "current_strategy_name": "Energy Inflation Shock Rotation",
+    "current_strategy_objective": "Emphasize energy and inflation-linked sleeves during commodity shocks",
+    "core_signal": "Oil and breakeven impulse with energy sector confirmation",
+    "risk_controls": "Commodity cap; shock persistence rule; human review mandatory"
+  },
+  "tomorrow_preview": {
+    "base_case_daily_return": 0.0008927195374605071,
+    "one_sigma_downside": -0.008964987792394115,
+    "one_sigma_upside": 0.010750426867315128,
+    "expected_daily_pnl": 1194.380706775176,
+    "downside_daily_pnl": -11994.370019244929,
+    "upside_daily_pnl": 14383.131432795279,
+    "interpretation": "This is a statistical preview from recent selected-sleeve returns, not a forecast or trading instruction.",
+    "watch_items": [
+      "Confirm whether current sleeve ETFs continue to support the selected strategy.",
+      "Check news linkage and risk limit utilization before any rebalance.",
+      "Escalate only if market moves, news, and portfolio risk limits agree."
+    ]
+  },
+  "current_holdings": [
+    {
+      "ticker": "XLE",
+      "sleeve_weight": 0.2,
+      "market_value": 267582.51761192444,
+      "latest_close": 58.82500076293945
+    },
+    {
+      "ticker": "USO",
+      "sleeve_weight": 0.2,
+      "market_value": 267582.51761192444,
+      "latest_close": 140.6300048828125
+    },
+    {
+      "ticker": "TIP",
+      "sleeve_weight": 0.2,
+      "market_value": 267582.51761192444,
+      "latest_close": 109.78500366210938
+    },
+    {
+      "ticker": "GLD",
+      "sleeve_weight": 0.2,
+      "market_value": 267582.51761192444,
+      "latest_close": 408.2900085449219
+    },
+    {
+      "ticker": "UUP",
+      "sleeve_weight": 0.2,
+      "market_value": 267582.51761192444,
+      "latest_close": 27.86989974975586
+    }
+  ],
+  "selection_log": [
+    {
+      "rebalance_date": "2025-01-02",
+      "train_start": "2019-12-31",
+      "train_end": "2024-12-31",
+      "selected_strategy": "usd_liquidity_stress_sleeve",
+      "selected_strategy_name": "USD Liquidity Stress Sleeve",
+      "selection_score": 0.6955,
+      "risk_gate_pass": true,
+      "train_total_return": 0.1365335739936382,
+      "train_sharpe": 0.5562850938124946,
+      "train_max_drawdown": -0.08977136080667958,
+      "train_monthly_win_rate": 0.5409836065573771,
+      "top_candidates": [
+        {
+          "strategy_id": "usd_liquidity_stress_sleeve",
+          "score": 0.6955,
+          "sharpe": 0.5562850938124946,
+          "max_drawdown": -0.08977136080667958
+        },
+        {
+          "strategy_id": "defensive_sector_rotation",
+          "score": 0.6195,
+          "sharpe": 0.37372390141449346,
+          "max_drawdown": -0.19325713153796265
+        },
+        {
+          "strategy_id": "minimum_volatility_sleeve",
+          "score": 0.5002,
+          "sharpe": 0.30021439311177023,
+          "max_drawdown": -0.20763153022281078
+        },
+        {
+          "strategy_id": "liquidity_first_defensive_portfolio",
+          "score": 0.4818,
+          "sharpe": 0.3054300916361569,
+          "max_drawdown": -0.1583354232301789
+        },
+        {
+          "strategy_id": "volatility_spike_monitor_sleeve",
+          "score": 0.7672,
+          "sharpe": 0.5986502036437719,
+          "max_drawdown": -0.25710566570521765
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2025-02-03",
+      "train_start": "2020-01-31",
+      "train_end": "2025-01-31",
+      "selected_strategy": "usd_liquidity_stress_sleeve",
+      "selected_strategy_name": "USD Liquidity Stress Sleeve",
+      "selection_score": 0.703,
+      "risk_gate_pass": true,
+      "train_total_return": 0.13536118948147768,
+      "train_sharpe": 0.5517736659278577,
+      "train_max_drawdown": -0.08977136080667736,
+      "train_monthly_win_rate": 0.5573770491803278,
+      "top_candidates": [
+        {
+          "strategy_id": "usd_liquidity_stress_sleeve",
+          "score": 0.703,
+          "sharpe": 0.5517736659278577,
+          "max_drawdown": -0.08977136080667736
+        },
+        {
+          "strategy_id": "defensive_sector_rotation",
+          "score": 0.5885,
+          "sharpe": 0.38148212114707614,
+          "max_drawdown": -0.19325713153796265
+        },
+        {
+          "strategy_id": "minimum_volatility_sleeve",
+          "score": 0.4555,
+          "sharpe": 0.3148425907578713,
+          "max_drawdown": -0.20763153022281056
+        },
+        {
+          "strategy_id": "liquidity_first_defensive_portfolio",
+          "score": 0.4375,
+          "sharpe": 0.30017494204463924,
+          "max_drawdown": -0.15833542323017857
+        },
+        {
+          "strategy_id": "volatility_spike_monitor_sleeve",
+          "score": 0.786,
+          "sharpe": 0.5781800321331855,
+          "max_drawdown": -0.25710566570521765
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2025-03-03",
+      "train_start": "2020-02-28",
+      "train_end": "2025-02-28",
+      "selected_strategy": "defensive_sector_rotation",
+      "selected_strategy_name": "Defensive Sector Rotation",
+      "selection_score": 0.6318,
+      "risk_gate_pass": true,
+      "train_total_return": 0.3326957463622706,
+      "train_sharpe": 0.497498783408282,
+      "train_max_drawdown": -0.1777495544026768,
+      "train_monthly_win_rate": 0.5901639344262295,
+      "top_candidates": [
+        {
+          "strategy_id": "defensive_sector_rotation",
+          "score": 0.6318,
+          "sharpe": 0.497498783408282,
+          "max_drawdown": -0.1777495544026768
+        },
+        {
+          "strategy_id": "usd_liquidity_stress_sleeve",
+          "score": 0.614,
+          "sharpe": 0.520815434338571,
+          "max_drawdown": -0.0897713608066778
+        },
+        {
+          "strategy_id": "minimum_volatility_sleeve",
+          "score": 0.5508,
+          "sharpe": 0.45175324064597205,
+          "max_drawdown": -0.1946705297458119
+        },
+        {
+          "strategy_id": "liquidity_first_defensive_portfolio",
+          "score": 0.4475,
+          "sharpe": 0.35940499575842,
+          "max_drawdown": -0.15833542323018024
+        },
+        {
+          "strategy_id": "economic_growth_beta_sleeve",
+          "score": 0.7192,
+          "sharpe": 0.6312603512239974,
+          "max_drawdown": -0.28885138979553837
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2025-04-01",
+      "train_start": "2020-03-31",
+      "train_end": "2025-03-31",
+      "selected_strategy": "energy_inflation_shock_rotation",
+      "selected_strategy_name": "Energy Inflation Shock Rotation",
+      "selection_score": 0.875,
+      "risk_gate_pass": true,
+      "train_total_return": 0.8745315166879506,
+      "train_sharpe": 1.0184725944356285,
+      "train_max_drawdown": -0.14068331374140997,
+      "train_monthly_win_rate": 0.6721311475409836,
+      "top_candidates": [
+        {
+          "strategy_id": "energy_inflation_shock_rotation",
+          "score": 0.875,
+          "sharpe": 1.0184725944356285,
+          "max_drawdown": -0.14068331374140997
+        },
+        {
+          "strategy_id": "inflation_protection_sleeve",
+          "score": 0.8725,
+          "sharpe": 1.0968181445789205,
+          "max_drawdown": -0.1782824657500448
+        },
+        {
+          "strategy_id": "sector_relative_strength_rotation",
+          "score": 0.7625,
+          "sharpe": 0.9360515244607116,
+          "max_drawdown": -0.2024704959420558
+        },
+        {
+          "strategy_id": "cyclical_recovery_rotation",
+          "score": 0.7518,
+          "sharpe": 0.9303645352140143,
+          "max_drawdown": -0.1981739972155253
+        },
+        {
+          "strategy_id": "gold_geopolitical_hedge_sleeve",
+          "score": 0.6382,
+          "sharpe": 0.7912552727475829,
+          "max_drawdown": -0.2038740063192893
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2025-05-01",
+      "train_start": "2020-04-30",
+      "train_end": "2025-04-30",
+      "selected_strategy": "energy_inflation_shock_rotation",
+      "selected_strategy_name": "Energy Inflation Shock Rotation",
+      "selection_score": 0.875,
+      "risk_gate_pass": true,
+      "train_total_return": 0.8058719210206355,
+      "train_sharpe": 0.9917017914709816,
+      "train_max_drawdown": -0.1406833137414102,
+      "train_monthly_win_rate": 0.6885245901639344,
+      "top_candidates": [
+        {
+          "strategy_id": "energy_inflation_shock_rotation",
+          "score": 0.875,
+          "sharpe": 0.9917017914709816,
+          "max_drawdown": -0.1406833137414102
+        },
+        {
+          "strategy_id": "inflation_protection_sleeve",
+          "score": 0.8685,
+          "sharpe": 1.0984827791498153,
+          "max_drawdown": -0.1782824657500448
+        },
+        {
+          "strategy_id": "gold_geopolitical_hedge_sleeve",
+          "score": 0.85,
+          "sharpe": 1.0555698815992711,
+          "max_drawdown": -0.11722904793705424
+        },
+        {
+          "strategy_id": "sector_relative_strength_rotation",
+          "score": 0.7025,
+          "sharpe": 0.7433659209957755,
+          "max_drawdown": -0.20247049594205557
+        },
+        {
+          "strategy_id": "cyclical_recovery_rotation",
+          "score": 0.677,
+          "sharpe": 0.7061044616990436,
+          "max_drawdown": -0.19875879891609938
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2025-06-02",
+      "train_start": "2020-05-30",
+      "train_end": "2025-05-30",
+      "selected_strategy": "energy_inflation_shock_rotation",
+      "selected_strategy_name": "Energy Inflation Shock Rotation",
+      "selection_score": 0.871,
+      "risk_gate_pass": true,
+      "train_total_return": 0.6976297891766181,
+      "train_sharpe": 0.8970635841307099,
+      "train_max_drawdown": -0.14068331374140985,
+      "train_monthly_win_rate": 0.6833333333333333,
+      "top_candidates": [
+        {
+          "strategy_id": "energy_inflation_shock_rotation",
+          "score": 0.871,
+          "sharpe": 0.8970635841307099,
+          "max_drawdown": -0.14068331374140985
+        },
+        {
+          "strategy_id": "inflation_protection_sleeve",
+          "score": 0.8585,
+          "sharpe": 0.9990548161341125,
+          "max_drawdown": -0.17828246575004514
+        },
+        {
+          "strategy_id": "gold_geopolitical_hedge_sleeve",
+          "score": 0.8365,
+          "sharpe": 0.8862326816925926,
+          "max_drawdown": -0.11722904793705557
+        },
+        {
+          "strategy_id": "sector_relative_strength_rotation",
+          "score": 0.7125,
+          "sharpe": 0.7650051599138603,
+          "max_drawdown": -0.20247049594205646
+        },
+        {
+          "strategy_id": "cyclical_recovery_rotation",
+          "score": 0.7067,
+          "sharpe": 0.755614790109731,
+          "max_drawdown": -0.1987587989160995
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2025-07-01",
+      "train_start": "2020-06-30",
+      "train_end": "2025-06-30",
+      "selected_strategy": "energy_inflation_shock_rotation",
+      "selected_strategy_name": "Energy Inflation Shock Rotation",
+      "selection_score": 0.851,
+      "risk_gate_pass": true,
+      "train_total_return": 0.7107746353863988,
+      "train_sharpe": 0.9173026901589498,
+      "train_max_drawdown": -0.14068331374140985,
+      "train_monthly_win_rate": 0.6885245901639344,
+      "top_candidates": [
+        {
+          "strategy_id": "energy_inflation_shock_rotation",
+          "score": 0.851,
+          "sharpe": 0.9173026901589498,
+          "max_drawdown": -0.14068331374140985
+        },
+        {
+          "strategy_id": "inflation_protection_sleeve",
+          "score": 0.8485,
+          "sharpe": 1.026742002982659,
+          "max_drawdown": -0.1782824657500448
+        },
+        {
+          "strategy_id": "gold_geopolitical_hedge_sleeve",
+          "score": 0.8128,
+          "sharpe": 0.866736278615098,
+          "max_drawdown": -0.11722904793705446
+        },
+        {
+          "strategy_id": "sector_relative_strength_rotation",
+          "score": 0.7088,
+          "sharpe": 0.8432538754786638,
+          "max_drawdown": -0.2024704959420558
+        },
+        {
+          "strategy_id": "cyclical_recovery_rotation",
+          "score": 0.6907,
+          "sharpe": 0.8319129424008408,
+          "max_drawdown": -0.19875879891609916
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2025-08-01",
+      "train_start": "2020-07-31",
+      "train_end": "2025-07-31",
+      "selected_strategy": "energy_inflation_shock_rotation",
+      "selected_strategy_name": "Energy Inflation Shock Rotation",
+      "selection_score": 0.871,
+      "risk_gate_pass": true,
+      "train_total_return": 0.7341556443313653,
+      "train_sharpe": 0.945977755380831,
+      "train_max_drawdown": -0.14068331374141052,
+      "train_monthly_win_rate": 0.6885245901639344,
+      "top_candidates": [
+        {
+          "strategy_id": "energy_inflation_shock_rotation",
+          "score": 0.871,
+          "sharpe": 0.945977755380831,
+          "max_drawdown": -0.14068331374141052
+        },
+        {
+          "strategy_id": "inflation_protection_sleeve",
+          "score": 0.8585,
+          "sharpe": 1.0072957744274067,
+          "max_drawdown": -0.17828246575004536
+        },
+        {
+          "strategy_id": "gold_geopolitical_hedge_sleeve",
+          "score": 0.834,
+          "sharpe": 0.8811671580654993,
+          "max_drawdown": -0.11722904793705469
+        },
+        {
+          "strategy_id": "cyclical_recovery_rotation",
+          "score": 0.719,
+          "sharpe": 0.8043445606945254,
+          "max_drawdown": -0.19875879891609938
+        },
+        {
+          "strategy_id": "sector_relative_strength_rotation",
+          "score": 0.6805,
+          "sharpe": 0.7742896716068715,
+          "max_drawdown": -0.20247049594205568
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2025-09-02",
+      "train_start": "2020-08-29",
+      "train_end": "2025-08-29",
+      "selected_strategy": "energy_inflation_shock_rotation",
+      "selected_strategy_name": "Energy Inflation Shock Rotation",
+      "selection_score": 0.881,
+      "risk_gate_pass": true,
+      "train_total_return": 0.7152412822801226,
+      "train_sharpe": 0.928462178829315,
+      "train_max_drawdown": -0.1406833137414102,
+      "train_monthly_win_rate": 0.6721311475409836,
+      "top_candidates": [
+        {
+          "strategy_id": "energy_inflation_shock_rotation",
+          "score": 0.881,
+          "sharpe": 0.928462178829315,
+          "max_drawdown": -0.1406833137414102
+        },
+        {
+          "strategy_id": "inflation_protection_sleeve",
+          "score": 0.8585,
+          "sharpe": 1.0031257525440878,
+          "max_drawdown": -0.1782824657500447
+        },
+        {
+          "strategy_id": "gold_geopolitical_hedge_sleeve",
+          "score": 0.8265,
+          "sharpe": 0.8488935350095659,
+          "max_drawdown": -0.11722904793705435
+        },
+        {
+          "strategy_id": "cyclical_recovery_rotation",
+          "score": 0.7228,
+          "sharpe": 0.7657377915829006,
+          "max_drawdown": -0.1987587989160996
+        },
+        {
+          "strategy_id": "sector_relative_strength_rotation",
+          "score": 0.6765,
+          "sharpe": 0.7312329315352543,
+          "max_drawdown": -0.2024704959420558
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2025-10-01",
+      "train_start": "2020-09-30",
+      "train_end": "2025-09-30",
+      "selected_strategy": "energy_inflation_shock_rotation",
+      "selected_strategy_name": "Energy Inflation Shock Rotation",
+      "selection_score": 0.881,
+      "risk_gate_pass": true,
+      "train_total_return": 0.8568462760422391,
+      "train_sharpe": 1.0829453600308583,
+      "train_max_drawdown": -0.1406833137414094,
+      "train_monthly_win_rate": 0.7049180327868853,
+      "top_candidates": [
+        {
+          "strategy_id": "energy_inflation_shock_rotation",
+          "score": 0.881,
+          "sharpe": 1.0829453600308583,
+          "max_drawdown": -0.1406833137414094
+        },
+        {
+          "strategy_id": "inflation_protection_sleeve",
+          "score": 0.8585,
+          "sharpe": 1.139046991211148,
+          "max_drawdown": -0.1782824657500448
+        },
+        {
+          "strategy_id": "gold_geopolitical_hedge_sleeve",
+          "score": 0.8265,
+          "sharpe": 0.9761871896478007,
+          "max_drawdown": -0.11722904793705535
+        },
+        {
+          "strategy_id": "cyclical_recovery_rotation",
+          "score": 0.734,
+          "sharpe": 0.8820799912354211,
+          "max_drawdown": -0.19875879891609927
+        },
+        {
+          "strategy_id": "sector_relative_strength_rotation",
+          "score": 0.6765,
+          "sharpe": 0.8397543107101325,
+          "max_drawdown": -0.2024704959420558
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2025-11-03",
+      "train_start": "2020-10-31",
+      "train_end": "2025-10-31",
+      "selected_strategy": "energy_inflation_shock_rotation",
+      "selected_strategy_name": "Energy Inflation Shock Rotation",
+      "selection_score": 0.881,
+      "risk_gate_pass": true,
+      "train_total_return": 0.928572209245559,
+      "train_sharpe": 1.1586195944466984,
+      "train_max_drawdown": -0.14068331374141008,
+      "train_monthly_win_rate": 0.7166666666666667,
+      "top_candidates": [
+        {
+          "strategy_id": "energy_inflation_shock_rotation",
+          "score": 0.881,
+          "sharpe": 1.1586195944466984,
+          "max_drawdown": -0.14068331374141008
+        },
+        {
+          "strategy_id": "inflation_protection_sleeve",
+          "score": 0.8585,
+          "sharpe": 1.1951954297113598,
+          "max_drawdown": -0.1782824657500457
+        },
+        {
+          "strategy_id": "gold_geopolitical_hedge_sleeve",
+          "score": 0.8265,
+          "sharpe": 1.0721330420543111,
+          "max_drawdown": -0.11722904793705435
+        },
+        {
+          "strategy_id": "cyclical_recovery_rotation",
+          "score": 0.7302,
+          "sharpe": 0.9037241981920461,
+          "max_drawdown": -0.19875879891609904
+        },
+        {
+          "strategy_id": "sector_relative_strength_rotation",
+          "score": 0.653,
+          "sharpe": 0.8581086561440794,
+          "max_drawdown": -0.2024704959420568
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2025-12-01",
+      "train_start": "2020-11-28",
+      "train_end": "2025-11-28",
+      "selected_strategy": "energy_inflation_shock_rotation",
+      "selected_strategy_name": "Energy Inflation Shock Rotation",
+      "selection_score": 0.9035,
+      "risk_gate_pass": true,
+      "train_total_return": 0.7763506647273455,
+      "train_sharpe": 1.0180450808098065,
+      "train_max_drawdown": -0.14068331374140997,
+      "train_monthly_win_rate": 0.7049180327868853,
+      "top_candidates": [
+        {
+          "strategy_id": "energy_inflation_shock_rotation",
+          "score": 0.9035,
+          "sharpe": 1.0180450808098065,
+          "max_drawdown": -0.14068331374140997
+        },
+        {
+          "strategy_id": "inflation_protection_sleeve",
+          "score": 0.8685,
+          "sharpe": 1.0340260299291655,
+          "max_drawdown": -0.17828246575004514
+        },
+        {
+          "strategy_id": "gold_geopolitical_hedge_sleeve",
+          "score": 0.8303,
+          "sharpe": 1.0112040801705031,
+          "max_drawdown": -0.11722904793705402
+        },
+        {
+          "strategy_id": "usd_liquidity_stress_sleeve",
+          "score": 0.707,
+          "sharpe": 0.8791484466039712,
+          "max_drawdown": -0.07618603936620005
+        },
+        {
+          "strategy_id": "cyclical_recovery_rotation",
+          "score": 0.6723,
+          "sharpe": 0.7026263473965452,
+          "max_drawdown": -0.19875879891609927
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2026-01-02",
+      "train_start": "2020-12-31",
+      "train_end": "2025-12-31",
+      "selected_strategy": "energy_inflation_shock_rotation",
+      "selected_strategy_name": "Energy Inflation Shock Rotation",
+      "selection_score": 0.9035,
+      "risk_gate_pass": true,
+      "train_total_return": 0.7236600198591014,
+      "train_sharpe": 0.9648547654764548,
+      "train_max_drawdown": -0.14068331374141008,
+      "train_monthly_win_rate": 0.7049180327868853,
+      "top_candidates": [
+        {
+          "strategy_id": "energy_inflation_shock_rotation",
+          "score": 0.9035,
+          "sharpe": 0.9648547654764548,
+          "max_drawdown": -0.14068331374141008
+        },
+        {
+          "strategy_id": "inflation_protection_sleeve",
+          "score": 0.8648,
+          "sharpe": 0.9742653884063552,
+          "max_drawdown": -0.1782824657500448
+        },
+        {
+          "strategy_id": "gold_geopolitical_hedge_sleeve",
+          "score": 0.819,
+          "sharpe": 0.9301290976624953,
+          "max_drawdown": -0.11722904793705469
+        },
+        {
+          "strategy_id": "usd_liquidity_stress_sleeve",
+          "score": 0.7033,
+          "sharpe": 0.8012776715313394,
+          "max_drawdown": -0.07618603936620028
+        },
+        {
+          "strategy_id": "cyclical_recovery_rotation",
+          "score": 0.6873,
+          "sharpe": 0.6881490275722163,
+          "max_drawdown": -0.19875879891609893
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2026-02-02",
+      "train_start": "2021-01-30",
+      "train_end": "2026-01-30",
+      "selected_strategy": "energy_inflation_shock_rotation",
+      "selected_strategy_name": "Energy Inflation Shock Rotation",
+      "selection_score": 0.9195,
+      "risk_gate_pass": true,
+      "train_total_return": 0.8338303147363524,
+      "train_sharpe": 1.0775346978122713,
+      "train_max_drawdown": -0.14068331374141008,
+      "train_monthly_win_rate": 0.7,
+      "top_candidates": [
+        {
+          "strategy_id": "energy_inflation_shock_rotation",
+          "score": 0.9195,
+          "sharpe": 1.0775346978122713,
+          "max_drawdown": -0.14068331374141008
+        },
+        {
+          "strategy_id": "inflation_protection_sleeve",
+          "score": 0.8375,
+          "sharpe": 1.074921870331682,
+          "max_drawdown": -0.17828246575004503
+        },
+        {
+          "strategy_id": "gold_geopolitical_hedge_sleeve",
+          "score": 0.819,
+          "sharpe": 1.0395965811372985,
+          "max_drawdown": -0.11722904793705557
+        },
+        {
+          "strategy_id": "usd_liquidity_stress_sleeve",
+          "score": 0.707,
+          "sharpe": 0.9350923622728937,
+          "max_drawdown": -0.07618603936620028
+        },
+        {
+          "strategy_id": "sector_relative_strength_rotation",
+          "score": 0.6828,
+          "sharpe": 0.7574110107222854,
+          "max_drawdown": -0.20247049594205535
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2026-03-02",
+      "train_start": "2021-02-27",
+      "train_end": "2026-02-27",
+      "selected_strategy": "energy_inflation_shock_rotation",
+      "selected_strategy_name": "Energy Inflation Shock Rotation",
+      "selection_score": 0.895,
+      "risk_gate_pass": true,
+      "train_total_return": 0.8123223411908587,
+      "train_sharpe": 1.0468505919202389,
+      "train_max_drawdown": -0.14068331374141063,
+      "train_monthly_win_rate": 0.7,
+      "top_candidates": [
+        {
+          "strategy_id": "energy_inflation_shock_rotation",
+          "score": 0.895,
+          "sharpe": 1.0468505919202389,
+          "max_drawdown": -0.14068331374141063
+        },
+        {
+          "strategy_id": "gold_geopolitical_hedge_sleeve",
+          "score": 0.855,
+          "sharpe": 1.0616480175618959,
+          "max_drawdown": -0.11722904793705513
+        },
+        {
+          "strategy_id": "inflation_protection_sleeve",
+          "score": 0.8055,
+          "sharpe": 1.0346726625156601,
+          "max_drawdown": -0.17828246575004536
+        },
+        {
+          "strategy_id": "usd_liquidity_stress_sleeve",
+          "score": 0.7588,
+          "sharpe": 1.1332989989791113,
+          "max_drawdown": -0.07618603936620028
+        },
+        {
+          "strategy_id": "sector_relative_strength_rotation",
+          "score": 0.6693,
+          "sharpe": 0.7543417124866024,
+          "max_drawdown": -0.20247049594205635
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2026-04-01",
+      "train_start": "2021-03-31",
+      "train_end": "2026-03-31",
+      "selected_strategy": "gold_geopolitical_hedge_sleeve",
+      "selected_strategy_name": "Gold Geopolitical Hedge Sleeve",
+      "selection_score": 0.9085,
+      "risk_gate_pass": true,
+      "train_total_return": 0.8062182331819938,
+      "train_sharpe": 1.2303083521250409,
+      "train_max_drawdown": -0.11722904793705435,
+      "train_monthly_win_rate": 0.6557377049180327,
+      "top_candidates": [
+        {
+          "strategy_id": "gold_geopolitical_hedge_sleeve",
+          "score": 0.9085,
+          "sharpe": 1.2303083521250409,
+          "max_drawdown": -0.11722904793705435
+        },
+        {
+          "strategy_id": "energy_inflation_shock_rotation",
+          "score": 0.8913,
+          "sharpe": 1.1970136527992414,
+          "max_drawdown": -0.14068331374140997
+        },
+        {
+          "strategy_id": "inflation_protection_sleeve",
+          "score": 0.8562,
+          "sharpe": 1.204574700689709,
+          "max_drawdown": -0.17828246575004525
+        },
+        {
+          "strategy_id": "usd_liquidity_stress_sleeve",
+          "score": 0.732,
+          "sharpe": 0.9956532129339508,
+          "max_drawdown": -0.07618603936620016
+        },
+        {
+          "strategy_id": "sector_relative_strength_rotation",
+          "score": 0.6332,
+          "sharpe": 0.6011595429002708,
+          "max_drawdown": -0.2024704959420568
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2026-05-01",
+      "train_start": "2021-04-30",
+      "train_end": "2026-04-30",
+      "selected_strategy": "gold_geopolitical_hedge_sleeve",
+      "selected_strategy_name": "Gold Geopolitical Hedge Sleeve",
+      "selection_score": 0.9197,
+      "risk_gate_pass": true,
+      "train_total_return": 0.8178749522811137,
+      "train_sharpe": 1.224561150031173,
+      "train_max_drawdown": -0.11722904793705546,
+      "train_monthly_win_rate": 0.6557377049180327,
+      "top_candidates": [
+        {
+          "strategy_id": "gold_geopolitical_hedge_sleeve",
+          "score": 0.9197,
+          "sharpe": 1.224561150031173,
+          "max_drawdown": -0.11722904793705546
+        },
+        {
+          "strategy_id": "energy_inflation_shock_rotation",
+          "score": 0.911,
+          "sharpe": 1.1774589084765337,
+          "max_drawdown": -0.1406833137414102
+        },
+        {
+          "strategy_id": "inflation_protection_sleeve",
+          "score": 0.8365,
+          "sharpe": 1.1588831396701167,
+          "max_drawdown": -0.17828246575004458
+        },
+        {
+          "strategy_id": "usd_liquidity_stress_sleeve",
+          "score": 0.7358,
+          "sharpe": 0.9230351929997312,
+          "max_drawdown": -0.0761860393662015
+        },
+        {
+          "strategy_id": "sector_relative_strength_rotation",
+          "score": 0.6232,
+          "sharpe": 0.6008718666998188,
+          "max_drawdown": -0.20247049594205624
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    },
+    {
+      "rebalance_date": "2026-06-01",
+      "train_start": "2021-05-29",
+      "train_end": "2026-05-29",
+      "selected_strategy": "energy_inflation_shock_rotation",
+      "selected_strategy_name": "Energy Inflation Shock Rotation",
+      "selection_score": 0.911,
+      "risk_gate_pass": true,
+      "train_total_return": 0.8656075343467915,
+      "train_sharpe": 1.0786889824779073,
+      "train_max_drawdown": -0.14068331374141052,
+      "train_monthly_win_rate": 0.6833333333333333,
+      "top_candidates": [
+        {
+          "strategy_id": "energy_inflation_shock_rotation",
+          "score": 0.911,
+          "sharpe": 1.0786889824779073,
+          "max_drawdown": -0.14068331374141052
+        },
+        {
+          "strategy_id": "gold_geopolitical_hedge_sleeve",
+          "score": 0.9085,
+          "sharpe": 1.1128042692275146,
+          "max_drawdown": -0.11722904793705546
+        },
+        {
+          "strategy_id": "inflation_protection_sleeve",
+          "score": 0.8328,
+          "sharpe": 1.0497037552720547,
+          "max_drawdown": -0.1782824657500447
+        },
+        {
+          "strategy_id": "usd_liquidity_stress_sleeve",
+          "score": 0.7133,
+          "sharpe": 0.831013072687267,
+          "max_drawdown": -0.0761860393662005
+        },
+        {
+          "strategy_id": "sector_relative_strength_rotation",
+          "score": 0.579,
+          "sharpe": 0.5958508090083795,
+          "max_drawdown": -0.20247049594205568
+        }
+      ],
+      "no_lookahead_note": "Selection used training data ending before rebalance date."
+    }
+  ],
+  "equity_curve": [
+    {
+      "date": "2025-01-02",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.005595546656570832,
+      "daily_pnl": 5595.546656570863,
+      "portfolio_value": 1005595.5466565709,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-01-03",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": -0.003129762565771105,
+      "daily_pnl": -3147.2752982318634,
+      "portfolio_value": 1002448.271358339,
+      "drawdown": -0.0031297625657711325
+    },
+    {
+      "date": "2025-01-06",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": -0.002096453268663756,
+      "daily_pnl": -2101.5859551555477,
+      "portfolio_value": 1000346.6854031835,
+      "drawdown": -0.005219654433473719
+    },
+    {
+      "date": "2025-01-07",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.0010534672090947717,
+      "daily_pnl": 1053.8324307987932,
+      "portfolio_value": 1001400.5178339822,
+      "drawdown": -0.004171685959167504
+    },
+    {
+      "date": "2025-01-08",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.0028492575680750254,
+      "daily_pnl": 2853.2480041126255,
+      "portfolio_value": 1004253.7658380949,
+      "drawdown": -0.001334314598883446
+    },
+    {
+      "date": "2025-01-10",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.0013779578128045589,
+      "daily_pnl": 1383.8193226750009,
+      "portfolio_value": 1005637.5851607699,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-01-13",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": -0.002108654414653577,
+      "daily_pnl": -2120.542133490788,
+      "portfolio_value": 1003517.0430272791,
+      "drawdown": -0.002108654414653577
+    },
+    {
+      "date": "2025-01-14",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": -0.0001355774719734304,
+      "daily_pnl": -136.05430377589073,
+      "portfolio_value": 1003380.9887235032,
+      "drawdown": -0.0022439460005921896
+    },
+    {
+      "date": "2025-01-15",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.004632062071830756,
+      "daily_pnl": 4647.72302146221,
+      "portfolio_value": 1008028.7117449654,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-01-16",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.002476844431818559,
+      "daily_pnl": 2496.730301798787,
+      "portfolio_value": 1010525.4420467642,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-01-17",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": -0.0002695451126662196,
+      "daily_pnl": -272.382194128586,
+      "portfolio_value": 1010253.0598526356,
+      "drawdown": -0.00026954511266619186
+    },
+    {
+      "date": "2025-01-21",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.0016044866406505764,
+      "daily_pnl": 1620.9375382099533,
+      "portfolio_value": 1011873.9973908456,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-01-22",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.0010021939573884864,
+      "daily_pnl": 1014.0940058237175,
+      "portfolio_value": 1012888.0913966693,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-01-23",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": -0.0010872850651123533,
+      "daily_pnl": -1101.2980944057927,
+      "portfolio_value": 1011786.7933022635,
+      "drawdown": -0.0010872850651123533
+    },
+    {
+      "date": "2025-01-24",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.0006900613709546755,
+      "daily_pnl": 698.1949816999258,
+      "portfolio_value": 1012484.9882839634,
+      "drawdown": -0.00039797398758045777
+    },
+    {
+      "date": "2025-01-27",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": -0.0005282172174117805,
+      "daily_pnl": -534.8120031825965,
+      "portfolio_value": 1011950.1762807808,
+      "drawdown": -0.0009259809882798953
+    },
+    {
+      "date": "2025-01-28",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.0032787971133692584,
+      "daily_pnl": 3317.979316862882,
+      "portfolio_value": 1015268.1555976437,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-01-29",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": -0.0008960380095638931,
+      "daily_pnl": -909.718857315369,
+      "portfolio_value": 1014358.4367403283,
+      "drawdown": -0.0008960380095639486
+    },
+    {
+      "date": "2025-01-30",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.004476178117523877,
+      "daily_pnl": 4540.449037862709,
+      "portfolio_value": 1018898.885778191,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-01-31",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.0011427586673352086,
+      "daily_pnl": 1164.3555328611983,
+      "portfolio_value": 1020063.2413110522,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-02-03",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.0008149396433201894,
+      "daily_pnl": 831.2899740380235,
+      "portfolio_value": 1020894.5312850903,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-02-04",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.001048482902607728,
+      "daily_pnl": 1070.3904614180792,
+      "portfolio_value": 1021964.9217465083,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-02-05",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.0027304255728509697,
+      "daily_pnl": 2790.399156893138,
+      "portfolio_value": 1024755.3209034015,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-02-06",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": -0.0012183901302713906,
+      "daily_pnl": -1248.551768931793,
+      "portfolio_value": 1023506.7691344697,
+      "drawdown": -0.001218390130271363
+    },
+    {
+      "date": "2025-02-07",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.0004517716696017249,
+      "daily_pnl": 462.3913619405357,
+      "portfolio_value": 1023969.1604964102,
+      "drawdown": -0.0007671688948130972
+    },
+    {
+      "date": "2025-02-10",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.005067412105782598,
+      "daily_pnl": 5188.873719847528,
+      "portfolio_value": 1029158.0342162577,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-02-11",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": -0.002465113062861929,
+      "daily_pnl": -2536.9909138957737,
+      "portfolio_value": 1026621.043302362,
+      "drawdown": -0.002465113062861901
+    },
+    {
+      "date": "2025-02-12",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": -0.0016263148782096337,
+      "daily_pnl": -1669.6090770057635,
+      "portfolio_value": 1024951.4342253562,
+      "drawdown": -0.004087418891020933
+    },
+    {
+      "date": "2025-02-13",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.002633653585092377,
+      "daily_pnl": 2699.3670192931313,
+      "portfolio_value": 1027650.8012446493,
+      "drawdown": -0.001464530151344734
+    },
+    {
+      "date": "2025-02-14",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": -0.0030182903882672585,
+      "daily_pnl": -3101.7485358918784,
+      "portfolio_value": 1024549.0527087575,
+      "drawdown": -0.004478400162332918
+    },
+    {
+      "date": "2025-02-18",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.0031027008239833676,
+      "daily_pnl": 3178.869190050871,
+      "portfolio_value": 1027727.9218988083,
+      "drawdown": -0.0013895944742232658
+    },
+    {
+      "date": "2025-02-19",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.000982403352922101,
+      "daily_pnl": 1009.6433563651517,
+      "portfolio_value": 1028737.5652551735,
+      "drawdown": -0.00040855626357172437
+    },
+    {
+      "date": "2025-02-20",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": -0.0012979069691748946,
+      "daily_pnl": -1335.2056553966831,
+      "portfolio_value": 1027402.3595997768,
+      "drawdown": -0.0017059329647248767
+    },
+    {
+      "date": "2025-02-21",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.002534281916889286,
+      "daily_pnl": 2603.7272213030374,
+      "portfolio_value": 1030006.0868210798,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-02-24",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.0022453174191859326,
+      "daily_pnl": 2312.6906086069066,
+      "portfolio_value": 1032318.7774296867,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-02-25",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": -0.0019379952565985181,
+      "daily_pnl": -2000.6288939563092,
+      "portfolio_value": 1030318.1485357304,
+      "drawdown": -0.0019379952565985459
+    },
+    {
+      "date": "2025-02-26",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.0016767494610268607,
+      "daily_pnl": 1727.5854002434062,
+      "portfolio_value": 1032045.7339359738,
+      "drawdown": -0.00026449532807371057
+    },
+    {
+      "date": "2025-02-27",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": -0.00220153043590246,
+      "daily_pnl": -2272.080094503355,
+      "portfolio_value": 1029773.6538414705,
+      "drawdown": -0.0024654434694613148
+    },
+    {
+      "date": "2025-02-28",
+      "strategy_id": "usd_liquidity_stress_sleeve",
+      "daily_return": 0.0013702837229995768,
+      "daily_pnl": 1411.0820762328804,
+      "portfolio_value": 1031184.7359177034,
+      "drawdown": -0.0010985381035177877
+    },
+    {
+      "date": "2025-03-03",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": -0.00010621113602190164,
+      "daily_pnl": -109.52330225030892,
+      "portfolio_value": 1031075.212615453,
+      "drawdown": -0.0012046325625597598
+    },
+    {
+      "date": "2025-03-04",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": -0.008916970993646542,
+      "daily_pnl": -9194.067763159866,
+      "portfolio_value": 1021881.1448522932,
+      "drawdown": -0.010110861882587918
+    },
+    {
+      "date": "2025-03-05",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": 0.002226586480947553,
+      "daily_pnl": 2275.306742263376,
+      "portfolio_value": 1024156.4515945566,
+      "drawdown": -0.00790678811001877
+    },
+    {
+      "date": "2025-03-06",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": -0.006592387521102842,
+      "daily_pnl": -6751.636211148929,
+      "portfolio_value": 1017404.8153834076,
+      "drawdown": -0.014447051019853108
+    },
+    {
+      "date": "2025-03-07",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": 0.004491587630546967,
+      "daily_pnl": 4569.762884035008,
+      "portfolio_value": 1021974.5782674426,
+      "drawdown": -0.010020353584964892
+    },
+    {
+      "date": "2025-03-10",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": -0.0030124137095545365,
+      "daily_pnl": -3078.610230389051,
+      "portfolio_value": 1018895.9680370536,
+      "drawdown": -0.01300258184400549
+    },
+    {
+      "date": "2025-03-11",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": -0.008964652939925044,
+      "daily_pnl": -9134.048735341057,
+      "portfolio_value": 1009761.9193017125,
+      "drawdown": -0.021850671150375978
+    },
+    {
+      "date": "2025-03-12",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": -0.00558735671238636,
+      "daily_pnl": -5641.900037722546,
+      "portfolio_value": 1004120.01926399,
+      "drawdown": -0.027315940368640046
+    },
+    {
+      "date": "2025-03-13",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": -0.003884110737320756,
+      "daily_pnl": -3900.113348381943,
+      "portfolio_value": 1000219.905915608,
+      "drawdown": -0.0310939529686749
+    },
+    {
+      "date": "2025-03-14",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": 0.007262445137441953,
+      "daily_pnl": 7264.042192089371,
+      "portfolio_value": 1007483.9481076974,
+      "drawdown": -0.0240573259587743
+    },
+    {
+      "date": "2025-03-17",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": 0.006516031283784807,
+      "daily_pnl": 6564.796923780814,
+      "portfolio_value": 1014048.7450314782,
+      "drawdown": -0.01769805296354099
+    },
+    {
+      "date": "2025-03-18",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": -0.005115051491785427,
+      "daily_pnl": -5186.911546016461,
+      "portfolio_value": 1008861.8334854618,
+      "drawdown": -0.022722578003113614
+    },
+    {
+      "date": "2025-03-19",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": 0.003439665996032145,
+      "daily_pnl": 3470.147743334528,
+      "portfolio_value": 1012331.9812287963,
+      "drawdown": -0.01936107008598109
+    },
+    {
+      "date": "2025-03-20",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": -0.00011187714905665687,
+      "daily_pnl": -113.25681595876813,
+      "portfolio_value": 1012218.7244128375,
+      "drawdown": -0.019470781173713814
+    },
+    {
+      "date": "2025-03-21",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": -0.00033145745541971844,
+      "daily_pnl": -335.50744272209704,
+      "portfolio_value": 1011883.2169701154,
+      "drawdown": -0.019795784893550716
+    },
+    {
+      "date": "2025-03-24",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": 0.00021945381466535277,
+      "daily_pnl": 222.06163195997942,
+      "portfolio_value": 1012105.2786020754,
+      "drawdown": -0.01958067533939445
+    },
+    {
+      "date": "2025-03-25",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": -0.0038519215559947675,
+      "daily_pnl": -3898.5501395834144,
+      "portfolio_value": 1008206.728462492,
+      "drawdown": -0.02335717366996848
+    },
+    {
+      "date": "2025-03-26",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": 0.0012359101232874425,
+      "daily_pnl": 1246.0529020733666,
+      "portfolio_value": 1009452.7813645654,
+      "drawdown": -0.022150130914071142
+    },
+    {
+      "date": "2025-03-27",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": 0.0013195167937910164,
+      "daily_pnl": 1331.9898975495016,
+      "portfolio_value": 1010784.7712621149,
+      "drawdown": -0.02085984159000598
+    },
+    {
+      "date": "2025-03-28",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": -0.0033857051043086526,
+      "daily_pnl": -3422.2191594196483,
+      "portfolio_value": 1007362.5521026952,
+      "drawdown": -0.02417492142216826
+    },
+    {
+      "date": "2025-03-31",
+      "strategy_id": "defensive_sector_rotation",
+      "daily_return": 0.008037097728070782,
+      "daily_pnl": 8096.271278848173,
+      "portfolio_value": 1015458.8233815434,
+      "drawdown": -0.016332119900135944
+    },
+    {
+      "date": "2025-04-01",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0008071141943296834,
+      "daily_pnl": -819.5912301085191,
+      "portfolio_value": 1014639.2321514349,
+      "drawdown": -0.017126052208670695
+    },
+    {
+      "date": "2025-04-02",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.001251555545855898,
+      "daily_pnl": 1269.877358042053,
+      "portfolio_value": 1015909.1095094769,
+      "drawdown": -0.015895930868435215
+    },
+    {
+      "date": "2025-04-03",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.033296915689340324,
+      "daily_pnl": -33826.63996736985,
+      "portfolio_value": 982082.4695421071,
+      "drawdown": -0.04866356108784564
+    },
+    {
+      "date": "2025-04-04",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0335130317791452,
+      "daily_pnl": -32912.56101150601,
+      "portfolio_value": 949169.9085306011,
+      "drawdown": -0.0805457293977675
+    },
+    {
+      "date": "2025-04-07",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.01286064553279238,
+      "daily_pnl": -12206.937744005118,
+      "portfolio_value": 936962.970786596,
+      "drawdown": -0.09237050485559506
+    },
+    {
+      "date": "2025-04-08",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.012950182184133708,
+      "daily_pnl": -12133.841171473498,
+      "portfolio_value": 924829.1296151225,
+      "drawdown": -0.10412447217340826
+    },
+    {
+      "date": "2025-04-09",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.03698080402188406,
+      "daily_pnl": 34200.92479602632,
+      "portfolio_value": 959030.0544111488,
+      "drawdown": -0.0709942748508513
+    },
+    {
+      "date": "2025-04-10",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.021419637389398248,
+      "daily_pnl": -20542.07601102162,
+      "portfolio_value": 938487.9784001271,
+      "drawdown": -0.09089324061622095
+    },
+    {
+      "date": "2025-04-11",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.010539226439765747,
+      "daily_pnl": 9890.937315356918,
+      "portfolio_value": 948378.9157154841,
+      "drawdown": -0.0813119586211537
+    },
+    {
+      "date": "2025-04-14",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.00047801573263814843,
+      "daily_pnl": 453.3400422142586,
+      "portfolio_value": 948832.2557576983,
+      "drawdown": -0.08087281128398816
+    },
+    {
+      "date": "2025-04-15",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0012813518388582247,
+      "daily_pnl": 1215.787955683074,
+      "portfolio_value": 950048.0437133814,
+      "drawdown": -0.07969508597058239
+    },
+    {
+      "date": "2025-04-16",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.010854335990091113,
+      "daily_pnl": 10312.140673193731,
+      "portfolio_value": 960360.1843865751,
+      "drawdown": -0.06970578722037524
+    },
+    {
+      "date": "2025-04-17",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.009352089168366185,
+      "daily_pnl": 8981.37407813198,
+      "portfolio_value": 969341.5584647071,
+      "drawdown": -0.06100559278964501
+    },
+    {
+      "date": "2025-04-21",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.004447389633527155,
+      "daily_pnl": -4311.039598462987,
+      "portfolio_value": 965030.5188662441,
+      "drawdown": -0.06518166678221227
+    },
+    {
+      "date": "2025-04-22",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.006283892115680678,
+      "daily_pnl": 6064.147668894846,
+      "portfolio_value": 971094.666535139,
+      "drawdown": -0.05930736922851132
+    },
+    {
+      "date": "2025-04-23",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.00654323637678258,
+      "daily_pnl": -6354.101947372197,
+      "portfolio_value": 964740.5645877668,
+      "drawdown": -0.0654625434695465
+    },
+    {
+      "date": "2025-04-24",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.007504357543656193,
+      "daily_pnl": 7239.75813353539,
+      "portfolio_value": 971980.3227213022,
+      "drawdown": -0.058449440257802854
+    },
+    {
+      "date": "2025-04-25",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0002630466773547724,
+      "daily_pnl": -255.6761943460442,
+      "portfolio_value": 971724.6465269561,
+      "drawdown": -0.058697112004104546
+    },
+    {
+      "date": "2025-04-28",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 2.7520034611505652e-05,
+      "daily_pnl": 26.74189590534661,
+      "portfolio_value": 971751.3884228615,
+      "drawdown": -0.058671207316046914
+    },
+    {
+      "date": "2025-04-29",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.007157745562174256,
+      "daily_pnl": -6955.549188020406,
+      "portfolio_value": 964795.839234841,
+      "drawdown": -0.06540899930442734
+    },
+    {
+      "date": "2025-04-30",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.012874816842254088,
+      "daily_pnl": -12421.569720317377,
+      "portfolio_value": 952374.2695145237,
+      "drawdown": -0.0774416872608018
+    },
+    {
+      "date": "2025-05-01",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0008676530951051032,
+      "daily_pnl": -826.3304826427484,
+      "portfolio_value": 951547.9390318809,
+      "drawdown": -0.07824214783626493
+    },
+    {
+      "date": "2025-05-02",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0003593306957326625,
+      "daily_pnl": 341.920382955228,
+      "portfolio_value": 951889.8594148362,
+      "drawdown": -0.07791093194595
+    },
+    {
+      "date": "2025-05-05",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.003326313358061239,
+      "daily_pnl": -3166.2839547746116,
+      "portfolio_value": 948723.5754600615,
+      "drawdown": -0.08097808913034044
+    },
+    {
+      "date": "2025-05-06",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.01217398713786555,
+      "daily_pnl": 11549.748605040484,
+      "portfolio_value": 960273.324065102,
+      "drawdown": -0.06978992820799668
+    },
+    {
+      "date": "2025-05-07",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0046326678916471355,
+      "daily_pnl": -4448.62739560171,
+      "portfolio_value": 955824.6966695003,
+      "drawdown": -0.07409928254007425
+    },
+    {
+      "date": "2025-05-08",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.006233627930161578,
+      "daily_pnl": 5958.255525497254,
+      "portfolio_value": 961782.9521949976,
+      "drawdown": -0.06832756196715939
+    },
+    {
+      "date": "2025-05-09",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.00614649984287674,
+      "daily_pnl": 5911.598764547962,
+      "portfolio_value": 967694.5509595455,
+      "drawdown": -0.06260103747317813
+    },
+    {
+      "date": "2025-05-12",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.003812423448029012,
+      "daily_pnl": 3689.2613966080826,
+      "portfolio_value": 971383.8123561536,
+      "drawdown": -0.0590272756882827
+    },
+    {
+      "date": "2025-05-13",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.008322477721117716,
+      "daily_pnl": 8084.3201369885355,
+      "portfolio_value": 979468.1324931422,
+      "drawdown": -0.05119605115401904
+    },
+    {
+      "date": "2025-05-14",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.007662977892347355,
+      "daily_pnl": -7505.642645553686,
+      "portfolio_value": 971962.4898475885,
+      "drawdown": -0.05846671483819765
+    },
+    {
+      "date": "2025-05-15",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.000789745092764238,
+      "daily_pnl": 767.6026067080675,
+      "portfolio_value": 972730.0924542965,
+      "drawdown": -0.057723143546566824
+    },
+    {
+      "date": "2025-05-16",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0002868528231166678,
+      "daily_pnl": -279.03037315106485,
+      "portfolio_value": 972451.0620811455,
+      "drawdown": -0.05799343832299808
+    },
+    {
+      "date": "2025-05-19",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.00016144509245934467,
+      "daily_pnl": -156.9974516298389,
+      "portfolio_value": 972294.0646295156,
+      "drawdown": -0.05814552065944523
+    },
+    {
+      "date": "2025-05-20",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.00144163958640382,
+      "daily_pnl": 1401.6976131953998,
+      "portfolio_value": 973695.762242711,
+      "drawdown": -0.05678770595739613
+    },
+    {
+      "date": "2025-05-21",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.007280247876450652,
+      "daily_pnl": -7088.746505376534,
+      "portfolio_value": 966607.0157373345,
+      "drawdown": -0.06365452525814197
+    },
+    {
+      "date": "2025-05-22",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.002710004927759502,
+      "daily_pnl": -2619.509775855113,
+      "portfolio_value": 963987.5059614794,
+      "drawdown": -0.06619202610877772
+    },
+    {
+      "date": "2025-05-23",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.006283056416411159,
+      "daily_pnl": 6056.787884671474,
+      "portfolio_value": 970044.2938461509,
+      "drawdown": -0.060324857926724595
+    },
+    {
+      "date": "2025-05-27",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0020792438667481595,
+      "daily_pnl": -2016.9586484536994,
+      "portfolio_value": 968027.3351976972,
+      "drawdown": -0.06227867170261625
+    },
+    {
+      "date": "2025-05-28",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.000984364405199245,
+      "daily_pnl": -952.8916520284256,
+      "portfolio_value": 967074.4435456687,
+      "drawdown": -0.06320173120018824
+    },
+    {
+      "date": "2025-05-29",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.00010119554050231905,
+      "daily_pnl": 97.86362102057319,
+      "portfolio_value": 967172.3071666893,
+      "drawdown": -0.06310693139303536
+    },
+    {
+      "date": "2025-05-30",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0026211697710452953,
+      "daily_pnl": -2535.1228149374947,
+      "portfolio_value": 964637.1843517518,
+      "drawdown": -0.06556268718316993
+    },
+    {
+      "date": "2025-06-02",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.012533656555873907,
+      "daily_pnl": 12090.431169690215,
+      "portfolio_value": 976727.615521442,
+      "drawdown": -0.05385077083132994
+    },
+    {
+      "date": "2025-06-03",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0027160266007988597,
+      "daily_pnl": 2652.8181854910217,
+      "portfolio_value": 979380.433706933,
+      "drawdown": -0.05128100435658256
+    },
+    {
+      "date": "2025-06-04",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.004286790153207631,
+      "daily_pnl": -4198.398399459082,
+      "portfolio_value": 975182.035307474,
+      "drawdown": -0.055347963605267725
+    },
+    {
+      "date": "2025-06-05",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.00023716494187677739,
+      "daily_pnl": -231.27899072295986,
+      "portfolio_value": 974950.756316751,
+      "drawdown": -0.05557200195057299
+    },
+    {
+      "date": "2025-06-06",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.005183843365359398,
+      "daily_pnl": 5053.992009684793,
+      "portfolio_value": 980004.7483264358,
+      "drawdown": -0.0506762351388248
+    },
+    {
+      "date": "2025-06-09",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0029720361891823143,
+      "daily_pnl": 2912.6095775966533,
+      "portfolio_value": 982917.3579040325,
+      "drawdown": -0.047854810554406546
+    },
+    {
+      "date": "2025-06-10",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.002687029914318484,
+      "daily_pnl": 2641.128343991004,
+      "portfolio_value": 985558.4862480235,
+      "drawdown": -0.04529636794759184
+    },
+    {
+      "date": "2025-06-11",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.012571532175279575,
+      "daily_pnl": 12389.98022048676,
+      "portfolio_value": 997948.4664685102,
+      "drawdown": -0.033294280519388875
+    },
+    {
+      "date": "2025-06-12",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0029006854703927942,
+      "daily_pnl": 2894.7346168860095,
+      "portfolio_value": 1000843.2010853962,
+      "drawdown": -0.030490171284745737
+    },
+    {
+      "date": "2025-06-13",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.020107665200972423,
+      "daily_pnl": 20124.620006094687,
+      "portfolio_value": 1020967.8210914909,
+      "drawdown": -0.01099559223988733
+    },
+    {
+      "date": "2025-06-16",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.007561308181418491,
+      "daily_pnl": -7719.85233858414,
+      "portfolio_value": 1013247.9687529068,
+      "drawdown": -0.018473759359742825
+    },
+    {
+      "date": "2025-06-17",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.013785801545859844,
+      "daily_pnl": 13968.435413973173,
+      "portfolio_value": 1027216.40416688,
+      "drawdown": -0.0049426333942224066
+    },
+    {
+      "date": "2025-06-18",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0019464143295172321,
+      "daily_pnl": -1999.3887285855599,
+      "portfolio_value": 1025217.0154382944,
+      "drawdown": -0.006879427311275554
+    },
+    {
+      "date": "2025-06-20",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.004155743264194678,
+      "daily_pnl": 4260.538706245599,
+      "portfolio_value": 1029477.55414454,
+      "drawdown": -0.002752273180791076
+    },
+    {
+      "date": "2025-06-23",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.022801625921384638,
+      "daily_pnl": -23473.76208406582,
+      "portfolio_value": 1006003.7920604742,
+      "drawdown": -0.025491142798673927
+    },
+    {
+      "date": "2025-06-24",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.01544318891974399,
+      "daily_pnl": -15535.906614768668,
+      "portfolio_value": 990467.8854457055,
+      "drawdown": -0.04054066718439764
+    },
+    {
+      "date": "2025-06-25",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.00017917907120901244,
+      "daily_pnl": 177.4711157765705,
+      "portfolio_value": 990645.3565614821,
+      "drawdown": -0.04036875215228097
+    },
+    {
+      "date": "2025-06-26",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.003176650168038098,
+      "daily_pnl": 3146.93373838719,
+      "portfolio_value": 993792.2902998693,
+      "drawdown": -0.03732033938755086
+    },
+    {
+      "date": "2025-06-27",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.005400785654233941,
+      "daily_pnl": -5367.25914473983,
+      "portfolio_value": 988425.0311551294,
+      "drawdown": -0.042519565888209376
+    },
+    {
+      "date": "2025-06-30",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.00025796436243572527,
+      "daily_pnl": 254.97843297733925,
+      "portfolio_value": 988680.0095881068,
+      "drawdown": -0.042272570058479175
+    },
+    {
+      "date": "2025-07-01",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.004686532312688119,
+      "daily_pnl": 4633.480811843416,
+      "portfolio_value": 993313.4903999502,
+      "drawdown": -0.03778414951131048
+    },
+    {
+      "date": "2025-07-02",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.00879635101498708,
+      "daily_pnl": 8737.534129480016,
+      "portfolio_value": 1002051.0245294302,
+      "drawdown": -0.029320161138227663
+    },
+    {
+      "date": "2025-07-03",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0015713822153024636,
+      "daily_pnl": -1574.6051587711554,
+      "portfolio_value": 1000476.419370659,
+      "drawdown": -0.03084547017376771
+    },
+    {
+      "date": "2025-07-07",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.002061833345233266,
+      "daily_pnl": 2062.8156425780617,
+      "portfolio_value": 1002539.2350132371,
+      "drawdown": -0.028847235047487985
+    },
+    {
+      "date": "2025-07-08",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.004532947014128786,
+      "daily_pnl": 4544.4572319003055,
+      "portfolio_value": 1007083.6922451374,
+      "drawdown": -0.02444505102133354
+    },
+    {
+      "date": "2025-07-09",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0005508566973374985,
+      "daily_pnl": 554.7587966526626,
+      "portfolio_value": 1007638.4510417901,
+      "drawdown": -0.023907660044067858
+    },
+    {
+      "date": "2025-07-10",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0017224191751076035,
+      "daily_pnl": -1735.5757896500872,
+      "portfolio_value": 1005902.87525214,
+      "drawdown": -0.025588900207083598
+    },
+    {
+      "date": "2025-07-11",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.008123170799619151,
+      "daily_pnl": 8171.120863501215,
+      "portfolio_value": 1014073.9961156412,
+      "drawdown": -0.017673592414420902
+    },
+    {
+      "date": "2025-07-14",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.006609079668713181,
+      "daily_pnl": -6702.095830298611,
+      "portfolio_value": 1007371.9002853426,
+      "drawdown": -0.02416586590283476
+    },
+    {
+      "date": "2025-07-15",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.00409559864561535,
+      "daily_pnl": -4125.790990439593,
+      "portfolio_value": 1003246.109294903,
+      "drawdown": -0.02816249086078837
+    },
+    {
+      "date": "2025-07-16",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0009655672048734853,
+      "daily_pnl": -968.7015415520873,
+      "portfolio_value": 1002277.4077533509,
+      "drawdown": -0.029100865288079092
+    },
+    {
+      "date": "2025-07-17",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0044366453536424325,
+      "daily_pnl": 4446.749404169619,
+      "portfolio_value": 1006724.1571575205,
+      "drawdown": -0.024793330153204063
+    },
+    {
+      "date": "2025-07-18",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0017716513754515218,
+      "daily_pnl": -1783.5642377283657,
+      "portfolio_value": 1004940.5929197922,
+      "drawdown": -0.026521056391187625
+    },
+    {
+      "date": "2025-07-21",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.000694695836350534,
+      "daily_pnl": -698.1280456810491,
+      "portfolio_value": 1004242.4648741111,
+      "drawdown": -0.027197328160087575
+    },
+    {
+      "date": "2025-07-22",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0013563358419343753,
+      "daily_pnl": 1362.0900491012726,
+      "portfolio_value": 1005604.5549232124,
+      "drawdown": -0.02587788102914157
+    },
+    {
+      "date": "2025-07-23",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0006069007441305008,
+      "daily_pnl": -610.3021526839584,
+      "portfolio_value": 1004994.2527705284,
+      "drawdown": -0.026469076468018993
+    },
+    {
+      "date": "2025-07-24",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0030200061154536774,
+      "daily_pnl": 3035.0887893628096,
+      "portfolio_value": 1008029.3415598912,
+      "drawdown": -0.023529007125369206
+    },
+    {
+      "date": "2025-07-25",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0052395973905275065,
+      "daily_pnl": -5281.667907612398,
+      "portfolio_value": 1002747.6736522788,
+      "drawdown": -0.02864532199156089
+    },
+    {
+      "date": "2025-07-28",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.009202892497836323,
+      "daily_pnl": 9228.179043077282,
+      "portfolio_value": 1011975.8526953561,
+      "drawdown": -0.01970604931257891
+    },
+    {
+      "date": "2025-07-29",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.01090360182806247,
+      "daily_pnl": 11034.18175740412,
+      "portfolio_value": 1023010.0344527602,
+      "drawdown": -0.009017314399825005
+    },
+    {
+      "date": "2025-07-30",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.002023644540011094,
+      "daily_pnl": -2070.2086705969414,
+      "portfolio_value": 1020939.8257821633,
+      "drawdown": -0.011022711100785454
+    },
+    {
+      "date": "2025-07-31",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0032181833124463877,
+      "daily_pnl": -3285.5715103440452,
+      "portfolio_value": 1017654.2542718193,
+      "drawdown": -0.014205421308309263
+    },
+    {
+      "date": "2025-08-01",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.006461427658845187,
+      "daily_pnl": -6575.499345693388,
+      "portfolio_value": 1011078.7549261259,
+      "drawdown": -0.020575061665007444
+    },
+    {
+      "date": "2025-08-04",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0022566096979126813,
+      "daily_pnl": -2281.610123719787,
+      "portfolio_value": 1008797.1448024061,
+      "drawdown": -0.022785241479231666
+    },
+    {
+      "date": "2025-08-05",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0026268639834645226,
+      "daily_pnl": -2649.9728863033233,
+      "portfolio_value": 1006147.1719161028,
+      "drawdown": -0.025352251732499886
+    },
+    {
+      "date": "2025-08-06",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0068752285022972036,
+      "daily_pnl": -6917.491713863215,
+      "portfolio_value": 999229.6802022395,
+      "drawdown": -0.03205317771108829
+    },
+    {
+      "date": "2025-08-07",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -2.2706194800270474e-05,
+      "daily_pnl": -22.688703768886626,
+      "portfolio_value": 999206.9914984707,
+      "drawdown": -0.032075156100191515
+    },
+    {
+      "date": "2025-08-08",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0011466359691175488,
+      "daily_pnl": 1145.7266770458082,
+      "portfolio_value": 1000352.7181755165,
+      "drawdown": -0.03096529865877362
+    },
+    {
+      "date": "2025-08-11",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0023099572384127852,
+      "daily_pnl": -2310.7720023153815,
+      "portfolio_value": 998041.9461732011,
+      "drawdown": -0.033203727381409864
+    },
+    {
+      "date": "2025-08-12",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.002872792142699132,
+      "daily_pnl": -2867.1670610504225,
+      "portfolio_value": 995174.7791121507,
+      "drawdown": -0.035981132116979286
+    },
+    {
+      "date": "2025-08-13",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0018331864526979435,
+      "daily_pnl": 1824.3409231350524,
+      "portfolio_value": 996999.1200352857,
+      "drawdown": -0.034213905788230914
+    },
+    {
+      "date": "2025-08-14",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0022133492765912923,
+      "daily_pnl": 2206.707281092182,
+      "portfolio_value": 999205.8273163779,
+      "drawdown": -0.032076283835265396
+    },
+    {
+      "date": "2025-08-15",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.003469488225342032,
+      "daily_pnl": -3466.73285256722,
+      "portfolio_value": 995739.0944638107,
+      "drawdown": -0.03543448377152825
+    },
+    {
+      "date": "2025-08-18",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0001939560116239747,
+      "daily_pnl": -193.12958338030148,
+      "portfolio_value": 995545.9648804304,
+      "drawdown": -0.03562156705200592
+    },
+    {
+      "date": "2025-08-19",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0026912155729055475,
+      "daily_pnl": -2679.228804229526,
+      "portfolio_value": 992866.7360762008,
+      "drawdown": -0.03821691730892984
+    },
+    {
+      "date": "2025-08-20",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.007140823086488224,
+      "daily_pnl": 7089.885710779112,
+      "portfolio_value": 999956.62178698,
+      "drawdown": -0.03134899446785566
+    },
+    {
+      "date": "2025-08-21",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.003396860719410677,
+      "daily_pnl": 3396.713369662757,
+      "portfolio_value": 1003353.3351566427,
+      "drawdown": -0.028058621916345894
+    },
+    {
+      "date": "2025-08-22",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.00699728196451912,
+      "daily_pnl": 7020.746196131804,
+      "portfolio_value": 1010374.0813527745,
+      "drawdown": -0.021257674040911168
+    },
+    {
+      "date": "2025-08-25",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.004244513194988952,
+      "daily_pnl": 4288.546120176557,
+      "portfolio_value": 1014662.6274729511,
+      "drawdown": -0.017103389323883778
+    },
+    {
+      "date": "2025-08-26",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0033913448607301388,
+      "daily_pnl": -3441.0708870553644,
+      "portfolio_value": 1011221.5565858957,
+      "drawdown": -0.020436730693129346
+    },
+    {
+      "date": "2025-08-27",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.004872775105949634,
+      "daily_pnl": 4927.455227531376,
+      "portfolio_value": 1016149.0118134271,
+      "drawdown": -0.015663539179748165
+    },
+    {
+      "date": "2025-08-28",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.003906191842812068,
+      "daily_pnl": 3969.272981027141,
+      "portfolio_value": 1020118.2847944542,
+      "drawdown": -0.011818532125909664
+    },
+    {
+      "date": "2025-08-29",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.001595121536371935,
+      "daily_pnl": 1627.2126457223203,
+      "portfolio_value": 1021745.4974401766,
+      "drawdown": -0.0102422625846601
+    },
+    {
+      "date": "2025-09-02",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.010347006907175849,
+      "daily_pnl": 10572.00771938928,
+      "portfolio_value": 1032317.5051595658,
+      "drawdown": -1.2324391929219303e-06
+    },
+    {
+      "date": "2025-09-03",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.00785814394371227,
+      "daily_pnl": -8112.099551157793,
+      "portfolio_value": 1024205.405608408,
+      "drawdown": -0.007859366698220627
+    },
+    {
+      "date": "2025-09-04",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0006897870575232723,
+      "daily_pnl": -706.4836330340477,
+      "portfolio_value": 1023498.921975374,
+      "drawdown": -0.008543732466315124
+    },
+    {
+      "date": "2025-09-05",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.005505138766178752,
+      "daily_pnl": -5634.503592508845,
+      "portfolio_value": 1017864.4183828651,
+      "drawdown": -0.014001836799685807
+    },
+    {
+      "date": "2025-09-08",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0027045398707543633,
+      "daily_pnl": 2752.8549025387038,
+      "portfolio_value": 1020617.2732854038,
+      "drawdown": -0.01133516545481994
+    },
+    {
+      "date": "2025-09-09",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0018797547832652306,
+      "daily_pnl": 1918.5102013413562,
+      "portfolio_value": 1022535.7834867452,
+      "drawdown": -0.00947671800303751
+    },
+    {
+      "date": "2025-09-10",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.008260499957749046,
+      "daily_pnl": 8446.656796289259,
+      "portfolio_value": 1030982.4402830345,
+      "drawdown": -0.001294500473951965
+    },
+    {
+      "date": "2025-09-11",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.005164605358581898,
+      "daily_pnl": -5324.61743568955,
+      "portfolio_value": 1025657.8228473449,
+      "drawdown": -0.0064524202484493864
+    },
+    {
+      "date": "2025-09-12",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 7.855777084329053e-05,
+      "daily_pnl": 80.5733922108775,
+      "portfolio_value": 1025738.3962395558,
+      "drawdown": -0.006374369365357402
+    },
+    {
+      "date": "2025-09-15",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0034535168942420704,
+      "daily_pnl": 3542.404880485963,
+      "portfolio_value": 1029280.8011200418,
+      "drawdown": -0.0029428664634087998
+    },
+    {
+      "date": "2025-09-16",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.006566797853117467,
+      "daily_pnl": 6759.078955050092,
+      "portfolio_value": 1036039.8800750918,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-09-17",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0023870171157952093,
+      "daily_pnl": -2473.0449263857445,
+      "portfolio_value": 1033566.8351487061,
+      "drawdown": -0.0023870171157952536
+    },
+    {
+      "date": "2025-09-18",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0017698326206229576,
+      "daily_pnl": -1829.240300440113,
+      "portfolio_value": 1031737.594848266,
+      "drawdown": -0.004152625115660613
+    },
+    {
+      "date": "2025-09-19",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0031871283100810112,
+      "daily_pnl": -3288.2800971159013,
+      "portfolio_value": 1028449.3147511501,
+      "drawdown": -0.007326518476674426
+    },
+    {
+      "date": "2025-09-22",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.00013669125103830116,
+      "daily_pnl": 140.58002346288413,
+      "portfolio_value": 1028589.894774613,
+      "drawdown": -0.007190828696612472
+    },
+    {
+      "date": "2025-09-23",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.009012094727982877,
+      "daily_pnl": 9269.749567954685,
+      "portfolio_value": 1037859.6443425677,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-09-24",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0054656255156351865,
+      "daily_pnl": 5672.552153766737,
+      "portfolio_value": 1043532.1964963344,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-09-25",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.005254939041411055,
+      "daily_pnl": 5483.698080338072,
+      "portfolio_value": 1049015.8945766725,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-09-26",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0023894809345873292,
+      "daily_pnl": 2506.6034801700152,
+      "portfolio_value": 1051522.4980568425,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-09-29",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.006867826081412121,
+      "daily_pnl": -7221.673637346365,
+      "portfolio_value": 1044300.8244194961,
+      "drawdown": -0.006867826081412121
+    },
+    {
+      "date": "2025-09-30",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0029423630556421497,
+      "daily_pnl": -3072.7121647485765,
+      "portfolio_value": 1041228.1122547475,
+      "drawdown": -0.009789981499319755
+    },
+    {
+      "date": "2025-10-01",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.001411867002356648,
+      "daily_pnl": -1470.0756136185955,
+      "portfolio_value": 1039758.036641129,
+      "drawdown": -0.011188026349843838
+    },
+    {
+      "date": "2025-10-02",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.006885494859070617,
+      "daily_pnl": -7159.248615969904,
+      "portfolio_value": 1032598.788025159,
+      "drawdown": -0.017996486110999466
+    },
+    {
+      "date": "2025-10-03",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.002565717957143909,
+      "daily_pnl": 2649.357252961141,
+      "portfolio_value": 1035248.1452781202,
+      "drawdown": -0.015476942061436127
+    },
+    {
+      "date": "2025-10-06",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.008597777960555364,
+      "daily_pnl": 8900.833687177976,
+      "portfolio_value": 1044148.9789652982,
+      "drawdown": -0.007012231412233394
+    },
+    {
+      "date": "2025-10-07",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.003968811159858499,
+      "daily_pnl": 4144.030120272422,
+      "portfolio_value": 1048293.0090855706,
+      "drawdown": -0.0030712504746591707
+    },
+    {
+      "date": "2025-10-08",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0036135908178359876,
+      "daily_pnl": 3788.1019920333056,
+      "portfolio_value": 1052081.111077604,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-10-09",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.008053710795292112,
+      "daily_pnl": -8473.157001808635,
+      "portfolio_value": 1043607.9540757952,
+      "drawdown": -0.008053710795292157
+    },
+    {
+      "date": "2025-10-10",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.012671689171528434,
+      "daily_pnl": -13224.275610983139,
+      "portfolio_value": 1030383.6784648121,
+      "drawdown": -0.02062334584694514
+    },
+    {
+      "date": "2025-10-13",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.011367075038030671,
+      "daily_pnl": 11712.44859107153,
+      "portfolio_value": 1042096.1270558836,
+      "drawdown": -0.00949069792869206
+    },
+    {
+      "date": "2025-10-14",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0030237974540066716,
+      "daily_pnl": -3151.08761582186,
+      "portfolio_value": 1038945.0394400618,
+      "drawdown": -0.012485797434465207
+    },
+    {
+      "date": "2025-10-15",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.002694702769900581,
+      "daily_pnl": 2799.648075553472,
+      "portfolio_value": 1041744.6875156153,
+      "drawdown": -0.009824740177495905
+    },
+    {
+      "date": "2025-10-16",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0014777034259300993,
+      "daily_pnl": -1539.389693686273,
+      "portfolio_value": 1040205.297821929,
+      "drawdown": -0.011287925551206834
+    },
+    {
+      "date": "2025-10-17",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0017970864834435218,
+      "daily_pnl": -1869.3388807221781,
+      "portfolio_value": 1038335.9589412068,
+      "drawdown": -0.013064726656216163
+    },
+    {
+      "date": "2025-10-20",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.009639428841505971,
+      "daily_pnl": 10008.965589790721,
+      "portfolio_value": 1048344.9245309975,
+      "drawdown": -0.003551234317646368
+    },
+    {
+      "date": "2025-10-21",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.010796564463680047,
+      "daily_pnl": -11318.523557870765,
+      "portfolio_value": 1037026.4009731268,
+      "drawdown": -0.014309457651090374
+    },
+    {
+      "date": "2025-10-22",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.009602332624090715,
+      "daily_pnl": 9957.872442107531,
+      "portfolio_value": 1046984.2734152343,
+      "drawdown": -0.004844529199035885
+    },
+    {
+      "date": "2025-10-23",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.010677377028227663,
+      "daily_pnl": 11179.04582987947,
+      "portfolio_value": 1058163.3192451138,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-10-24",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0030117670030471943,
+      "daily_pnl": -3186.941368737258,
+      "portfolio_value": 1054976.3778763765,
+      "drawdown": -0.003011767003047172
+    },
+    {
+      "date": "2025-10-27",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.005523552586579506,
+      "daily_pnl": -5827.2175007993355,
+      "portfolio_value": 1049149.1603755772,
+      "drawdown": -0.008518683936206806
+    },
+    {
+      "date": "2025-10-28",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.00823210349175516,
+      "daily_pnl": -8636.704466499854,
+      "portfolio_value": 1040512.4559090773,
+      "drawdown": -0.016680660740185593
+    },
+    {
+      "date": "2025-10-29",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.001974591814384885,
+      "daily_pnl": 2054.587378203636,
+      "portfolio_value": 1042567.043287281,
+      "drawdown": -0.014739006421956802
+    },
+    {
+      "date": "2025-10-30",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.002850385635300845,
+      "daily_pnl": 2971.7181240241043,
+      "portfolio_value": 1045538.761411305,
+      "drawdown": -0.011930632638839644
+    },
+    {
+      "date": "2025-10-31",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0036400970278049893,
+      "daily_pnl": 3805.862537868088,
+      "portfolio_value": 1049344.6239491731,
+      "drawdown": -0.008333964271443284
+    },
+    {
+      "date": "2025-11-03",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.00022913954711198948,
+      "daily_pnl": 240.44635189604014,
+      "portfolio_value": 1049585.0703010692,
+      "drawdown": -0.008106734365130208
+    },
+    {
+      "date": "2025-11-04",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.007158446106936079,
+      "daily_pnl": -7513.398160394863,
+      "portfolio_value": 1042071.6721406743,
+      "drawdown": -0.015207148851010155
+    },
+    {
+      "date": "2025-11-05",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.00033016470690534484,
+      "daily_pnl": -344.0552882067859,
+      "portfolio_value": 1041727.6168524675,
+      "drawdown": -0.015532292694072303
+    },
+    {
+      "date": "2025-11-06",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0007658065630018251,
+      "daily_pnl": 797.7618458458455,
+      "portfolio_value": 1042525.3786983134,
+      "drawdown": -0.014778380862754181
+    },
+    {
+      "date": "2025-11-07",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.005067732356924948,
+      "daily_pnl": 5283.2395945449825,
+      "portfolio_value": 1047808.6182928584,
+      "drawdown": -0.009785541384710217
+    },
+    {
+      "date": "2025-11-10",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.008634353444881393,
+      "daily_pnl": 9047.149952933425,
+      "portfolio_value": 1056855.7682457918,
+      "drawdown": -0.0012356797627938176
+    },
+    {
+      "date": "2025-11-11",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.006828924142132919,
+      "daily_pnl": 7217.187870525988,
+      "portfolio_value": 1064072.9561163178,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-11-12",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.007992979478633245,
+      "daily_pnl": -8505.113302006386,
+      "portfolio_value": 1055567.8428143114,
+      "drawdown": -0.00799297947863331
+    },
+    {
+      "date": "2025-11-13",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0019532862159093558,
+      "daily_pnl": -2061.8261173265055,
+      "portfolio_value": 1053506.0166969849,
+      "drawdown": -0.009930653117903088
+    },
+    {
+      "date": "2025-11-14",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.004225808152254107,
+      "daily_pnl": 4451.914313806919,
+      "portfolio_value": 1057957.9310107918,
+      "drawdown": -0.005746810000551772
+    },
+    {
+      "date": "2025-11-17",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.005634160438418689,
+      "daily_pnl": -5960.704720412381,
+      "portfolio_value": 1051997.2262903794,
+      "drawdown": -0.0113485919894184
+    },
+    {
+      "date": "2025-11-18",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.00677037286836839,
+      "daily_pnl": 7122.413478475064,
+      "portfolio_value": 1059119.6397688545,
+      "drawdown": -0.004655053320349434
+    },
+    {
+      "date": "2025-11-19",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.005711228303814231,
+      "daily_pnl": -6048.8740637733135,
+      "portfolio_value": 1053070.7657050812,
+      "drawdown": -0.010339695551884631
+    },
+    {
+      "date": "2025-11-20",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.004156928573962526,
+      "daily_pnl": -4377.539956364082,
+      "portfolio_value": 1048693.225748717,
+      "drawdown": -0.014453642749961415
+    },
+    {
+      "date": "2025-11-21",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0011437612493734096,
+      "daily_pnl": -1199.4546740917722,
+      "portfolio_value": 1047493.7710746253,
+      "drawdown": -0.01558087248284512
+    },
+    {
+      "date": "2025-11-24",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.005932077142574421,
+      "daily_pnl": 6213.813856380875,
+      "portfolio_value": 1053707.5849310062,
+      "drawdown": -0.00974122227778762
+    },
+    {
+      "date": "2025-11-25",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.004845525471653067,
+      "daily_pnl": -5105.766942457296,
+      "portfolio_value": 1048601.817988549,
+      "drawdown": -0.014539546408768644
+    },
+    {
+      "date": "2025-11-26",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.005259721617351354,
+      "daily_pnl": 5515.353650068166,
+      "portfolio_value": 1054117.171638617,
+      "drawdown": -0.009356298757970172
+    },
+    {
+      "date": "2025-11-28",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.007456916142230097,
+      "daily_pnl": 7860.463352993829,
+      "portfolio_value": 1061977.634991611,
+      "drawdown": -0.0019691517509800027
+    },
+    {
+      "date": "2025-12-01",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0014227287291484815,
+      "daily_pnl": 1510.906091015553,
+      "portfolio_value": 1063488.5410826264,
+      "drawdown": -0.0005492245905998061
+    },
+    {
+      "date": "2025-12-02",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.006309448400446382,
+      "daily_pnl": -6710.026074426714,
+      "portfolio_value": 1056778.5150081997,
+      "drawdown": -0.006855207686831455
+    },
+    {
+      "date": "2025-12-03",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0043334616209432355,
+      "daily_pnl": 4579.509136625333,
+      "portfolio_value": 1061358.024144825,
+      "drawdown": -0.002551452845302782
+    },
+    {
+      "date": "2025-12-04",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0032018613057143595,
+      "daily_pnl": 3398.321189018665,
+      "portfolio_value": 1064756.3453338437,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2025-12-05",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.00023466072978144402,
+      "daily_pnl": -249.85650103539228,
+      "portfolio_value": 1064506.4888328083,
+      "drawdown": -0.00023466072978139962
+    },
+    {
+      "date": "2025-12-08",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.006795683973884636,
+      "daily_pnl": -7234.049686257262,
+      "portfolio_value": 1057272.439146551,
+      "drawdown": -0.007028750023505337
+    },
+    {
+      "date": "2025-12-09",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0005033699558707916,
+      "daily_pnl": 532.199181036558,
+      "portfolio_value": 1057804.6383275876,
+      "drawdown": -0.0065289181292237375
+    },
+    {
+      "date": "2025-12-10",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.004487908791160122,
+      "daily_pnl": 4747.330735680414,
+      "portfolio_value": 1062551.969063268,
+      "drawdown": -0.0020703105271323574
+    },
+    {
+      "date": "2025-12-11",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0032608982683319356,
+      "daily_pnl": -3464.873875931138,
+      "portfolio_value": 1059087.095187337,
+      "drawdown": -0.005324457723451581
+    },
+    {
+      "date": "2025-12-12",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.002131402784349956,
+      "daily_pnl": -2257.3411835513543,
+      "portfolio_value": 1056829.7540037856,
+      "drawdown": -0.007444511943784593
+    },
+    {
+      "date": "2025-12-15",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0041865098399831435,
+      "daily_pnl": -4424.428164323792,
+      "portfolio_value": 1052405.3258394618,
+      "drawdown": -0.011599855261261172
+    },
+    {
+      "date": "2025-12-16",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.011307586347354492,
+      "daily_pnl": -11900.164094345528,
+      "portfolio_value": 1040505.1617451162,
+      "drawdown": -0.022776275243632127
+    },
+    {
+      "date": "2025-12-17",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.012264573266217615,
+      "daily_pnl": 12761.351790100685,
+      "portfolio_value": 1053266.513535217,
+      "drawdown": -0.010791043273871481
+    },
+    {
+      "date": "2025-12-18",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.005064050562844624,
+      "daily_pnl": -5333.794880693429,
+      "portfolio_value": 1047932.7186545235,
+      "drawdown": -0.015800447447951393
+    },
+    {
+      "date": "2025-12-19",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0023559066704283314,
+      "daily_pnl": 2468.831682038377,
+      "portfolio_value": 1050401.5503365619,
+      "drawdown": -0.013481765157061454
+    },
+    {
+      "date": "2025-12-22",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.00227557204992328,
+      "daily_pnl": 2390.264409141848,
+      "portfolio_value": 1052791.8147457037,
+      "drawdown": -0.011236871835113238
+    },
+    {
+      "date": "2025-12-23",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.00502243832466176,
+      "daily_pnl": 5287.581958269002,
+      "portfolio_value": 1058079.3967039727,
+      "drawdown": -0.00627087000620552
+    },
+    {
+      "date": "2025-12-24",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0012025412897151532,
+      "daily_pnl": -1272.384162333561,
+      "portfolio_value": 1056807.0125416392,
+      "drawdown": -0.0074658703158159145
+    },
+    {
+      "date": "2025-12-26",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.003200944730492439,
+      "daily_pnl": -3382.7808379426133,
+      "portfolio_value": 1053424.2317036965,
+      "drawdown": -0.01064291720806243
+    },
+    {
+      "date": "2025-12-29",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.003249099792551546,
+      "daily_pnl": -3422.680452697212,
+      "portfolio_value": 1050001.5512509993,
+      "drawdown": -0.013857437100521008
+    },
+    {
+      "date": "2025-12-30",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0025255749881170075,
+      "daily_pnl": 2651.857655323576,
+      "portfolio_value": 1052653.408906323,
+      "drawdown": -0.011366860108944499
+    },
+    {
+      "date": "2025-12-31",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.004616382023631282,
+      "daily_pnl": -4859.450273989234,
+      "portfolio_value": 1047793.9586323337,
+      "drawdown": -0.015930768363903614
+    },
+    {
+      "date": "2026-01-02",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.005121621744484406,
+      "daily_pnl": 5366.40432227077,
+      "portfolio_value": 1053160.3629546044,
+      "drawdown": -0.010890737989078136
+    },
+    {
+      "date": "2026-01-05",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.01460061792418219,
+      "daily_pnl": 15376.792072393233,
+      "portfolio_value": 1068537.1550269977,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-01-06",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.007519704797807325,
+      "daily_pnl": -8035.0839712917805,
+      "portfolio_value": 1060502.071055706,
+      "drawdown": -0.00751970479780717
+    },
+    {
+      "date": "2026-01-07",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0056453310750702364,
+      "daily_pnl": -5986.885296907043,
+      "portfolio_value": 1054515.1857587988,
+      "drawdown": -0.013122584649706948
+    },
+    {
+      "date": "2026-01-08",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.015626325825692698,
+      "daily_pnl": 16478.19788080803,
+      "portfolio_value": 1070993.3836396069,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-01-09",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0033571249905365087,
+      "daily_pnl": 3595.458652915666,
+      "portfolio_value": 1074588.8422925225,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-01-12",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0044228063316991365,
+      "daily_pnl": 4752.69833566458,
+      "portfolio_value": 1079341.5406281871,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-01-13",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.008367184462393661,
+      "daily_pnl": 9031.049768360099,
+      "portfolio_value": 1088372.5903965472,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-01-14",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0042584680641603034,
+      "daily_pnl": 4634.799918111181,
+      "portfolio_value": 1093007.3903146584,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-01-15",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0067509454894475905,
+      "daily_pnl": -7378.83331157756,
+      "portfolio_value": 1085628.5570030808,
+      "drawdown": -0.006750945489447546
+    },
+    {
+      "date": "2026-01-16",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0004533687745082116,
+      "daily_pnl": 492.1900884597562,
+      "portfolio_value": 1086120.7470915406,
+      "drawdown": -0.006300637382822494
+    },
+    {
+      "date": "2026-01-20",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.005572004563797117,
+      "daily_pnl": 6051.869759628782,
+      "portfolio_value": 1092172.6168511694,
+      "drawdown": -0.0007637399992773686
+    },
+    {
+      "date": "2026-01-21",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.01308989654361219,
+      "daily_pnl": 14296.426562347915,
+      "portfolio_value": 1106469.0434135173,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-01-22",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0008760196209316895,
+      "daily_pnl": -969.2885919837281,
+      "portfolio_value": 1105499.7548215336,
+      "drawdown": -0.0008760196209316451
+    },
+    {
+      "date": "2026-01-23",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.008457515632246504,
+      "daily_pnl": 9349.781457847916,
+      "portfolio_value": 1114849.5362793815,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-01-26",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.001082614012262506,
+      "daily_pnl": 1206.9517295404803,
+      "portfolio_value": 1116056.488008922,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-01-27",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.010371441269994208,
+      "daily_pnl": 11575.114319380606,
+      "portfolio_value": 1127631.6023283026,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-01-28",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.013121946758695203,
+      "daily_pnl": 14796.721849174006,
+      "portfolio_value": 1142428.3241774766,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-01-29",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.008802419463749312,
+      "daily_pnl": 10056.133316678228,
+      "portfolio_value": 1152484.4574941548,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-01-30",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.015566728668373164,
+      "daily_pnl": -17940.412844328675,
+      "portfolio_value": 1134544.0446498261,
+      "drawdown": -0.015566728668373053
+    },
+    {
+      "date": "2026-02-02",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.02194799393303839,
+      "daily_pnl": -24900.965808739187,
+      "portfolio_value": 1109643.078841087,
+      "drawdown": -0.037173064135040734
+    },
+    {
+      "date": "2026-02-03",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.024680629683434673,
+      "daily_pnl": 27386.689909663284,
+      "portfolio_value": 1137029.7687507502,
+      "drawdown": -0.013409889081721471
+    },
+    {
+      "date": "2026-02-04",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.005858822440045985,
+      "daily_pnl": 6661.6555241572205,
+      "portfolio_value": 1143691.4242749074,
+      "drawdown": -0.007629632800746022
+    },
+    {
+      "date": "2026-02-05",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.009574746955272561,
+      "daily_pnl": -10950.555982347578,
+      "portfolio_value": 1132740.8682925599,
+      "drawdown": -0.01713132795258987
+    },
+    {
+      "date": "2026-02-06",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.010521097087258412,
+      "daily_pnl": 11917.676650011446,
+      "portfolio_value": 1144658.5449425713,
+      "drawdown": -0.0067904712299542425
+    },
+    {
+      "date": "2026-02-09",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.007754668384529739,
+      "daily_pnl": 8876.447429548018,
+      "portfolio_value": 1153534.9923721193,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0016908618672871745,
+      "daily_pnl": -1950.4683311833069,
+      "portfolio_value": 1151584.524040936,
+      "drawdown": -0.0016908618672870634
+    },
+    {
+      "date": "2026-02-11",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.009591750949956923,
+      "daily_pnl": 11045.71195242554,
+      "portfolio_value": 1162630.2359933616,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-02-12",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.016227029055800025,
+      "daily_pnl": -18866.034620615887,
+      "portfolio_value": 1143764.2013727457,
+      "drawdown": -0.01622702905579998
+    },
+    {
+      "date": "2026-02-13",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.006179343766904011,
+      "daily_pnl": 7067.712188560516,
+      "portfolio_value": 1150831.9135613062,
+      "drawdown": -0.01014795767974741
+    },
+    {
+      "date": "2026-02-17",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.009343832866619573,
+      "daily_pnl": -10753.181057888782,
+      "portfolio_value": 1140078.7325034174,
+      "drawdown": -0.019396969725869795
+    },
+    {
+      "date": "2026-02-18",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.019160468824219845,
+      "daily_pnl": 21844.4430112876,
+      "portfolio_value": 1161923.175514705,
+      "drawdown": -0.0006081559353670052
+    },
+    {
+      "date": "2026-02-19",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0069851707661384484,
+      "daily_pnl": 8116.2317981040105,
+      "portfolio_value": 1170039.407312809,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-02-20",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0016888970553279093,
+      "daily_pnl": 1976.076109628193,
+      "portfolio_value": 1172015.4834224372,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-02-23",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.006690629673780269,
+      "daily_pnl": 7841.521571516059,
+      "portfolio_value": 1179857.0049939533,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-02-24",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0031156249260265944,
+      "daily_pnl": -3675.9918939061463,
+      "portfolio_value": 1176181.0131000471,
+      "drawdown": -0.0031156249260264612
+    },
+    {
+      "date": "2026-02-25",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.003928697517495472,
+      "daily_pnl": -4620.859426291427,
+      "portfolio_value": 1171560.1536737557,
+      "drawdown": -0.007032082095609571
+    },
+    {
+      "date": "2026-02-26",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0031578539109837767,
+      "daily_pnl": 3699.6158132313285,
+      "portfolio_value": 1175259.769486987,
+      "drawdown": -0.0038964344725739286
+    },
+    {
+      "date": "2026-02-27",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.01140950875286999,
+      "daily_pnl": 13409.136626857799,
+      "portfolio_value": 1188668.9061138448,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-03-02",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.020670231437578533,
+      "daily_pnl": 24570.061392026488,
+      "portfolio_value": 1213238.9675058713,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-03-03",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0030154295805465913,
+      "daily_pnl": -3658.436670888914,
+      "portfolio_value": 1209580.5308349824,
+      "drawdown": -0.003015429580546458
+    },
+    {
+      "date": "2026-03-04",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.002598820091509424,
+      "daily_pnl": 3143.4821858326904,
+      "portfolio_value": 1212724.013020815,
+      "drawdown": -0.00042444604801550323
+    },
+    {
+      "date": "2026-03-05",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.009461201848229184,
+      "daily_pnl": 11473.826673384523,
+      "portfolio_value": 1224197.8396941996,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-03-06",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.029664822619316335,
+      "daily_pnl": 36315.61176547874,
+      "portfolio_value": 1260513.4514596784,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-03-09",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.00921153691644543,
+      "daily_pnl": -11611.266191796865,
+      "portfolio_value": 1248902.1852678815,
+      "drawdown": -0.009211536916445384
+    },
+    {
+      "date": "2026-03-10",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0018962629421411582,
+      "daily_pnl": 2368.246932282578,
+      "portfolio_value": 1251270.432200164,
+      "drawdown": -0.0073327414703990845
+    },
+    {
+      "date": "2026-03-11",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.008846500809407899,
+      "daily_pnl": 11069.364891246893,
+      "portfolio_value": 1262339.797091411,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-03-12",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.01776044677277533,
+      "daily_pnl": 22419.718775397865,
+      "portfolio_value": 1284759.5158668088,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-03-13",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0017280543972729712,
+      "daily_pnl": 2220.134330831701,
+      "portfolio_value": 1286979.6501976405,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-03-16",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.008107210658256769,
+      "daily_pnl": -10433.815137041965,
+      "portfolio_value": 1276545.8350605986,
+      "drawdown": -0.008107210658256814
+    },
+    {
+      "date": "2026-03-17",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.008569253543916178,
+      "daily_pnl": 10939.044921064517,
+      "portfolio_value": 1287484.879981663,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-03-18",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.0009866983886482438,
+      "daily_pnl": -1270.359256486874,
+      "portfolio_value": 1286214.5207251762,
+      "drawdown": -0.0009866983886482883
+    },
+    {
+      "date": "2026-03-19",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.014317134662362174,
+      "daily_pnl": -18414.906497908058,
+      "portfolio_value": 1267799.6142272681,
+      "drawdown": -0.015289706357309085
+    },
+    {
+      "date": "2026-03-20",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.00022087524225316012,
+      "daily_pnl": -280.02554692095146,
+      "portfolio_value": 1267519.5886803472,
+      "drawdown": -0.01550720448196663
+    },
+    {
+      "date": "2026-03-23",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -0.022264583540696558,
+      "daily_pnl": -28220.795771643054,
+      "portfolio_value": 1239298.7929087041,
+      "drawdown": -0.037426526572991836
+    },
+    {
+      "date": "2026-03-24",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.011302325435011284,
+      "daily_pnl": 14006.95826867083,
+      "portfolio_value": 1253305.751177375,
+      "drawdown": -0.02654720792121057
+    },
+    {
+      "date": "2026-03-25",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0040848610019883266,
+      "daily_pnl": 5119.579786552116,
+      "portfolio_value": 1258425.330963927,
+      "drawdown": -0.02257078857357131
+    },
+    {
+      "date": "2026-03-26",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.0025120739928724324,
+      "daily_pnl": 3161.2575458863284,
+      "portfolio_value": 1261586.5885098134,
+      "drawdown": -0.020115414071673277
+    },
+    {
+      "date": "2026-03-27",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.022288473505741348,
+      "daily_pnl": 28118.83925319952,
+      "portfolio_value": 1289705.427763013,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-03-30",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.00933580646583052,
+      "daily_pnl": 12040.440271526575,
+      "portfolio_value": 1301745.8680345395,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-03-31",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": -6.664677085321813e-05,
+      "daily_pnl": -86.75715857604519,
+      "portfolio_value": 1301659.1108759635,
+      "drawdown": -6.664677085321813e-05
+    },
+    {
+      "date": "2026-04-01",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.003331060009476111,
+      "daily_pnl": -4335.904610209167,
+      "portfolio_value": 1297323.2062657543,
+      "drawdown": -0.003397484775936155
+    },
+    {
+      "date": "2026-04-02",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.024811374593788876,
+      "daily_pnl": 32188.372039874783,
+      "portfolio_value": 1329511.578305629,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-04-06",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.00010107013792060027,
+      "daily_pnl": -134.37391858641058,
+      "portfolio_value": 1329377.2043870427,
+      "drawdown": -0.00010107013792060027
+    },
+    {
+      "date": "2026-04-07",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.0007973243808796493,
+      "daily_pnl": 1059.9448564434424,
+      "portfolio_value": 1330437.149243486,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-04-08",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.024298381636587513,
+      "daily_pnl": -32327.469595811795,
+      "portfolio_value": 1298109.6796476743,
+      "drawdown": -0.024298381636587485
+    },
+    {
+      "date": "2026-04-09",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.006188050331348588,
+      "daily_pnl": 8032.768033270491,
+      "portfolio_value": 1306142.4476809448,
+      "drawdown": -0.01826069091377658
+    },
+    {
+      "date": "2026-04-10",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.005442277748713531,
+      "daily_pnl": -7108.389979664236,
+      "portfolio_value": 1299034.0577012806,
+      "drawdown": -0.02360358891065395
+    },
+    {
+      "date": "2026-04-13",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.0063026576983157,
+      "daily_pnl": 8187.36700414517,
+      "portfolio_value": 1307221.4247054257,
+      "drawdown": -0.017449696553693883
+    },
+    {
+      "date": "2026-04-14",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.0031392529094102783,
+      "daily_pnl": -4103.698660749942,
+      "portfolio_value": 1303117.7260446758,
+      "drawdown": -0.020534170452429668
+    },
+    {
+      "date": "2026-04-15",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.005966588520524618,
+      "daily_pnl": -7775.167265110416,
+      "portfolio_value": 1295342.5587795654,
+      "drawdown": -0.026378240027254418
+    },
+    {
+      "date": "2026-04-16",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.006700317051961946,
+      "daily_pnl": 8679.205834722845,
+      "portfolio_value": 1304021.7646142882,
+      "drawdown": -0.019854665546747752
+    },
+    {
+      "date": "2026-04-17",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.014874706898987344,
+      "daily_pnl": -19396.941538537852,
+      "portfolio_value": 1284624.8230757504,
+      "drawdown": -0.03443404011514983
+    },
+    {
+      "date": "2026-04-20",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.008622521048730097,
+      "daily_pnl": 11076.704576691845,
+      "portfolio_value": 1295701.5276524422,
+      "drawdown": -0.026108427302105386
+    },
+    {
+      "date": "2026-04-21",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.007477462005319152,
+      "daily_pnl": 9688.558943255106,
+      "portfolio_value": 1305390.0865956973,
+      "drawdown": -0.01882619006995634
+    },
+    {
+      "date": "2026-04-22",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.005906161898264317,
+      "daily_pnl": 7709.845191823551,
+      "portfolio_value": 1313099.9317875209,
+      "drawdown": -0.013031218698172697
+    },
+    {
+      "date": "2026-04-23",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.007916697186413885,
+      "daily_pnl": 10395.414535462623,
+      "portfolio_value": 1323495.3463229835,
+      "drawdown": -0.005217685724162036
+    },
+    {
+      "date": "2026-04-24",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.0029794745295131098,
+      "daily_pnl": -3943.320674298331,
+      "portfolio_value": 1319552.0256486852,
+      "drawdown": -0.008181614291956962
+    },
+    {
+      "date": "2026-04-27",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.0015933802486663706,
+      "daily_pnl": 2102.5481347562745,
+      "portfolio_value": 1321654.5737834414,
+      "drawdown": -0.00660127046590564
+    },
+    {
+      "date": "2026-04-28",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.004907709026159307,
+      "daily_pnl": 6486.2960812216625,
+      "portfolio_value": 1328140.869864663,
+      "drawdown": -0.0017259585543959455
+    },
+    {
+      "date": "2026-04-29",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.016631801992636336,
+      "daily_pnl": 22089.375965916784,
+      "portfolio_value": 1350230.24583058,
+      "drawdown": 0.0
+    },
+    {
+      "date": "2026-04-30",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.003921003949907437,
+      "daily_pnl": -5294.258127186215,
+      "portfolio_value": 1344935.9877033937,
+      "drawdown": -0.0039210039499074645
+    },
+    {
+      "date": "2026-05-01",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.007749557474008878,
+      "daily_pnl": -10422.658735570265,
+      "portfolio_value": 1334513.3289678234,
+      "drawdown": -0.011640175378450635
+    },
+    {
+      "date": "2026-05-04",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.003131956208421577,
+      "daily_pnl": 4179.637305882061,
+      "portfolio_value": 1338692.9662737055,
+      "drawdown": -0.008544675689572734
+    },
+    {
+      "date": "2026-05-05",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.003127336040614964,
+      "daily_pnl": -4186.542760745622,
+      "portfolio_value": 1334506.4235129599,
+      "drawdown": -0.011645289657948421
+    },
+    {
+      "date": "2026-05-06",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.010257958647035714,
+      "daily_pnl": -13689.311706599547,
+      "portfolio_value": 1320817.1118063603,
+      "drawdown": -0.021783791405240227
+    },
+    {
+      "date": "2026-05-07",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.0021066571923585575,
+      "daily_pnl": 2782.5088683769573,
+      "portfolio_value": 1323599.6206747373,
+      "drawdown": -0.019723025193722488
+    },
+    {
+      "date": "2026-05-08",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.001324288517067923,
+      "daily_pnl": -1752.827778854873,
+      "portfolio_value": 1321846.7928958824,
+      "drawdown": -0.02102119473500441
+    },
+    {
+      "date": "2026-05-11",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.009244167662871061,
+      "daily_pnl": 12219.373378157848,
+      "portfolio_value": 1334066.1662740402,
+      "drawdown": -0.011971350520737611
+    },
+    {
+      "date": "2026-05-12",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.009248226811027854,
+      "daily_pnl": 12337.746486620745,
+      "portfolio_value": 1346403.912760661,
+      "drawdown": -0.002833837474559897
+    },
+    {
+      "date": "2026-05-13",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.004772252497018237,
+      "daily_pnl": -6425.379434667062,
+      "portfolio_value": 1339978.533325994,
+      "drawdown": -0.007592566183613925
+    },
+    {
+      "date": "2026-05-14",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.0006197181377732841,
+      "daily_pnl": 830.4090013287496,
+      "portfolio_value": 1340808.9423273227,
+      "drawdown": -0.006977553296817041
+    },
+    {
+      "date": "2026-05-15",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.002706780987473789,
+      "daily_pnl": 3629.2761529262643,
+      "portfolio_value": 1344438.218480249,
+      "drawdown": -0.004289659017946312
+    },
+    {
+      "date": "2026-05-18",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.0017336103674768788,
+      "daily_pnl": 2330.732033989392,
+      "portfolio_value": 1346768.9505142383,
+      "drawdown": -0.002563485247815911
+    },
+    {
+      "date": "2026-05-19",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.0018547044619208752,
+      "daily_pnl": 2497.858381695114,
+      "portfolio_value": 1349266.8088959334,
+      "drawdown": -0.0007135352934223294
+    },
+    {
+      "date": "2026-05-20",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.009466854148498516,
+      "daily_pnl": -12773.312087227823,
+      "portfolio_value": 1336493.4968087056,
+      "drawdown": -0.01017363450736819
+    },
+    {
+      "date": "2026-05-21",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.003083409289558331,
+      "daily_pnl": -4120.956463494338,
+      "portfolio_value": 1332372.5403452113,
+      "drawdown": -0.013225674317777991
+    },
+    {
+      "date": "2026-05-22",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.004167981581975122,
+      "daily_pnl": -5553.304208488204,
+      "portfolio_value": 1326819.236136723,
+      "drawdown": -0.017338531532787416
+    },
+    {
+      "date": "2026-05-27",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.014115393931188075,
+      "daily_pnl": -18728.57619354804,
+      "portfolio_value": 1308090.659943175,
+      "drawdown": -0.031209185261201977
+    },
+    {
+      "date": "2026-05-28",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": 0.002275093426098551,
+      "daily_pnl": 2976.0284611776005,
+      "portfolio_value": 1311066.6884043526,
+      "drawdown": -0.02900509564732512
+    },
+    {
+      "date": "2026-05-29",
+      "strategy_id": "gold_geopolitical_hedge_sleeve",
+      "daily_return": -0.0006661133930583041,
+      "daily_pnl": -873.3190803388134,
+      "portfolio_value": 1310193.3693240138,
+      "drawdown": -0.029651888357705825
+    },
+    {
+      "date": "2026-06-01",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.009220923958303961,
+      "daily_pnl": 12081.193429210689,
+      "portfolio_value": 1322274.5627532245,
+      "drawdown": -0.020704382207168526
+    },
+    {
+      "date": "2026-06-02",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.00523358317242002,
+      "daily_pnl": 6920.233900944237,
+      "portfolio_value": 1329194.7966541687,
+      "drawdown": -0.015579157141063282
+    },
+    {
+      "date": "2026-06-03",
+      "strategy_id": "energy_inflation_shock_rotation",
+      "daily_return": 0.006558701122963839,
+      "daily_pnl": 8717.791405453347,
+      "portfolio_value": 1337912.588059622,
+      "drawdown": -0.009122635053535388
+    }
+  ],
+  "note": "Simulation support only. No execution, no investment advice, no look-ahead selection."
+}

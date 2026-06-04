@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Financial Risk Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">RM</div></div>
+      <nav class="side-nav">
+        <a class="active" data-icon="O" href="index.html">Overview</a>
+        <a data-icon="M" href="market.html">Market</a>
+        <a data-icon="R" href="risk.html">Risk</a>
+        <a data-icon="S" href="strategies.html">Strategies</a>
+      </nav>
+      <div class="side-footer"><div class="avatar">RM</div><div>Risk Manager</div><div>ETF Platform</div></div>
+    </aside>
+
+    <main class="shell">
+      <div class="topbar">
+        <div>
+          <h1>Financial Risk Dashboard</h1>
+          <div id="overview-subtitle" class="subtitle">Multi-sector ETF portfolio, simulated from a USD 1,000,000 initial portfolio.</div>
+        </div>
+        <div class="top-actions">
+          <div id="date-chip" class="control-chip">Loading date...</div>
+          <label class="control-chip control-field">Risk Style
+            <select id="risk-profile">
+              <option value="conservative" selected>Conservative</option>
+              <option value="balanced">Balanced</option>
+              <option value="aggressive">Aggressive</option>
+            </select>
+          </label>
+          <label class="control-chip control-field">Asset Class
+            <select id="asset-filter">
+              <option value="all" selected>All</option>
+            </select>
+          </label>
+          <label class="control-chip control-field">VaR Limit
+            <input id="risk-limit-input" type="number" min="5000" step="1000" value="100000">
+          </label>
+        </div>
+      </div>
+
+      <section class="kpi-grid">
+        <div class="card kpi-card">
+          <div class="metric-label">Total Portfolio Value</div>
+          <div id="portfolio-value" class="metric-value">$...</div>
+          <div id="portfolio-change" class="metric-sub"></div>
+        </div>
+        <div class="card kpi-card">
+          <div class="metric-label">Daily P&L</div>
+          <div id="daily-pnl" class="metric-value">...</div>
+          <div id="daily-return" class="metric-sub"></div>
+        </div>
+        <div class="card kpi-card">
+          <div class="metric-label">VaR (95%)</div>
+          <div id="portfolio-var" class="metric-value">...</div>
+          <div class="metric-sub">proxy from ETF weights and risk buckets</div>
+        </div>
+        <div class="card kpi-card">
+          <div class="metric-label">Expected Shortfall (95%)</div>
+          <div id="portfolio-es" class="metric-value">...</div>
+          <div class="metric-sub">prototype tail-loss proxy</div>
+        </div>
+        <div class="card kpi-card">
+          <div class="metric-label">Max Drawdown</div>
+          <div id="max-drawdown" class="metric-value">...</div>
+          <div class="metric-sub">portfolio drawdown proxy</div>
+        </div>
+        <div class="card kpi-card">
+          <div class="metric-label">Risk Limit Utilization</div>
+          <div id="risk-utilization" class="metric-value">...</div>
+          <div class="limit-track"><div id="risk-util-bar" class="limit-fill"></div><span class="limit-marker"></span></div>
+          <div id="risk-util-sub" class="metric-sub"></div>
+        </div>
+      </section>
+
+      <section class="overview-grid-main section">
+        <div class="card">
+          <div class="section-title"><h2>Portfolio Performance Path</h2><span class="small">2025 initial investment simulation</span></div>
+          <div id="performance-chart"></div>
+        </div>
+        <div class="card">
+          <div class="section-title"><h2>Drawdown Over Time</h2><span id="drawdown-label" class="small"></span></div>
+          <div id="drawdown-chart"></div>
+        </div>
+        <div class="card">
+          <div class="section-title"><h2>Risk Exposure Heatmap</h2><span class="small">portfolio risk lens</span></div>
+          <div id="risk-heatmap"></div>
+        </div>
+      </section>
+
+      <section class="overview-grid-mid section">
+        <div class="card">
+          <div class="section-title"><h2>Stress Test (P&L Impact)</h2><span class="small">scenario loss proxy</span></div>
+          <div id="stress-table"></div>
+        </div>
+        <div class="card">
+          <div class="section-title"><h2>Factor Exposures</h2><span class="small">Barra-style proxy, not Barra</span></div>
+          <div id="factor-exposure-table"></div>
+        </div>
+        <div class="card">
+          <div class="section-title"><h2>Correlation Matrix (Key Assets)</h2><span class="small">static proxy view</span></div>
+          <div id="correlation-matrix"></div>
+        </div>
+        <div class="card">
+          <div class="section-title"><h2>Alerts & News Signals</h2><span id="alert-count" class="small"></span></div>
+          <div id="alerts-list"></div>
+        </div>
+      </section>
+
+      <section class="overview-grid-bottom section">
+        <div class="card">
+          <div class="section-title"><h2>Portfolio Allocation By Asset Class</h2><span id="allocation-caption" class="small">$1M simulated portfolio</span></div>
+          <div id="overview-allocation"></div>
+        </div>
+        <div class="card">
+          <div class="section-title"><h2>Top 10 Positions</h2><span class="small">market value, P&L, limit usage</span></div>
+          <div id="top-positions"></div>
+        </div>
+        <div class="card">
+          <div class="section-title"><h2>Risk Contribution By Asset Class</h2><span class="small">VaR contribution proxy</span></div>
+          <div id="risk-contribution-bars"></div>
+        </div>
+      </section>
+
+      <section class="overview-grid-bottom section">
+        <div class="card">
+          <div class="section-title"><h2>Current Strategy Sleeve</h2><span class="small">selected by no-look-ahead simulation</span></div>
+          <div id="current-strategy-card"></div>
+        </div>
+        <div class="card">
+          <div class="section-title"><h2>Next Business Day Preview</h2><span class="small">scenario evidence, not a forecast</span></div>
+          <div id="tomorrow-preview-card"></div>
+        </div>
+        <div class="card">
+          <div class="section-title"><h2>Selected Sleeve Holdings</h2><span class="small">current strategy constituents</span></div>
+          <div id="simulation-holdings-table"></div>
+        </div>
+      </section>
+
+      <section class="card section">
+        <div class="section-title"><h2>Data Quality & Methodology</h2><span class="small">prototype governance</span></div>
+        <div id="methodology-table"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    const PORTFOLIO_BASE = 1000000;
+    const RISK_PROFILES = {
+      conservative: { label: "Conservative", varLimit: 100000, equityLimit: 0.55, drawdownLimit: -0.08, warning: 0.70, critical: 0.90 },
+      balanced: { label: "Balanced", varLimit: 24000, equityLimit: 0.65, drawdownLimit: -0.12, warning: 0.80, critical: 1.00 },
+      aggressive: { label: "Aggressive", varLimit: 32000, equityLimit: 0.75, drawdownLimit: -0.18, warning: 0.90, critical: 1.15 }
+    };
+    const BUCKET_VOL = {
+      core_equity: 0.014,
+      growth_equity: 0.017,
+      small_cap_equity: 0.019,
+      intl_equity: 0.016,
+      quality_equity: 0.013,
+      value_equity: 0.015,
+      momentum_equity: 0.018,
+      min_vol_equity: 0.010,
+      sector_energy: 0.021,
+      sector_financials: 0.017,
+      sector_technology: 0.018,
+      sector_healthcare: 0.013,
+      sector_staples: 0.010,
+      sector_utilities: 0.011,
+      sector_materials: 0.016,
+      sector_industrials: 0.015,
+      sector_real_estate: 0.018,
+      short_duration_rates: 0.003,
+      intermediate_duration_rates: 0.006,
+      long_duration_rates: 0.013,
+      inflation_linked: 0.009,
+      investment_grade_credit: 0.008,
+      high_yield_credit: 0.014,
+      emerging_debt: 0.016,
+      real_assets: 0.017,
+      commodity_energy: 0.026,
+      usd_factor: 0.007
+    };
+
+    function money(value, digits = 0) {
+      const n = Number(value);
+      if (!Number.isFinite(n)) return "N/A";
+      return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: digits });
+    }
+
+    function positionRows(rows) {
+      return investableRows(rows).map(row => {
+        const weight = Number(row.target_weight) || 0;
+        const ret = Number(row.latest_return_pct) || 0;
+        const mv = PORTFOLIO_BASE * weight;
+        const pnl = mv * ret / 100;
+        const vol = BUCKET_VOL[row.risk_bucket] ?? (row.asset_class === "Equity" ? 0.015 : 0.008);
+        const var95 = 1.65 * mv * vol;
+        const limit = Math.max(5000, mv * 0.20);
+        return { ...row, market_value: mv, daily_pnl: pnl, var95, limit, utilization: var95 / limit, vol_proxy: vol };
+      }).sort((a, b) => b.market_value - a.market_value);
+    }
+
+    function marketMap(rows) {
+      return new Map((rows ?? []).map(row => [row.ticker, row]));
+    }
+
+    function hasSimulation(simulation) {
+      return simulation && simulation.current && Array.isArray(simulation.equity_curve) && simulation.equity_curve.length > 0;
+    }
+
+    function simulationPositionRows(simulation, market) {
+      const byTicker = marketMap(market.items ?? []);
+      const portfolioValue = Number(simulation.current?.portfolio_value ?? PORTFOLIO_BASE);
+      return (simulation.current_holdings ?? []).map(row => {
+        const marketRow = byTicker.get(row.ticker) ?? {};
+        const weight = Number(row.sleeve_weight) || 0;
+        const mv = Number(row.market_value) || portfolioValue * weight;
+        const ret = Number(marketRow.latest_return_pct) || 0;
+        const assetClass = marketRow.asset_class ?? "Strategy sleeve";
+        const riskBucket = marketRow.risk_bucket ?? "selected_sleeve";
+        const vol = BUCKET_VOL[riskBucket] ?? (assetClass === "Equity" ? 0.015 : 0.010);
+        const var95 = 1.65 * mv * vol;
+        const limit = Math.max(5000, mv * 0.20);
+        return {
+          ...marketRow,
+          ticker: row.ticker,
+          target_weight: weight,
+          sleeve_weight: weight,
+          latest_close: row.latest_close ?? marketRow.latest_close,
+          latest_return_pct: ret,
+          asset_class: assetClass,
+          risk_bucket: riskBucket,
+          market_value: mv,
+          daily_pnl: mv * ret / 100,
+          var95,
+          limit,
+          utilization: var95 / limit,
+          vol_proxy: vol
+        };
+      }).sort((a, b) => b.market_value - a.market_value);
+    }
+
+    function simulationSnapshot(simulation, positions, riskProfile) {
+      const current = simulation.current ?? {};
+      const portfolioValue = Number(current.portfolio_value) || PORTFOLIO_BASE;
+      const dailyPnl = Number(current.daily_pnl) || 0;
+      const dailyReturn = Number(current.daily_return) || dailyPnl / portfolioValue;
+      const var95 = Math.sqrt(positions.reduce((sum, row) => sum + row.var95 ** 2, 0)) * 1.22;
+      const es95 = var95 * 1.32;
+      const maxDrawdown = Number(current.max_drawdown) || 0;
+      return {
+        positions,
+        dailyPnl,
+        dailyReturn,
+        portfolioValue,
+        var95,
+        es95,
+        maxDrawdown,
+        riskUtil: var95 / riskProfile.varLimit
+      };
+    }
+
+    function selectedRiskProfile() {
+      const key = byId("risk-profile")?.value ?? "conservative";
+      const base = RISK_PROFILES[key] ?? RISK_PROFILES.conservative;
+      const customLimit = Number(byId("risk-limit-input")?.value);
+      return { ...base, key, varLimit: Number.isFinite(customLimit) && customLimit > 0 ? customLimit : base.varLimit };
+    }
+
+    function selectedAssetClass() {
+      return byId("asset-filter")?.value ?? "all";
+    }
+
+    function applyAssetFilter(positions) {
+      const filter = selectedAssetClass();
+      return filter === "all" ? positions : positions.filter(row => row.asset_class === filter);
+    }
+
+    function populateAssetFilter(rows) {
+      const select = byId("asset-filter");
+      if (!select || select.dataset.ready === "true") return;
+      const values = [...new Set(investableRows(rows).map(row => row.asset_class).filter(Boolean))].sort();
+      select.innerHTML = `<option value="all">All</option>` + values.map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join("");
+      select.dataset.ready = "true";
+    }
+
+    function portfolioSnapshot(rows, backtestRows, riskProfile) {
+      const positions = positionRows(rows);
+      const dailyPnl = positions.reduce((sum, row) => sum + row.daily_pnl, 0);
+      const dailyReturn = dailyPnl / PORTFOLIO_BASE;
+      const var95 = Math.sqrt(positions.reduce((sum, row) => sum + row.var95 ** 2, 0)) * 1.22;
+      const es95 = var95 * 1.32;
+      const maxDrawdown = -0.0361;
+      const riskUtil = var95 / riskProfile.varLimit;
+      return {
+        positions,
+        dailyPnl,
+        dailyReturn,
+        portfolioValue: PORTFOLIO_BASE + dailyPnl,
+        var95,
+        es95,
+        maxDrawdown,
+        riskUtil
+      };
+    }
+
+    function demoPath(anchorReturn) {
+      const base = [-0.4, -0.9, -1.25, -0.65, -0.95, -0.28, 0.15, 0.55, 0.35, 0.92, 1.32, 1.05, 1.72, 2.18, 1.86, 2.55, 3.05, 2.74, 2.21, 3.01, 3.63, 4.06];
+      const shift = anchorReturn * 100 * 0.35;
+      const values = base.map((value, index) => value + shift * (index / Math.max(1, base.length - 1)));
+      return values.map((value, index) => ({ label: String(index + 1), value }));
+    }
+
+    function drawdownsFromPath(path) {
+      const values = [-1.2, -2.4, -3.1, -2.0, -2.7, -1.4, -0.8, -1.1, -0.6, -0.5, -0.9, -0.4, -0.4, -1.0, -0.3, -0.3, -0.8, -1.6, -3.0, -0.9, -0.5, -0.5];
+      return values.map((value, index) => ({ label: path[index]?.label ?? String(index + 1), value }));
+    }
+
+    function sampleCurve(rows, maxPoints = 140) {
+      if (!Array.isArray(rows) || rows.length <= maxPoints) return rows ?? [];
+      const step = Math.ceil(rows.length / maxPoints);
+      const sampled = rows.filter((_, index) => index % step === 0);
+      const last = rows[rows.length - 1];
+      if (sampled[sampled.length - 1] !== last) sampled.push(last);
+      return sampled;
+    }
+
+    function performancePathFromSimulation(simulation) {
+      const initial = Number(simulation.initial_capital) || PORTFOLIO_BASE;
+      return sampleCurve(simulation.equity_curve ?? []).map(row => ({
+        label: row.date,
+        value: (Number(row.portfolio_value) / initial - 1) * 100
+      }));
+    }
+
+    function drawdownPathFromSimulation(simulation) {
+      return (simulation.equity_curve ?? []).map(row => ({
+        label: row.date,
+        value: Number(row.drawdown) * 100
+      }));
+    }
+
+    function renderLineChart(id, rows, options = {}) {
+      const target = byId(id);
+      if (!target || !rows.length) return;
+      const width = 680;
+      const height = 240;
+      const pad = 34;
+      const values = rows.map(row => Number(row.value));
+      const min = Math.min(...values, options.min ?? Infinity);
+      const max = Math.max(...values, options.max ?? -Infinity);
+      const scaleX = i => pad + i / Math.max(1, rows.length - 1) * (width - 2 * pad);
+      const scaleY = v => height - pad - (v - min) / Math.max(0.001, max - min) * (height - 2 * pad);
+      const path = rows.map((row, i) => `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleY(Number(row.value))}`).join(" ");
+      const area = `${path} L${scaleX(rows.length - 1)},${height - pad} L${pad},${height - pad} Z`;
+      target.innerHTML = `
+        <svg class="svg-chart terminal-chart" viewBox="0 0 ${width} ${height}">
+          <path d="${area}" fill="${options.area ?? "rgba(45, 140, 255, 0.16)"}"></path>
+          <path d="${path}" fill="none" stroke="${options.color ?? "#2d8cff"}" stroke-width="2.2"></path>
+          <line class="chart-axis" x1="${pad}" y1="${height - pad}" x2="${width - pad}" y2="${height - pad}"></line>
+          <line class="chart-axis" x1="${pad}" y1="${pad}" x2="${pad}" y2="${height - pad}"></line>
+          <text class="chart-label" x="${pad}" y="18">${escapeHtml(options.title ?? "")}</text>
+          <text class="chart-label" x="${width - 130}" y="${height - 12}">${escapeHtml(options.footer ?? "")}</text>
+        </svg>
+      `;
+    }
+
+    function riskHeatmapRows(positions) {
+      const families = [
+        { name: "Equities", test: p => p.asset_class === "Equity" },
+        { name: "Rates", test: p => /rates|duration|inflation/.test(p.risk_bucket) },
+        { name: "Credit", test: p => /credit|debt/.test(p.risk_bucket) },
+        { name: "FX", test: p => p.asset_class === "FX" || /usd/.test(p.risk_bucket) },
+        { name: "Commodities", test: p => p.asset_class === "Commodity" || /commodity|energy|real_assets/.test(p.risk_bucket) },
+        { name: "Liquidity", test: p => /high_yield|emerging|small_cap/.test(p.risk_bucket) }
+      ];
+      return families.map(family => {
+        const subset = positions.filter(family.test);
+        const risk = subset.reduce((sum, row) => sum + row.var95, 0) / Math.max(1, positions.reduce((sum, row) => sum + row.var95, 0));
+        return { name: family.name, low: Math.max(2, risk * 12), moderate: Math.max(8, risk * 28), high: Math.max(4, risk * 38), veryHigh: Math.max(1, risk * 18) };
+      });
+    }
+
+    function renderHeatmap(id, rows) {
+      const target = byId(id);
+      if (!target) return;
+      const cols = ["low", "moderate", "high", "veryHigh"];
+      const head = `<tr><th>Factor</th><th>Low</th><th>Moderate</th><th>High</th><th>Very High</th></tr>`;
+      const body = rows.map(row => `<tr><td>${escapeHtml(row.name)}</td>${cols.map(col => {
+        const value = Number(row[col]);
+        const cls = value >= 20 ? "hm-red" : value >= 12 ? "hm-yellow" : "hm-green";
+        return `<td class="${cls}">${fmtPct(value)}</td>`;
+      }).join("")}</tr>`).join("");
+      target.innerHTML = `<table class="heatmap-table">${head}${body}</table><div class="small">Values represent approximate contribution to VaR buckets.</div>`;
+    }
+
+    function renderAlerts(newsTriage, riskSignals) {
+      const target = byId("alerts-list");
+      const rows = [
+        ...riskSignals.signals.filter(row => row.level !== "green").map(row => ({
+          level: row.level,
+          title: row.name,
+          meta: row.reason,
+          right: row.value === null ? "" : `${fmtNum(row.value, 2)} ${row.unit}`
+        })),
+        ...newsTriage.rows.slice(0, 4).map(row => ({
+          level: row.decision.includes("human") ? "yellow" : row.watch_level,
+          title: row.title,
+          meta: `${row.source ?? "source N/A"} | ${row.exposure} | confidence ${fmtNum(Math.min(0.88, 0.35 + Number(row.severity || 0) / 14), 2)}`,
+          right: row.decision
+        }))
+      ].slice(0, 7);
+      byId("alert-count").textContent = `${rows.length} items`;
+      target.innerHTML = rows.map(row => `
+        <div class="alert-item ${row.level}">
+          <div><div class="alert-title">${escapeHtml(row.title)}</div><div class="small">${escapeHtml(row.meta)}</div></div>
+          <div class="alert-right">${escapeHtml(row.right)}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderStrategySimulationCards(simulation, positions) {
+      const current = simulation.current ?? {};
+      const preview = simulation.tomorrow_preview ?? {};
+      const currentNode = byId("current-strategy-card");
+      const previewNode = byId("tomorrow-preview-card");
+      if (!hasSimulation(simulation)) {
+        currentNode.innerHTML = `<div class="small">No portfolio simulation snapshot available.</div>`;
+        previewNode.innerHTML = `<div class="small">No next-day preview available.</div>`;
+        renderTable("simulation-holdings-table", [], []);
+        return;
+      }
+      currentNode.innerHTML = `
+        <div class="decision-card">
+          <div class="metric-label">Selected strategy</div>
+          <div class="decision-name">${escapeHtml(current.current_strategy_name ?? current.current_strategy ?? "N/A")}</div>
+          <div class="metric-sub">${escapeHtml(current.current_strategy ?? "")}</div>
+          <div class="decision-grid">
+            <div><span>Total return</span><strong class="pos">${fmtPct(Number(current.total_return) * 100)}</strong></div>
+            <div><span>Max drawdown</span><strong class="neg">${fmtPct(Number(current.max_drawdown) * 100)}</strong></div>
+            <div><span>Today return</span><strong class="${signedClass(current.daily_return)}">${fmtPct(Number(current.daily_return) * 100)}</strong></div>
+          </div>
+          <p><strong>Why this sleeve:</strong> ${escapeHtml(current.current_strategy_objective ?? "N/A")}</p>
+          <p><strong>Signal:</strong> ${escapeHtml(current.core_signal ?? "N/A")}</p>
+          <p><strong>Risk control:</strong> ${escapeHtml(current.risk_controls ?? "Human review required")}</p>
+        </div>
+      `;
+      previewNode.innerHTML = `
+        <div class="decision-card">
+          <div class="decision-grid">
+            <div><span>Base case</span><strong class="${signedClass(preview.base_case_daily_return)}">${fmtPct(Number(preview.base_case_daily_return) * 100)}</strong></div>
+            <div><span>Expected P&L</span><strong class="${signedClass(preview.expected_daily_pnl)}">${money(preview.expected_daily_pnl)}</strong></div>
+            <div><span>1-sigma downside</span><strong class="neg">${money(preview.downside_daily_pnl)}</strong></div>
+          </div>
+          <p>${escapeHtml(preview.interpretation ?? "Scenario evidence only; not a trading instruction.")}</p>
+          <ul class="compact-list">${(preview.watch_items ?? []).map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+        </div>
+      `;
+      renderTable("simulation-holdings-table", positions, [
+        { label: "ETF", key: "ticker" },
+        { label: "Weight", value: r => fmtPct(Number(r.sleeve_weight ?? r.target_weight) * 100) },
+        { label: "Market value", value: r => money(r.market_value) },
+        { label: "Today", value: r => `<span class="${signedClass(r.latest_return_pct)}">${fmtPct(r.latest_return_pct)}</span>`, html: true },
+        { label: "Risk bucket", key: "risk_bucket" }
+      ], 8);
+    }
+
+    async function updateOverview() {
+      const [status, market, news, metrics, backtest, simulation] = await Promise.all([
+        loadJson(PATHS.liveStatus, {}),
+        loadJson(PATHS.market, { items: [] }),
+        loadJson(PATHS.news, { items: [] }),
+        loadJson(PATHS.metrics, { metrics: {} }),
+        loadJson(PATHS.backtest, { items: [] }),
+        loadJson(PATHS.simulation, {})
+      ]);
+      const rows = market.items ?? [];
+      populateAssetFilter(rows);
+      const riskProfile = selectedRiskProfile();
+      const simulationReady = hasSimulation(simulation);
+      const positions = simulationReady ? simulationPositionRows(simulation, market) : positionRows(rows);
+      const filteredPositions = applyAssetFilter(positions);
+      const snap = simulationReady
+        ? simulationSnapshot(simulation, positions, riskProfile)
+        : portfolioSnapshot(rows, backtest.items ?? [], riskProfile);
+      const risk = calculateRiskSignals(market, news, metrics);
+      const newsTriage = buildNewsTriage(news, market);
+      const asOf = simulation.as_of_date ?? market.official_eod_date ?? status.latest_observed_date ?? metrics.as_of_date ?? "N/A";
+
+      setText("date-chip", `As of ${asOf}`);
+      setText("overview-subtitle", simulationReady
+        ? `As of ${asOf} | invested ${simulation.simulation_start_actual} | no-look-ahead monthly strategy simulation`
+        : `As of ${asOf} | source: ${market.data_mode ?? "snapshot"} | $1,000,000 simulated ETF portfolio`
+      );
+      setText("portfolio-value", money(snap.portfolioValue));
+      const valueDelta = byId("portfolio-change");
+      valueDelta.innerHTML = `<span class="${signedClass(snap.dailyPnl)}">${money(snap.dailyPnl)} | ${fmtPct(snap.dailyReturn * 100)}</span>`;
+      const pnl = byId("daily-pnl");
+      pnl.textContent = money(snap.dailyPnl);
+      pnl.className = `metric-value ${signedClass(snap.dailyPnl)}`;
+      byId("daily-return").innerHTML = `<span class="${signedClass(snap.dailyReturn)}">${fmtPct(snap.dailyReturn * 100)}</span> vs initial portfolio`;
+      setText("portfolio-var", money(snap.var95));
+      setText("portfolio-es", money(snap.es95));
+      const dd = byId("max-drawdown");
+      dd.textContent = fmtPct(snap.maxDrawdown * 100);
+      dd.className = "metric-value neg";
+      const utilPct = snap.riskUtil * 100;
+      const util = byId("risk-utilization");
+      util.textContent = fmtPct(utilPct);
+      util.className = `metric-value ${utilPct >= 90 ? "neg" : utilPct >= 70 ? "warn" : "pos"}`;
+      byId("risk-util-bar").style.width = `${Math.min(100, utilPct)}%`;
+      byId("risk-util-sub").textContent = `${riskProfile.label} profile | limit ${money(riskProfile.varLimit)}`;
+
+      const perfPath = simulationReady ? performancePathFromSimulation(simulation) : demoPath(snap.dailyReturn);
+      const ddPath = simulationReady ? drawdownPathFromSimulation(simulation) : drawdownsFromPath(perfPath);
+      renderLineChart("performance-chart", perfPath, {
+        title: simulationReady ? "Cumulative return since initial investment" : "Cumulative P&L / Return proxy",
+        footer: simulationReady ? `Total ${fmtPct(Number(simulation.current.total_return) * 100)}` : `Today ${fmtPct(snap.dailyReturn * 100)}`
+      });
+      const chartMaxDrawdown = simulationReady ? Number(simulation.current.max_drawdown) * 100 : Math.min(...ddPath.map(x => x.value));
+      renderLineChart("drawdown-chart", ddPath, { color: "#ff5164", area: "rgba(255, 81, 100, 0.18)", title: simulationReady ? "Simulation drawdown" : "Drawdown proxy", footer: `Max ${fmtPct(chartMaxDrawdown)}` });
+      setText("drawdown-label", `max ${fmtPct(chartMaxDrawdown)}`);
+      renderHeatmap("risk-heatmap", riskHeatmapRows(filteredPositions.length ? filteredPositions : positions));
+
+      const stressRows = [
+        { scenario: "Equity selloff", description: "-20% global equities", impact: -filteredPositions.filter(p => p.asset_class === "Equity").reduce((s, p) => s + p.market_value, 0) * 0.20 },
+        { scenario: "Rate shock", description: "+200 bps duration shock", impact: -filteredPositions.filter(p => /rates|duration/.test(p.risk_bucket)).reduce((s, p) => s + p.market_value, 0) * 0.07 },
+        { scenario: "Credit spread widening", description: "+150 bps IG / +300 bps HY", impact: -filteredPositions.filter(p => /credit|debt/.test(p.risk_bucket)).reduce((s, p) => s + p.market_value, 0) * 0.09 },
+        { scenario: "USD rally", description: "+10% USD index", impact: -filteredPositions.filter(p => p.asset_class === "FX" || /intl|emerging/.test(p.risk_bucket)).reduce((s, p) => s + p.market_value, 0) * 0.05 },
+        { scenario: "Commodity shock", description: "-20% oil / -15% metals", impact: -filteredPositions.filter(p => p.asset_class === "Commodity" || /energy|real_assets/.test(p.risk_bucket)).reduce((s, p) => s + p.market_value, 0) * 0.16 }
+      ];
+      renderTable("stress-table", stressRows, [
+        { label: "Scenario", key: "scenario" },
+        { label: "Description", key: "description" },
+        { label: "Impact", value: r => `<span class="neg">${money(r.impact)}</span>`, html: true },
+        { label: "% PV", value: r => `<span class="neg">${fmtPct(r.impact / PORTFOLIO_BASE * 100)}</span>`, html: true }
+      ], 8);
+
+      const factorRows = [
+        { factor: "Market beta", exposure: positions.filter(p => p.asset_class === "Equity").reduce((s, p) => s + p.target_weight, 0), risk: "Equity drawdown" },
+        { factor: "Interest rate", exposure: positions.filter(p => /rates|duration/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0), risk: "Duration shock" },
+        { factor: "Credit", exposure: positions.filter(p => /credit|debt/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0), risk: "Spread widening" },
+        { factor: "FX / USD", exposure: positions.filter(p => p.asset_class === "FX" || /usd|intl/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0), risk: "USD pressure" },
+        { factor: "Commodity", exposure: positions.filter(p => p.asset_class === "Commodity" || /energy|real_assets/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0), risk: "Oil/gold shock" },
+        { factor: "Volatility", exposure: Number(metrics.metrics?.["VIX level"] ?? 0) / 100, risk: "VIX regime" }
+      ];
+      renderTable("factor-exposure-table", factorRows, [
+        { label: "Factor", key: "factor" },
+        { label: "Exposure", value: r => fmtPct(r.exposure * 100) },
+        { label: "% of Risk", value: r => fmtPct(Math.min(42, Math.max(2, r.exposure * 60))) },
+        { label: "Risk", key: "risk" }
+      ], 8);
+
+      const corrRows = [
+        { asset: "SPY", SPY: "1.00", TLT: "-0.28", HYG: "0.63", USD: "-0.41", GLD: "-0.12" },
+        { asset: "TLT", SPY: "-0.28", TLT: "1.00", HYG: "-0.28", USD: "0.61", GLD: "0.24" },
+        { asset: "HYG", SPY: "0.63", TLT: "-0.28", HYG: "1.00", USD: "-0.31", GLD: "-0.08" },
+        { asset: "USD", SPY: "-0.41", TLT: "0.61", HYG: "-0.31", USD: "1.00", GLD: "0.18" },
+        { asset: "GLD", SPY: "-0.12", TLT: "0.24", HYG: "-0.08", USD: "0.18", GLD: "1.00" }
+      ];
+      renderTable("correlation-matrix", corrRows, [
+        { label: "", key: "asset" }, { label: "SPY", key: "SPY" }, { label: "TLT", key: "TLT" }, { label: "HYG", key: "HYG" }, { label: "USD", key: "USD" }, { label: "GLD", key: "GLD" }
+      ], 8);
+      const equityWeight = positions.filter(p => p.asset_class === "Equity").reduce((sum, p) => sum + Number(p.target_weight || 0), 0);
+      const profileAlerts = {
+        signals: [
+          ...(risk.signals ?? []),
+          {
+            name: "Conservative Risk Limit",
+            level: snap.riskUtil >= riskProfile.critical ? "red" : snap.riskUtil >= riskProfile.warning ? "yellow" : "green",
+            value: snap.riskUtil * 100,
+            unit: "%",
+            reason: `VaR usage checked against ${riskProfile.label} limit ${money(riskProfile.varLimit)}.`
+          },
+          {
+            name: "Equity Concentration Limit",
+            level: equityWeight > riskProfile.equityLimit ? "yellow" : "green",
+            value: equityWeight * 100,
+            unit: "%",
+            reason: `Equity weight ${fmtPct(equityWeight * 100)} vs ${riskProfile.label} limit ${fmtPct(riskProfile.equityLimit * 100)}.`
+          }
+        ]
+      };
+      renderAlerts(newsTriage, profileAlerts);
+      renderAllocationPie("overview-allocation", groupAllocation(filteredPositions, "asset_class", "target_weight"), { label: "asset class allocation" });
+      setText("allocation-caption", simulationReady ? `${money(snap.portfolioValue)} current selected sleeve` : "$1M simulated portfolio");
+      renderTable("top-positions", filteredPositions, [
+        { label: "Asset", key: "ticker" },
+        { label: "Type", key: "asset_class" },
+        { label: "Exposure", value: r => money(r.market_value) },
+        { label: "% PV", value: r => fmtPct(Number(r.target_weight) * 100) },
+        { label: "P&L", value: r => `<span class="${signedClass(r.daily_pnl)}">${money(r.daily_pnl)}</span>`, html: true },
+        { label: "VaR", value: r => money(r.var95) },
+        { label: "Util", value: r => fmtPct(r.utilization * 100) }
+      ], 10);
+      const riskGroups = groupSum(filteredPositions, "asset_class", "var95");
+      const riskGroupTotal = riskGroups.reduce((sum, row) => sum + Number(row.value || 0), 0) || 1;
+      const riskContrib = riskGroups.map(row => ({ name: row.name, value: row.value / riskGroupTotal * 100 }));
+      renderBars("risk-contribution-bars", riskContrib, 8);
+      renderStrategySimulationCards(simulation, filteredPositions.length ? filteredPositions : positions);
+      renderTable("methodology-table", [
+        { item: "Portfolio base", value: simulationReady ? `$1,000,000 invested from ${simulation.simulation_start_actual}; current value ${money(snap.portfolioValue)}` : "$1,000,000 simulated initial portfolio" },
+        { item: "Strategy selection rule", value: simulationReady ? simulation.selection_rule : "Static fallback when simulation snapshot is missing" },
+        { item: "No-look-ahead control", value: simulationReady ? "Monthly selection uses only the prior training window; future test returns are not used for selection." : "N/A" },
+        { item: "Market data source", value: market.data_mode ?? "snapshot fallback" },
+        { item: "News data source", value: news.data_mode ?? "friend API snapshot" },
+        { item: "Risk profile", value: `${riskProfile.label}; VaR limit ${money(riskProfile.varLimit)}; equity limit ${fmtPct(riskProfile.equityLimit * 100)}` },
+        { item: "VaR / ES", value: "95% prototype ETF bucket volatility proxy; not production VaR" },
+        { item: "Strategy decisions", value: "Human review only; WFO/backtest evidence is decision support, not execution" },
+        { item: "Last update", value: market.generated_at_utc ?? status.generated_at_utc ?? "N/A" }
+      ], [{ label: "Item", key: "item" }, { label: "Value", key: "value" }], 20);
+    }
+    ["risk-profile", "asset-filter", "risk-limit-input"].forEach(id => {
+      window.addEventListener("DOMContentLoaded", () => {
+        const node = byId(id);
+        if (node) node.addEventListener("change", updateOverview);
+        if (id === "risk-limit-input" && node) node.addEventListener("input", updateOverview);
+      });
+    });
+    startLoop(updateOverview, 5);
+  </script>
+</body>
+</html>

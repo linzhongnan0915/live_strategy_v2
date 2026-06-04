@@ -1,0 +1,21 @@
+{
+  "generated_at_utc": "2026-06-04T00:59:24+00:00",
+  "status": "success",
+  "cycle": 1,
+  "message": "live poll updated shared market/news artifacts",
+  "provider": "yfinance",
+  "market_data_mode": "openbb",
+  "market_data_active": true,
+  "interval_seconds": 15,
+  "next_poll_after_utc": "2026-06-04T00:59:39+00:00",
+  "ticker_count": 39,
+  "configured_market_ticker_count": 39,
+  "row_count": 274,
+  "latest_observed_date": "2026-06-03",
+  "news_status": "success",
+  "news_max_severity": 6.7,
+  "error": null,
+  "data_mode": "live_polling_openbb_yfinance_prototype",
+  "official_risk_decision_allowed": false,
+  "note": "Live-style polling updates market monitor/watchlist artifacts only. Official EOD risk decisions still require processed EOD quality gates."
+}

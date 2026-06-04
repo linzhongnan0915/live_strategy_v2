@@ -1,0 +1,28 @@
+{
+  "as_of_date": "2026-06-03",
+  "data_source": "openbb_yfinance_computed_from_prices",
+  "timestamp": "2026-06-03T19:08:00+00:00",
+  "metrics": {
+    "VIX level": 16.049999237060547,
+    "VIX change": 0.279998779296875,
+    "headline severity": 0,
+    "strategy return deviation": 0.0,
+    "SPY return": 0.006369384273334333,
+    "QQQ return": 0.02100213457789435,
+    "IWM return": -0.009797848498619643,
+    "TLT return": 0.00046885445137134774,
+    "IEF return": -0.0033927024582229848,
+    "SHY return": -0.0031014945150388273,
+    "HYG return": -0.005428648115611834,
+    "LQD return": -0.002671443728960554,
+    "TIP return": -0.009875483571720856,
+    "GLD return": -0.0004895632554873242,
+    "USO return": 0.07326571161528883,
+    "UUP return": 0.004320711702913815,
+    "HYG vs LQD relative return": -0.0027572043866512796,
+    "SPY drawdown": -0.005700616201391839,
+    "portfolio drawdown": -0.0030205590396761295,
+    "portfolio VaR": 0.2448763202199439,
+    "cross-asset confirmation count": 3
+  }
+}

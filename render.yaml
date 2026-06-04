@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: live-strategy-risk-workstation
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python scripts/prepare_web_snapshots.py
+    startCommand: python scripts/run_hosted_web_app.py
+    envVars:
+      - key: ENABLE_POLLING
+        value: "true"
+      - key: POLLING_INTERVAL_SECONDS
+        value: "60"
+      - key: MARKET_DATA_MODE
+        value: "none"
+      - key: NEWS_API_URL
+        value: "https://news.tcx086.com/analysis/patterns"
+      - key: FRIEND_API_BASE_URL
+        value: "https://news.tcx086.com"

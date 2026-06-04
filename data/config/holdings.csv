@@ -1,0 +1,39 @@
+ticker,name,target_weight,asset_class,sector,risk_bucket,role,notes
+SPY,SPDR S&P 500 ETF Trust,0.10,Equity,Broad Market,core_equity,core_beta,Core US large-cap beta anchor for economic growth exposure
+QQQ,Invesco QQQ Trust,0.06,Equity,Technology,growth_equity,growth_tech,Growth and mega-cap technology beta sleeve
+IWM,iShares Russell 2000 ETF,0.04,Equity,Small Cap,small_cap_equity,cyclical_beta,Small-cap cyclical growth sensitivity
+VTI,Vanguard Total Stock Market ETF,0.04,Equity,Broad Market,core_equity,completion,Total US market completion sleeve
+XLK,Technology Select Sector SPDR Fund,0.03,Equity,Technology,sector_tech,sector_rotation,Technology sector factor implementation
+XLF,Financial Select Sector SPDR Fund,0.02,Equity,Financials,sector_financials,sector_rotation,Financials sector cyclical and credit sensitivity
+XLE,Energy Select Sector SPDR Fund,0.02,Equity,Energy,sector_energy,sector_rotation,Energy sector inflation and oil shock exposure
+XLV,Health Care Select Sector SPDR Fund,0.02,Equity,Health Care,sector_healthcare,defensive_sector,Defensive health care sector sleeve
+XLP,Consumer Staples Select Sector SPDR Fund,0.02,Equity,Consumer Staples,sector_staples,defensive_sector,Defensive staples sector sleeve
+XLY,Consumer Discretionary Select Sector SPDR Fund,0.018,Equity,Consumer Discretionary,sector_discretionary,sector_rotation,Cyclical consumer demand exposure
+XLI,Industrial Select Sector SPDR Fund,0.018,Equity,Industrials,sector_industrials,sector_rotation,Industrial cyclical recovery exposure
+XLU,Utilities Select Sector SPDR Fund,0.015,Equity,Utilities,sector_utilities,defensive_sector,Rate-sensitive defensive utilities sleeve
+XLB,Materials Select Sector SPDR Fund,0.015,Equity,Materials,sector_materials,sector_rotation,Materials and inflation beta sleeve
+XLRE,Real Estate Select Sector SPDR Fund,0.012,Equity,Real Estate,sector_real_estate,sector_rotation,Real estate rate and inflation sensitivity sleeve
+XLC,Communication Services Select Sector SPDR Fund,0.012,Equity,Communication Services,sector_communication,sector_rotation,Communication services growth sleeve
+QUAL,iShares MSCI USA Quality Factor ETF,0.025,Equity,Smart Beta,quality_equity,smart_beta,Quality factor sleeve for profitability and balance sheet strength
+MTUM,iShares MSCI USA Momentum Factor ETF,0.015,Equity,Smart Beta,momentum_equity,smart_beta,Momentum factor sleeve; monitored with reversal risk controls
+VLUE,iShares MSCI USA Value Factor ETF,0.015,Equity,Smart Beta,value_equity,smart_beta,Value recovery sleeve for cyclical/value factor exposure
+USMV,iShares MSCI USA Min Vol Factor ETF,0.025,Equity,Smart Beta,low_vol_equity,smart_beta,Minimum volatility defensive equity sleeve
+IWD,iShares Russell 1000 Value ETF,0.01,Equity,Style,value_equity,style_tilt,Large-cap value style tilt
+IWF,iShares Russell 1000 Growth ETF,0.01,Equity,Style,growth_equity,style_tilt,Large-cap growth style tilt
+SHY,iShares 1-3 Year Treasury Bond ETF,0.035,Fixed Income,Government/Short,short_duration_rates,cash_proxy,Short Treasury liquidity and cash proxy
+IEF,iShares 7-10 Year Treasury Bond ETF,0.045,Fixed Income,Government/Intermediate,intermediate_duration_rates,rates_core,Intermediate Treasury duration anchor
+TLT,iShares 20+ Year Treasury Bond ETF,0.035,Fixed Income,Government/Long,long_duration_rates,duration_hedge,Long-duration rates and flight-to-quality exposure
+TIP,iShares TIPS Bond ETF,0.035,Fixed Income,Inflation-Linked,inflation_linked,inflation_hedge,TIPS real-rate and inflation-linked exposure
+AGG,iShares Core US Aggregate Bond ETF,0.03,Fixed Income,Core Bond,core_fixed_income,core_fixed,Broad investment-grade bond core sleeve
+LQD,iShares iBoxx Investment Grade Corporate Bond ETF,0.035,Fixed Income,Credit/Investment Grade,ig_credit,credit_core,Investment-grade credit ballast
+HYG,iShares iBoxx High Yield Corporate Bond ETF,0.025,Fixed Income,Credit/High Yield,high_yield_credit,credit_risk,High-yield credit risk premium sleeve
+EMB,iShares J.P. Morgan USD Emerging Markets Bond ETF,0.02,Fixed Income,EM Credit,em_credit,em_credit,Emerging market sovereign credit sleeve
+GLD,SPDR Gold Shares,0.035,Commodity,Gold,real_assets,inflation_hedge,Gold real-asset and geopolitical hedge proxy
+SLV,iShares Silver Trust,0.01,Commodity,Silver,real_assets,commodity_tilt,Silver commodity beta sleeve
+USO,United States Oil Fund,0.02,Commodity,Oil,commodity_energy,commodity_tilt,Oil price and inflation shock monitor
+DBA,Invesco DB Agriculture Fund,0.015,Commodity,Agriculture,commodity_agriculture,commodity_tilt,Agriculture inflation proxy
+EFA,iShares MSCI EAFE ETF,0.03,Equity,International Developed,intl_equity,intl_beta,Developed international equity beta
+EEM,iShares MSCI Emerging Markets ETF,0.02,Equity,International EM,em_equity,em_beta,Emerging markets equity risk sleeve
+VEA,Vanguard FTSE Developed Markets ETF,0.03,Equity,International Developed,intl_equity,intl_completion,Developed markets completion sleeve
+VWO,Vanguard FTSE Emerging Markets ETF,0.02,Equity,International EM,em_equity,em_completion,Emerging markets completion sleeve
+UUP,Invesco DB US Dollar Index Bullish Fund,0.02,FX,USD,usd_factor,fx_hedge_monitor,US dollar strength and global liquidity stress proxy
