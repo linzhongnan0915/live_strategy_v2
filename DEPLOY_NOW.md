@@ -42,7 +42,7 @@ Then create a GitHub repo and push:
 
 ```powershell
 git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/live_strategy.git
+git remote add origin https://github.com/linzhongnan0915/live_strategy_v2.git
 git push -u origin main
 ```
 
@@ -52,6 +52,12 @@ data, logs, or generated reports are included.
 ## 3. Deploy On Render
 
 Create a Render Web Service from the GitHub repo.
+
+Repository:
+
+```text
+https://github.com/linzhongnan0915/live_strategy_v2
+```
 
 Use the checked-in `render.yaml` if Render detects it, or set:
 
@@ -72,6 +78,16 @@ MARKET_DATA_MODE=none
 NEWS_API_URL=https://news.tcx086.com/analysis/patterns
 FRIEND_API_BASE_URL=https://news.tcx086.com
 ```
+
+Recommended first deploy:
+
+```text
+MARKET_DATA_MODE=none
+```
+
+Reason: deploy the stable public website first. The site will serve committed
+market/risk/strategy snapshots and poll the friend news feed. After the public
+URL works, test `MARKET_DATA_MODE=openbb` in Render logs.
 
 ## 4. Share These Links
 
