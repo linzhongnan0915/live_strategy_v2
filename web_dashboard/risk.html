@@ -87,9 +87,14 @@
       <div class="card"><div class="metric-label">manager news action</div><div id="news-manager-action" class="thesis">...</div></div>
     </section>
 
+    <section class="card section">
+      <div class="section-title"><h2>Global Market Pulse</h2><span class="small">price confirmation for news and macro risk</span></div>
+      <div id="global-market-pulse"></div>
+    </section>
+
     <section class="section">
       <div class="card">
-        <div class="section-title"><h2>Risk Bucket Moves</h2><span class="small">average latest return</span></div>
+        <div class="section-title"><h2>Market Risk Bucket Moves</h2><span class="small">ETF universe average latest return, not selected sleeve P&L</span></div>
         <div id="risk-bucket-bars"></div>
       </div>
     </section>
@@ -105,9 +110,15 @@
       </div>
     </section>
 
-    <section class="card section">
-      <div class="section-title"><h2>News/Event Risk Queue</h2><span class="small">human review context</span></div>
-      <div id="risk-news-table"></div>
+    <section class="grid-2 section">
+      <div class="card">
+        <div class="section-title"><h2>Portfolio-Relevant News</h2><span class="small">mapped to ETF, factor, strategy, or confirmation</span></div>
+        <div id="risk-news-relevant-table"></div>
+      </div>
+      <div class="card">
+        <div class="section-title"><h2>Context-Only News</h2><span class="small">not enough linkage for escalation</span></div>
+        <div id="risk-news-context-table"></div>
+      </div>
     </section>
   </main>
   </div>
@@ -155,6 +166,39 @@
       setText("news-topics", `${newsTriage.top_topics}. Unique headlines: ${newsTriage.unique_count}.`);
       setText("news-portfolio-relevance", newsTriage.conclusion);
       setText("news-manager-action", newsTriage.manager_action);
+      const pulseTickers = [
+        ["SPY", "S&P 500 proxy"],
+        ["QQQ", "Nasdaq proxy"],
+        ["IWM", "Small cap"],
+        ["VIX", "Volatility"],
+        ["GLD", "Gold"],
+        ["USO", "Oil"],
+        ["UUP", "USD"],
+        ["TLT", "Long duration"],
+        ["HYG", "High yield"],
+        ["LQD", "IG credit"]
+      ];
+      const byTicker = new Map(rows.map(row => [row.ticker, row]));
+      const pulseRows = pulseTickers.map(([ticker, label]) => {
+        const row = byTicker.get(ticker) ?? {};
+        return {
+          ticker,
+          label,
+          close: row.latest_close,
+          ret: row.latest_return_pct,
+          date: row.latest_date,
+          timing: row.timing_status,
+          _tooltip: `${ticker}: ${label}. Used as market confirmation for news and macro/factor risk.`
+        };
+      });
+      renderTable("global-market-pulse", pulseRows, [
+        { label: "Ticker", key: "ticker" },
+        { label: "Lens", key: "label" },
+        { label: "Close", value: r => fmtNum(r.close, 2) },
+        { label: "Latest move", value: r => `<span class="${signedClass(r.ret)}">${fmtPct(r.ret)}</span>`, html: true },
+        { label: "Date", key: "date" },
+        { label: "Timing", key: "timing" }
+      ], 12);
 
       renderTable("risk-signals", risk.signals, [
         { label: "Signal", key: "name" },
@@ -198,18 +242,28 @@
         { label: "Loading", value: r => fmtNum(r.loading, 1) },
         { label: "Source", key: "loading_source" }
       ], 16);
-      renderTable("risk-news-table", newsTriage.rows, [
+      const relevantNews = newsTriage.rows.filter(row =>
+        row.decision !== "context only" ||
+        (row.affected_tickers ?? []).length > 0 ||
+        (row.affected_strategies ?? []).length > 0 ||
+        (row.market_confirmations ?? []).length > 0
+      );
+      const contextNews = newsTriage.rows.filter(row => !relevantNews.includes(row));
+      const newsColumns = [
         { label: "Time", value: r => fmtTime(r.timestamp ?? r.published_at) },
+        { label: "Source", value: r => r.source ?? "N/A" },
         { label: "Signal", value: r => statusPill(r.warning_level ?? r.watch_level), html: true },
         { label: "Severity", value: r => fmtNum(r.severity, 1) },
         { label: "Keywords", value: r => (r.keywords ?? r.topics ?? []).join(", ") || "none" },
-        { label: "Exposure", key: "exposure" },
         { label: "Affected ETFs", value: r => (r.affected_tickers ?? []).join(", ") || "none" },
         { label: "Affected strategies", value: r => (r.affected_strategies ?? []).join(", ") || "none" },
+        { label: "Market confirm", value: r => (r.market_confirmations ?? []).join(", ") || `${r.confirmations ?? 0}` },
         { label: "Confidence", value: r => fmtNum(Number(r.confidence) * 100, 0) + "%" },
         { label: "Title", key: "title" },
         { label: "Reasoning", key: "explanation" }
-      ], 20);
+      ];
+      renderTable("risk-news-relevant-table", relevantNews, newsColumns, 12);
+      renderTable("risk-news-context-table", contextNews, newsColumns, 12);
     }
     startLoop(updateRisk, 3);
   </script>

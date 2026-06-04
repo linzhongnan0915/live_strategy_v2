@@ -151,7 +151,7 @@
           <div id="overview-allocation"></div>
         </div>
         <div class="card">
-          <div class="section-title"><h2>Top 10 Positions</h2><span class="small">market value, P&L, limit usage</span></div>
+          <div class="section-title"><h2>Current Strategy Sleeve Positions</h2><span class="small">selected sleeve only, not full ETF universe</span></div>
           <div id="top-positions"></div>
         </div>
         <div class="card">
@@ -633,7 +633,7 @@
         ...newsTriage.rows.slice(0, 4).map(row => ({
           level: row.decision.includes("human") ? "yellow" : row.watch_level,
           title: row.title,
-          meta: `${fmtTime(row.timestamp ?? row.published_at)} | ${row.source ?? "source N/A"} | ${row.exposure} | confidence ${fmtNum(Math.min(0.88, 0.35 + Number(row.severity || 0) / 14), 2)}`,
+          meta: `${fmtTime(row.timestamp ?? row.published_at)} | ${row.source ?? "source N/A"} | ${row.exposure} | tickers ${(row.affected_tickers ?? []).join(", ") || "none"} | strategies ${(row.affected_strategies ?? []).slice(0, 2).join(", ") || "none"} | ${row.explanation ?? row.reasoning ?? "context only"}`,
           right: row.decision
         }))
       ].slice(0, 7);
