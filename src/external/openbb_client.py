@@ -21,6 +21,17 @@ YFINANCE_IMPORT_ERROR = "Neither OpenBB nor yfinance is installed. Install with:
 PRICE_HISTORY_COLUMNS = ["date", "ticker", "close", "source"]
 
 YFINANCE_VIX_PROXY = "^VIX"
+YFINANCE_SYMBOL_MAP = {
+    "VIX": "^VIX",
+    "SPX": "^GSPC",
+    "NASDAQ": "^IXIC",
+    "DOW": "^DJI",
+    "GOLD": "GC=F",
+    "OIL": "CL=F",
+    "DXY": "DX-Y.NYB",
+    "EURUSD": "EURUSD=X",
+    "US10Y": "^TNX",
+}
 
 VIX_MAPPING_NOTE = (
     "VIX is requested as ticker VIX but fetched via ^VIX on yfinance; "
@@ -83,8 +94,8 @@ def _source_label(provider: str) -> str:
 def _map_symbol_for_provider(symbol: str, provider: str) -> str:
     """Map internal ticker to provider-specific symbol when needed."""
     sym = str(symbol).strip().upper()
-    if sym == "VIX" and provider.strip().lower() == "yfinance":
-        return YFINANCE_VIX_PROXY
+    if provider.strip().lower() == "yfinance":
+        return YFINANCE_SYMBOL_MAP.get(sym, sym)
     return sym
 
 

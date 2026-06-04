@@ -38,4 +38,12 @@ EEM,iShares MSCI Emerging Markets ETF,Equity,International EM,em_equity,em_risk,
 VEA,Vanguard FTSE Developed Markets ETF,Equity,International DM,intl_equity,economic_growth,em_risk,high,intl_completion,Developed markets completion
 VWO,Vanguard FTSE Emerging Markets ETF,Equity,International EM,em_equity,em_risk,economic_growth,high,em_completion,Emerging markets completion
 VIX,CBOE Volatility Index,Volatility,Volatility Index,volatility_monitor,volatility,equity_beta,monitor_only,monitor_only,Monitor only; not an investable holding; fetched via ^VIX
+SPX,S&P 500 Index,Index,US Large Cap,index_spx,equity_beta,economic_growth,monitor_only,monitor_only,Market pulse only; fetched via ^GSPC
+NASDAQ,Nasdaq Composite Index,Index,US Growth,index_nasdaq,growth_tech,equity_beta,monitor_only,monitor_only,Market pulse only; fetched via ^IXIC
+DOW,Dow Jones Industrial Average,Index,US Blue Chip,index_dow,equity_beta,value_cyclical,monitor_only,monitor_only,Market pulse only; fetched via ^DJI
+GOLD,Gold Futures,Commodity,Precious Metals,gold_futures,real_assets,geopolitical_risk,monitor_only,monitor_only,Market pulse only; fetched via GC=F
+OIL,WTI Crude Oil Futures,Commodity,Energy,oil_futures,commodities,inflation,monitor_only,monitor_only,Market pulse only; fetched via CL=F
+DXY,US Dollar Index,FX,USD,dxy_index,usd,liquidity,monitor_only,monitor_only,Market pulse only; fetched via DX-Y.NYB
+EURUSD,EUR/USD Spot,FX,EURUSD,eurusd_fx,fx,usd,monitor_only,monitor_only,Market pulse only; fetched via EURUSD=X
+US10Y,US 10Y Treasury Yield,Rates,Treasury Yield,us10y_yield,rates,duration,monitor_only,monitor_only,Market pulse only; fetched via ^TNX
 VXX,iPath Series B S&P 500 VIX Short-Term Futures ETN,Volatility,VIX Futures,volatility_trading,volatility,liquidity_stress,low,high_risk_prototype,High-risk prototype only; roll decay; not a long-term holding

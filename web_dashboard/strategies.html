@@ -290,7 +290,7 @@
         { label: "OOS max DD", value: r => evidenceBadge(r.oos_max_drawdown, "drawdown"), html: true }
       ], 10);
       renderTable("champion-news-table", selectedSummary.strategyNewsRows, [
-        { label: "Time", value: r => fmtTime(r.timestamp ?? r.published_at) },
+        { label: "Time", value: r => fmtTime(newsDisplayTime(r, news)) },
         { label: "Signal", value: r => statusPill(r.warning_level ?? r.watch_level), html: true },
         { label: "Keywords", value: r => (r.keywords ?? r.topics ?? []).join(", ") || "none" },
         { label: "Affected ETFs", value: r => (r.affected_tickers ?? []).join(", ") || "none" },

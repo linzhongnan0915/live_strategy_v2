@@ -444,16 +444,16 @@ function renderBars(id, rows, maxRows = 12) {
 }
 
 const MARKET_PULSE_TICKERS = [
-  ["SPY", "S&P 500"],
-  ["QQQ", "Nasdaq"],
+  ["SPX", "S&P 500"],
+  ["NASDAQ", "Nasdaq"],
+  ["DOW", "Dow"],
   ["IWM", "Small Cap"],
   ["VIX", "VIX"],
-  ["GLD", "Gold"],
-  ["USO", "Oil"],
-  ["UUP", "USD"],
-  ["TLT", "US 20Y"],
-  ["HYG", "HY Credit"],
-  ["LQD", "IG Credit"]
+  ["GOLD", "Gold futures"],
+  ["OIL", "WTI crude"],
+  ["DXY", "US Dollar Index"],
+  ["EURUSD", "EUR/USD"],
+  ["US10Y", "US 10Y yield"]
 ];
 
 function buildMarketPulseRows(market) {
@@ -485,6 +485,10 @@ function renderMarketPulseCards(id, market) {
       <div class="pulse-move ${signedClass(row.ret)}">${fmtPct(row.ret)}</div>
     </div>
   `).join("");
+}
+
+function newsDisplayTime(row, news) {
+  return row.timestamp ?? row.published_at ?? row.generated_at_utc ?? news?.generated_at_utc;
 }
 
 function renderScatter(id, rows, options) {

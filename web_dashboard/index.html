@@ -156,7 +156,7 @@
           <div id="overview-allocation"></div>
         </div>
         <div class="card">
-          <div class="section-title"><h2>Current Strategy Sleeve Positions</h2><span class="small">selected sleeve only, not full ETF universe</span></div>
+          <div class="section-title"><h2>Overall Portfolio Positions</h2><span class="small">configured portfolio, separate from selected strategy sleeve</span></div>
           <div id="top-positions"></div>
         </div>
         <div class="card">
@@ -638,7 +638,7 @@
         ...newsTriage.rows.slice(0, 4).map(row => ({
           level: row.decision.includes("human") ? "yellow" : row.watch_level,
           title: row.title,
-          meta: `${fmtTime(row.timestamp ?? row.published_at)} | ${row.source ?? "source N/A"} | ${row.exposure} | tickers ${(row.affected_tickers ?? []).join(", ") || "none"} | strategies ${(row.affected_strategies ?? []).slice(0, 2).join(", ") || "none"} | ${row.explanation ?? row.reasoning ?? "context only"}`,
+          meta: `${fmtTime(newsDisplayTime(row, newsTriage))} | ${row.source ?? "source N/A"} | ${row.exposure} | ${(row.keywords ?? row.topics ?? []).slice(0, 3).join(", ") || "no keywords"} | ${row.explanation ?? row.reasoning ?? "context only"}`,
           right: row.decision
         }))
       ].slice(0, 7);
@@ -909,7 +909,8 @@
       renderAlerts(newsTriage, profileAlerts);
       safeOverviewRender("overview allocation", () => renderAllocationPie("overview-allocation", groupAllocation(filteredPositions, "asset_class", "target_weight"), { label: "asset class allocation" }));
       setText("allocation-caption", simulationReady ? `${money(snap.portfolioValue)} current selected sleeve` : "$1M simulated portfolio");
-      const positionTableRows = filteredPositions.map(row => ({
+      const fullPortfolioPositions = applyAssetFilter(positionRows(rows));
+      const positionTableRows = fullPortfolioPositions.map(row => ({
         ...row,
         _tooltip: `${row.ticker}: ${row.asset_class} | ${row.risk_bucket} | weight ${fmtPct(Number(row.target_weight) * 100)} | market value ${money(row.market_value)} | P&L ${money(row.daily_pnl)} | VaR ${money(row.var95)} | utilization ${fmtPct(row.utilization * 100)}`
       }));

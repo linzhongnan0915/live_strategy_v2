@@ -488,6 +488,14 @@ h1 {
   text-overflow: ellipsis;
 }
 
+#poll-time {
+  font-size: 17px;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  line-height: 1.18;
+}
+
 .metric-value.accent {
   color: #7fc0ff;
 }
