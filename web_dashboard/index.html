@@ -141,7 +141,7 @@
           <div id="factor-exposure-table"></div>
         </div>
         <div class="card">
-          <div class="section-title"><h2>Correlation Evidence</h2><span class="small">requires rolling price history</span></div>
+          <div class="section-title"><h2>Co-Movement Evidence</h2><span class="small">current market confirmation, not rolling correlation</span></div>
           <div id="correlation-matrix"></div>
         </div>
         <div class="card">
@@ -492,6 +492,51 @@
       };
     }
 
+    function latestReturnByTicker(market, tickers) {
+      const rows = market.items ?? [];
+      for (const ticker of tickers) {
+        const row = rows.find(item => item.ticker === ticker);
+        const value = Number(row?.latest_return_pct);
+        if (Number.isFinite(value)) {
+          return { ticker, value, date: row.latest_date, timing: row.timing_status };
+        }
+      }
+      return null;
+    }
+
+    function coMovementRows(market) {
+      const pairs = [
+        { pair: "Equity vs Rates", leftLabel: "Equity", left: ["SPX", "SPY"], rightLabel: "Rates", right: ["TLT", "IEF"] },
+        { pair: "Equity vs Credit", leftLabel: "Equity", left: ["SPX", "SPY"], rightLabel: "Credit", right: ["HYG", "LQD"] },
+        { pair: "Equity vs Gold", leftLabel: "Equity", left: ["SPX", "SPY"], rightLabel: "Gold", right: ["GOLD", "GLD"] },
+        { pair: "Oil vs Energy", leftLabel: "Oil", left: ["OIL", "USO"], rightLabel: "Energy ETF", right: ["XLE"] },
+        { pair: "USD vs Gold", leftLabel: "USD", left: ["DXY", "UUP"], rightLabel: "Gold", right: ["GOLD", "GLD"] }
+      ];
+      return pairs.map(pair => {
+        const left = latestReturnByTicker(market, pair.left);
+        const right = latestReturnByTicker(market, pair.right);
+        const hasBoth = left && right;
+        const relation = !hasBoth
+          ? "waiting for data"
+          : Math.sign(left.value) === Math.sign(right.value)
+            ? "same direction"
+            : "diverging";
+        const read = !hasBoth
+          ? "Need both legs from live market monitor before using this as evidence."
+          : relation === "same direction"
+            ? `${pair.leftLabel} and ${pair.rightLabel} are moving together today; treat as broad confirmation, not correlation.`
+            : `${pair.leftLabel} and ${pair.rightLabel} are diverging today; useful for risk/hedge interpretation.`;
+        return {
+          pair: pair.pair,
+          left: left ? `${left.ticker} ${fmtPct(left.value)}` : "waiting",
+          right: right ? `${right.ticker} ${fmtPct(right.value)}` : "waiting",
+          relation,
+          read,
+          _tooltip: read
+        };
+      });
+    }
+
     function safeOverviewRender(label, fn) {
       try {
         return fn();
@@ -741,10 +786,11 @@
       const simulationReady = hasSimulation(simulation);
       const simulationPortfolioValue = Number(simulation.current?.portfolio_value) || PORTFOLIO_BASE;
       const positions = simulationReady ? simulationPositionRows(simulation, market) : positionRows(rows, simulationPortfolioValue);
-      const filteredPositions = applyAssetFilter(positions);
       const snap = simulationReady
         ? simulationSnapshot(simulation, positions, riskProfile)
         : portfolioSnapshot(rows, backtest.items ?? [], riskProfile);
+      const fullPortfolioPositions = positionRows(rows, snap.portfolioValue);
+      const displayedPortfolioPositions = applyAssetFilter(fullPortfolioPositions);
       const risk = calculateRiskSignals(market, news, metrics);
       const newsTriage = buildNewsTriage(news, market);
       const liveAsOf = latestMarketDate(market, status, metrics);
@@ -774,7 +820,7 @@
       util.className = `metric-value ${utilPct >= 90 ? "neg" : utilPct >= 70 ? "warn" : "pos"}`;
       byId("risk-util-bar").style.width = `${Math.min(100, utilPct)}%`;
       byId("risk-util-sub").textContent = `${riskProfile.label} profile | limit ${money(riskProfile.varLimit)} | equity gate ${fmtPct(riskProfile.equityLimit * 100)}`;
-      const focus = assetFocusSummary(positions, filteredPositions, riskProfile);
+      const focus = assetFocusSummary(fullPortfolioPositions, displayedPortfolioPositions, riskProfile);
       setText("risk-profile-lens-title", `${riskProfile.label}: ${riskProfile.posture}`);
       setText("risk-profile-lens-detail", `${riskProfile.detail} Current utilization ${fmtPct(utilPct)} vs warning ${fmtPct(riskProfile.warning * 100)} / critical ${fmtPct(riskProfile.critical * 100)}.`);
       setText("asset-focus-title", focus.title);
@@ -789,14 +835,14 @@
       const chartMaxDrawdown = simulationReady ? Number(simulation.current.max_drawdown) * 100 : null;
       renderLineChart("drawdown-chart", ddPath, { color: "#ff5164", area: "rgba(255, 81, 100, 0.18)", title: simulationReady ? "Simulation drawdown" : "No drawdown path", footer: simulationReady ? `Max ${fmtPct(chartMaxDrawdown)}` : "simulation missing" });
       setText("drawdown-label", simulationReady ? `max ${fmtPct(chartMaxDrawdown)}` : "simulation missing");
-      renderHeatmap("risk-heatmap", riskHeatmapRows(positions, riskProfile));
+      renderHeatmap("risk-heatmap", riskHeatmapRows(fullPortfolioPositions, riskProfile));
 
       const stressRows = [
-        { scenario: "Equity selloff", description: "-20% global equities", impact: -filteredPositions.filter(p => p.asset_class === "Equity").reduce((s, p) => s + p.market_value, 0) * 0.20 },
-        { scenario: "Rate shock", description: "+200 bps duration shock", impact: -filteredPositions.filter(p => /rates|duration/.test(p.risk_bucket)).reduce((s, p) => s + p.market_value, 0) * 0.07 },
-        { scenario: "Credit spread widening", description: "+150 bps IG / +300 bps HY", impact: -filteredPositions.filter(p => /credit|debt/.test(p.risk_bucket)).reduce((s, p) => s + p.market_value, 0) * 0.09 },
-        { scenario: "USD rally", description: "+10% USD index", impact: -filteredPositions.filter(p => p.asset_class === "FX" || /intl|emerging/.test(p.risk_bucket)).reduce((s, p) => s + p.market_value, 0) * 0.05 },
-        { scenario: "Commodity shock", description: "-20% oil / -15% metals", impact: -filteredPositions.filter(p => p.asset_class === "Commodity" || /energy|real_assets/.test(p.risk_bucket)).reduce((s, p) => s + p.market_value, 0) * 0.16 }
+        { scenario: "Equity selloff", description: "-20% global equities", impact: -fullPortfolioPositions.filter(p => p.asset_class === "Equity").reduce((s, p) => s + p.market_value, 0) * 0.20 },
+        { scenario: "Rate shock", description: "+200 bps duration shock", impact: -fullPortfolioPositions.filter(p => /rates|duration/.test(p.risk_bucket)).reduce((s, p) => s + p.market_value, 0) * 0.07 },
+        { scenario: "Credit spread widening", description: "+150 bps IG / +300 bps HY", impact: -fullPortfolioPositions.filter(p => /credit|debt/.test(p.risk_bucket)).reduce((s, p) => s + p.market_value, 0) * 0.09 },
+        { scenario: "USD rally", description: "+10% USD index", impact: -fullPortfolioPositions.filter(p => p.asset_class === "FX" || /intl|emerging/.test(p.risk_bucket)).reduce((s, p) => s + p.market_value, 0) * 0.05 },
+        { scenario: "Commodity shock", description: "-20% oil / -15% metals", impact: -fullPortfolioPositions.filter(p => p.asset_class === "Commodity" || /energy|real_assets/.test(p.risk_bucket)).reduce((s, p) => s + p.market_value, 0) * 0.16 }
       ].map(row => ({
         ...row,
         _tooltip: `${row.scenario}: ${row.description} | estimated P&L impact ${money(row.impact)} (${fmtPct(row.impact / PORTFOLIO_BASE * 100)} of base portfolio)`
@@ -812,36 +858,36 @@
         {
           factor: "Market beta",
           type: "portfolio exposure",
-          exposure: positions.filter(p => p.asset_class === "Equity").reduce((s, p) => s + p.target_weight, 0),
-          varContribution: positions.filter(p => p.asset_class === "Equity").reduce((s, p) => s + p.var95, 0),
+          exposure: fullPortfolioPositions.filter(p => p.asset_class === "Equity").reduce((s, p) => s + p.target_weight, 0),
+          varContribution: fullPortfolioPositions.filter(p => p.asset_class === "Equity").reduce((s, p) => s + p.var95, 0),
           risk: "Equity drawdown"
         },
         {
           factor: "Rates / duration",
           type: "portfolio exposure",
-          exposure: positions.filter(p => /rates|duration|inflation/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0),
-          varContribution: positions.filter(p => /rates|duration|inflation/.test(p.risk_bucket)).reduce((s, p) => s + p.var95, 0),
+          exposure: fullPortfolioPositions.filter(p => /rates|duration|inflation/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0),
+          varContribution: fullPortfolioPositions.filter(p => /rates|duration|inflation/.test(p.risk_bucket)).reduce((s, p) => s + p.var95, 0),
           risk: "Duration or inflation-linked bond shock"
         },
         {
           factor: "Credit",
           type: "portfolio exposure",
-          exposure: positions.filter(p => /credit|debt/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0),
-          varContribution: positions.filter(p => /credit|debt/.test(p.risk_bucket)).reduce((s, p) => s + p.var95, 0),
+          exposure: fullPortfolioPositions.filter(p => /credit|debt/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0),
+          varContribution: fullPortfolioPositions.filter(p => /credit|debt/.test(p.risk_bucket)).reduce((s, p) => s + p.var95, 0),
           risk: "Spread widening"
         },
         {
           factor: "FX / USD",
           type: "portfolio exposure",
-          exposure: positions.filter(p => p.asset_class === "FX" || /usd|intl/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0),
-          varContribution: positions.filter(p => p.asset_class === "FX" || /usd|intl/.test(p.risk_bucket)).reduce((s, p) => s + p.var95, 0),
+          exposure: fullPortfolioPositions.filter(p => p.asset_class === "FX" || /usd|intl/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0),
+          varContribution: fullPortfolioPositions.filter(p => p.asset_class === "FX" || /usd|intl/.test(p.risk_bucket)).reduce((s, p) => s + p.var95, 0),
           risk: "USD pressure"
         },
         {
           factor: "Commodity shock",
           type: "commodity-sensitive exposure",
-          exposure: positions.filter(p => p.asset_class === "Commodity" || /energy|real_assets/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0),
-          varContribution: positions.filter(p => p.asset_class === "Commodity" || /energy|real_assets/.test(p.risk_bucket)).reduce((s, p) => s + p.var95, 0),
+          exposure: fullPortfolioPositions.filter(p => p.asset_class === "Commodity" || /energy|real_assets/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0),
+          varContribution: fullPortfolioPositions.filter(p => p.asset_class === "Commodity" || /energy|real_assets/.test(p.risk_bucket)).reduce((s, p) => s + p.var95, 0),
           risk: "Oil/gold shock"
         },
         {
@@ -869,14 +915,13 @@
         { label: "Interpretation", key: "risk" }
       ], 8);
 
-      byId("correlation-matrix").innerHTML = `
-        <div class="method-box">
-          <strong>Not shown as live data.</strong>
-          Correlation should be computed from the rolling price-history artifact, not typed into the dashboard.
-          Use this panel only after the rolling correlation job is wired to the hosted data pipeline.
-        </div>
-      `;
-      const equityWeight = positions.filter(p => p.asset_class === "Equity").reduce((sum, p) => sum + Number(p.target_weight || 0), 0);
+      renderTable("correlation-matrix", coMovementRows(market), [
+        { label: "Pair", key: "pair" },
+        { label: "Leg 1", key: "left" },
+        { label: "Leg 2", key: "right" },
+        { label: "Read", key: "relation" }
+      ], 8);
+      const equityWeight = fullPortfolioPositions.filter(p => p.asset_class === "Equity").reduce((sum, p) => sum + Number(p.target_weight || 0), 0);
       const profileAlerts = {
         signals: [
           ...(risk.signals ?? []),
@@ -897,10 +942,9 @@
         ]
       };
       renderAlerts(newsTriage, profileAlerts);
-      const fullPortfolioPositions = applyAssetFilter(positionRows(rows, snap.portfolioValue));
       safeOverviewRender("overview allocation", () => renderAllocationPie("overview-allocation", groupAllocation(fullPortfolioPositions, "asset_class", "target_weight"), { label: "overall portfolio asset class allocation" }));
       setText("allocation-caption", `${money(snap.portfolioValue)} overall portfolio`);
-      const positionTableRows = fullPortfolioPositions.map(row => ({
+      const positionTableRows = displayedPortfolioPositions.map(row => ({
         ...row,
         _tooltip: `${row.ticker}: ${row.asset_class} | ${row.risk_bucket} | weight ${fmtPct(Number(row.target_weight) * 100)} | market value ${money(row.market_value)} | P&L ${money(row.daily_pnl)} | VaR ${money(row.var95)} | utilization ${fmtPct(row.utilization * 100)}`
       }));
@@ -913,12 +957,12 @@
         { label: "VaR", value: r => money(r.var95) },
         { label: "Util", value: r => fmtPct(r.utilization * 100) }
       ], 10));
-      const riskGroups = groupSum(filteredPositions, "asset_class", "var95");
+      const riskGroups = groupSum(fullPortfolioPositions, "asset_class", "var95");
       const riskGroupTotal = riskGroups.reduce((sum, row) => sum + Number(row.value || 0), 0) || 1;
       const riskContrib = riskGroups.map(row => ({ name: row.name, value: row.value / riskGroupTotal * 100 }));
       safeOverviewRender("risk contribution", () => renderBars("risk-contribution-bars", riskContrib, 8));
       safeOverviewRender("strategy framework", () => renderOverviewStrategyFramework({ simulation, wfo, strategyLibrary, dailyReview }));
-      safeOverviewRender("strategy simulation cards", () => renderStrategySimulationCards(simulation, filteredPositions.length ? filteredPositions : positions));
+      safeOverviewRender("strategy simulation cards", () => renderStrategySimulationCards(simulation, positions));
       safeOverviewRender("methodology", () => renderTable("methodology-table", [
         { item: "Portfolio base", value: simulationReady ? `$1,000,000 invested from ${simulation.simulation_start_actual}; current value ${money(snap.portfolioValue)}` : "$1,000,000 simulated initial portfolio" },
         { item: "Strategy selection rule", value: simulationReady ? simulation.selection_rule : "No simulation snapshot available; no fake fallback chart is shown." },
