@@ -933,7 +933,7 @@
         { item: "Strategy decisions", value: "Human review only; WFO/backtest evidence is decision support, not execution" },
         { item: "Live monitor date", value: liveAsOf },
         { item: "Strategy simulation date", value: strategyAsOf },
-        { item: "Last update", value: market.generated_at_utc ?? status.generated_at_utc ?? "N/A" }
+        { item: "Last update", value: fmtDateTimeET(market.generated_at_utc ?? status.generated_at_utc) }
       ], [{ label: "Item", key: "item" }, { label: "Value", key: "value" }], 20));
     }
     ["risk-profile", "asset-filter", "risk-limit-input"].forEach(id => {

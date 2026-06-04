@@ -108,7 +108,7 @@
       const newsNode = byId("news-severity");
       newsNode.textContent = `${newsImpact.level.toUpperCase()} ${fmtNum(newsImpact.severity, 1)}`;
       newsNode.className = `metric-value ${newsImpact.level === "red" ? "neg" : newsImpact.level === "green" ? "pos" : ""}`;
-      setText("market-note", `${market.data_mode ?? ""} | ${market.generated_at_utc ?? ""}`);
+      setText("market-note", `${market.data_mode ?? ""} | ${fmtDateTimeET(market.generated_at_utc)}`);
 
       const columns = [
         { label: "Ticker", key: "ticker" },

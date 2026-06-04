@@ -233,7 +233,7 @@
         news,
         market
       });
-      setText("daily-review-meta", `${dailyReviewArtifact.generated_at_utc ?? "browser preview"} | ${dailyReviewArtifact.as_of_date ?? "live context"}`);
+      setText("daily-review-meta", `${fmtDateTimeET(dailyReviewArtifact.generated_at_utc) ?? "browser preview"} | ${dailyReviewArtifact.as_of_date ?? "live context"}`);
       const decisionRows = buildStrategyDecisionRows({
         reviewRows: dailyReview,
         strategyLibrary,

@@ -111,11 +111,29 @@ function fmtTime(value) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return String(value).slice(0, 19);
   return date.toLocaleString("en-US", {
+    timeZone: "America/New_York",
     month: "short",
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
     hour12: false
+  }) + " ET";
+}
+
+function fmtDateTimeET(value) {
+  if (!value) return "N/A";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return `${String(value).slice(0, 19)} UTC`;
+  return date.toLocaleString("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+    timeZoneName: "short"
   });
 }
 
@@ -788,7 +806,7 @@ function renderLiveStatus(status) {
   setText("poll-mode", status.market_data_mode ?? "N/A");
   setText("poll-latest", status.latest_observed_date ?? "N/A");
   setText("poll-rows", status.row_count ?? "N/A");
-  setText("poll-time", status.generated_at_utc ?? "N/A");
+  setText("poll-time", fmtDateTimeET(status.generated_at_utc));
 }
 
 function calculateRiskSignals(market, news, metrics) {
