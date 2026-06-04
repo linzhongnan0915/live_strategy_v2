@@ -243,6 +243,46 @@ function renderTable(id, rows, columns, limit = 100) {
   target.innerHTML = `<div class="table-wrap"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
 }
 
+function newsTimeLabel(row, news) {
+  const original = row.timestamp ?? row.published_at;
+  if (original) return fmtTime(original);
+  const fallback = row.generated_at_utc ?? news?.generated_at_utc;
+  return fallback ? `${fmtTime(fallback)} feed` : "time N/A";
+}
+
+function renderNewsCards(id, rows, news, limit = 8) {
+  const target = byId(id);
+  if (!target) return;
+  const data = (rows ?? []).slice(0, limit);
+  if (data.length === 0) {
+    target.innerHTML = `<div class="small">No news in this bucket.</div>`;
+    return;
+  }
+  target.innerHTML = `<div class="news-card-list">` + data.map(row => {
+    const level = row.warning_level ?? row.watch_level ?? "info";
+    const affected = [
+      (row.affected_tickers ?? []).slice(0, 4).join(", "),
+      (row.affected_strategies ?? []).slice(0, 2).join(", ")
+    ].filter(Boolean).join(" | ") || row.exposure || "context only";
+    const keywords = (row.keywords ?? row.topics ?? []).slice(0, 4).join(", ") || "no keywords";
+    const managerRead = row.explanation ?? row.reasoning ?? "No direct portfolio or strategy linkage.";
+    return `
+      <article class="news-card ${escapeHtml(level)}">
+        <div class="news-card-head">
+          ${statusPill(level)}
+          <span>${escapeHtml(newsTimeLabel(row, news))}</span>
+          <span>${escapeHtml(row.source ?? "source N/A")}</span>
+          <strong>${fmtNum(row.severity, 1)}</strong>
+        </div>
+        <div class="news-headline">${escapeHtml(row.title ?? "Untitled headline")}</div>
+        <div class="news-meta"><strong>Keywords:</strong> ${escapeHtml(keywords)}</div>
+        <div class="news-meta"><strong>Impact:</strong> ${escapeHtml(affected)}</div>
+        <div class="news-read">${escapeHtml(managerRead)}</div>
+      </article>
+    `;
+  }).join("") + `</div>`;
+}
+
 function renderList(id, items) {
   const target = byId(id);
   if (!target) return;
