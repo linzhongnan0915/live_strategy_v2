@@ -369,18 +369,59 @@
       return sampled;
     }
 
+    function weekKey(dateText) {
+      const date = new Date(`${dateText}T00:00:00Z`);
+      if (Number.isNaN(date.getTime())) return String(dateText ?? "");
+      const start = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+      const day = Math.floor((date - start) / 86400000);
+      const week = Math.floor((day + start.getUTCDay()) / 7) + 1;
+      return `${date.getUTCFullYear()}-W${String(week).padStart(2, "0")}`;
+    }
+
+    function weeklySimulationCurve(simulation) {
+      const rows = simulation.equity_curve ?? [];
+      if (!rows.length) return [];
+      const weeks = [];
+      let currentKey = "";
+      for (const row of rows) {
+        const key = weekKey(row.date);
+        if (key !== currentKey) {
+          weeks.push({ key, rows: [] });
+          currentKey = key;
+        }
+        weeks[weeks.length - 1].rows.push(row);
+      }
+      let priorValue = Number(rows[0].portfolio_value) || Number(simulation.initial_capital) || PORTFOLIO_BASE;
+      return weeks.map(week => {
+        const first = week.rows[0] ?? {};
+        const last = week.rows[week.rows.length - 1] ?? first;
+        const endValue = Number(last.portfolio_value);
+        const weekReturn = Number.isFinite(endValue) && priorValue ? endValue / priorValue - 1 : Number(last.daily_return);
+        priorValue = Number.isFinite(endValue) ? endValue : priorValue;
+        return {
+          ...last,
+          label: last.date,
+          week_label: week.key,
+          week_return: weekReturn,
+          week_start: first.date
+        };
+      });
+    }
+
     function performancePathFromSimulation(simulation) {
       const initial = Number(simulation.initial_capital) || PORTFOLIO_BASE;
-      return sampleCurve(simulation.equity_curve ?? []).map(row => ({
+      return weeklySimulationCurve(simulation).map(row => ({
         label: row.date,
-        value: (Number(row.portfolio_value) / initial - 1) * 100
+        value: (Number(row.portfolio_value) / initial - 1) * 100,
+        tooltip: `${row.week_label} | ${row.week_start} to ${row.date}\nStrategy: ${row.strategy_id}\nCumulative return: ${fmtPct((Number(row.portfolio_value) / initial - 1) * 100)}\nWeek return: ${fmtPct(Number(row.week_return) * 100)}\nPortfolio value: ${money(row.portfolio_value)}`
       }));
     }
 
     function drawdownPathFromSimulation(simulation) {
-      return (simulation.equity_curve ?? []).map(row => ({
+      return weeklySimulationCurve(simulation).map(row => ({
         label: row.date,
-        value: Number(row.drawdown) * 100
+        value: Number(row.drawdown) * 100,
+        tooltip: `${row.week_label} | ${row.week_start} to ${row.date}\nStrategy: ${row.strategy_id}\nDrawdown: ${fmtPct(Number(row.drawdown) * 100)}\nWeek return: ${fmtPct(Number(row.week_return) * 100)}`
       }));
     }
 
@@ -397,14 +438,33 @@
       const scaleY = v => height - pad - (v - min) / Math.max(0.001, max - min) * (height - 2 * pad);
       const path = rows.map((row, i) => `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleY(Number(row.value))}`).join(" ");
       const area = `${path} L${scaleX(rows.length - 1)},${height - pad} L${pad},${height - pad} Z`;
+      const tickIndices = [...new Set([0, Math.floor((rows.length - 1) * 0.25), Math.floor((rows.length - 1) * 0.5), Math.floor((rows.length - 1) * 0.75), rows.length - 1])]
+        .filter(index => index >= 0 && index < rows.length);
+      const xTicks = tickIndices.map(index => {
+        const x = scaleX(index);
+        const label = rows[index]?.label ?? "";
+        const anchor = index === 0 ? "start" : index === rows.length - 1 ? "end" : "middle";
+        return `
+          <line class="chart-grid" x1="${x}" y1="${pad}" x2="${x}" y2="${height - pad}"></line>
+          <text class="chart-label" x="${x}" y="${height - 9}" text-anchor="${anchor}">${escapeHtml(label)}</text>
+        `;
+      }).join("");
+      const hoverPoints = rows.map((row, i) => {
+        const x = scaleX(i);
+        const y = scaleY(Number(row.value));
+        const tooltip = row.tooltip ?? `${row.label}\n${options.title ?? "Value"}: ${fmtPct(row.value)}`;
+        return `<circle class="chart-hover-point" cx="${x}" cy="${y}" r="7"><title>${escapeHtml(tooltip)}</title></circle>`;
+      }).join("");
       target.innerHTML = `
         <svg class="svg-chart terminal-chart" viewBox="0 0 ${width} ${height}">
           <path d="${area}" fill="${options.area ?? "rgba(45, 140, 255, 0.16)"}"></path>
+          ${xTicks}
           <path d="${path}" fill="none" stroke="${options.color ?? "#2d8cff"}" stroke-width="2.2"></path>
           <line class="chart-axis" x1="${pad}" y1="${height - pad}" x2="${width - pad}" y2="${height - pad}"></line>
           <line class="chart-axis" x1="${pad}" y1="${pad}" x2="${pad}" y2="${height - pad}"></line>
+          ${hoverPoints}
           <text class="chart-label" x="${pad}" y="18">${escapeHtml(options.title ?? "")}</text>
-          <text class="chart-label" x="${width - 130}" y="${height - 12}">${escapeHtml(options.footer ?? "")}</text>
+          <text class="chart-label" x="${width - 170}" y="18">${escapeHtml(options.footer ?? "")}</text>
         </svg>
       `;
     }

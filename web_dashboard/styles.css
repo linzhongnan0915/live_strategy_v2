@@ -925,6 +925,23 @@ th {
   stroke-width: 1;
 }
 
+.chart-grid {
+  stroke: rgba(141, 164, 187, 0.18);
+  stroke-width: 1;
+}
+
+.chart-hover-point {
+  fill: rgba(255, 255, 255, 0.01);
+  stroke: transparent;
+  cursor: crosshair;
+}
+
+.chart-hover-point:hover {
+  fill: rgba(78, 161, 255, 0.22);
+  stroke: rgba(216, 236, 255, 0.85);
+  stroke-width: 1.2;
+}
+
 .error {
   color: var(--red);
 }
