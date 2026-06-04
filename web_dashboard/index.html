@@ -499,6 +499,15 @@
       };
     }
 
+    function safeOverviewRender(label, fn) {
+      try {
+        return fn();
+      } catch (error) {
+        console.error(`Overview render failed: ${label}`, error);
+        return null;
+      }
+    }
+
     function renderLineChart(id, rows, options = {}) {
       const target = byId(id);
       if (!target || !rows.length) return;
@@ -892,13 +901,13 @@
         ]
       };
       renderAlerts(newsTriage, profileAlerts);
-      renderAllocationPie("overview-allocation", groupAllocation(filteredPositions, "asset_class", "target_weight"), { label: "asset class allocation" });
+      safeOverviewRender("overview allocation", () => renderAllocationPie("overview-allocation", groupAllocation(filteredPositions, "asset_class", "target_weight"), { label: "asset class allocation" }));
       setText("allocation-caption", simulationReady ? `${money(snap.portfolioValue)} current selected sleeve` : "$1M simulated portfolio");
       const positionTableRows = filteredPositions.map(row => ({
         ...row,
         _tooltip: `${row.ticker}: ${row.asset_class} | ${row.risk_bucket} | weight ${fmtPct(Number(row.target_weight) * 100)} | market value ${money(row.market_value)} | P&L ${money(row.daily_pnl)} | VaR ${money(row.var95)} | utilization ${fmtPct(row.utilization * 100)}`
       }));
-      renderTable("top-positions", positionTableRows, [
+      safeOverviewRender("top positions", () => renderTable("top-positions", positionTableRows, [
         { label: "Asset", key: "ticker" },
         { label: "Type", key: "asset_class" },
         { label: "Exposure", value: r => money(r.market_value) },
@@ -906,14 +915,14 @@
         { label: "P&L", value: r => `<span class="${signedClass(r.daily_pnl)}">${money(r.daily_pnl)}</span>`, html: true },
         { label: "VaR", value: r => money(r.var95) },
         { label: "Util", value: r => fmtPct(r.utilization * 100) }
-      ], 10);
+      ], 10));
       const riskGroups = groupSum(filteredPositions, "asset_class", "var95");
       const riskGroupTotal = riskGroups.reduce((sum, row) => sum + Number(row.value || 0), 0) || 1;
       const riskContrib = riskGroups.map(row => ({ name: row.name, value: row.value / riskGroupTotal * 100 }));
-      renderBars("risk-contribution-bars", riskContrib, 8);
-      renderOverviewStrategyFramework({ simulation, wfo, strategyLibrary, dailyReview });
-      renderStrategySimulationCards(simulation, filteredPositions.length ? filteredPositions : positions);
-      renderTable("methodology-table", [
+      safeOverviewRender("risk contribution", () => renderBars("risk-contribution-bars", riskContrib, 8));
+      safeOverviewRender("strategy framework", () => renderOverviewStrategyFramework({ simulation, wfo, strategyLibrary, dailyReview }));
+      safeOverviewRender("strategy simulation cards", () => renderStrategySimulationCards(simulation, filteredPositions.length ? filteredPositions : positions));
+      safeOverviewRender("methodology", () => renderTable("methodology-table", [
         { item: "Portfolio base", value: simulationReady ? `$1,000,000 invested from ${simulation.simulation_start_actual}; current value ${money(snap.portfolioValue)}` : "$1,000,000 simulated initial portfolio" },
         { item: "Strategy selection rule", value: simulationReady ? simulation.selection_rule : "Static fallback when simulation snapshot is missing" },
         { item: "No-look-ahead control", value: simulationReady ? "Monthly selection uses only the prior training window; future test returns are not used for selection." : "N/A" },
@@ -925,7 +934,7 @@
         { item: "Live monitor date", value: liveAsOf },
         { item: "Strategy simulation date", value: strategyAsOf },
         { item: "Last update", value: market.generated_at_utc ?? status.generated_at_utc ?? "N/A" }
-      ], [{ label: "Item", key: "item" }, { label: "Value", key: "value" }], 20);
+      ], [{ label: "Item", key: "item" }, { label: "Value", key: "value" }], 20));
     }
     ["risk-profile", "asset-filter", "risk-limit-input"].forEach(id => {
       window.addEventListener("DOMContentLoaded", () => {

@@ -922,6 +922,16 @@ function buildStrategyDailyReview({ wfoRows, backtestRows, rankingRows, strategy
 }
 
 function startLoop(fn, seconds = 3) {
-  fn();
-  setInterval(fn, seconds * 1000);
+  const run = () => {
+    try {
+      const result = fn();
+      if (result && typeof result.catch === "function") {
+        result.catch(error => console.error("dashboard update failed", error));
+      }
+    } catch (error) {
+      console.error("dashboard update failed", error);
+    }
+  };
+  run();
+  setInterval(run, seconds * 1000);
 }
