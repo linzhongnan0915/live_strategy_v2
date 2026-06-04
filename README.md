@@ -1,10 +1,106 @@
 # Live Strategy Risk Workstation (Prototype)
 
+![Overview dashboard](docs/screenshots/overview_dashboard.png)
+
 ## Executive Summary
 
-This repository is a **research and risk-monitoring framework** for a Bloomberg-style, live-style quantitative risk manager workflow. It organizes portfolio configuration, regime-aware strategy policy, numeric risk triggers, and a **prototype rule engine dry-run** that produces **monitoring alerts and proposed actions** for human review.
+This repository is a **shareable ETF risk and strategy dashboard prototype** for a Bloomberg-style, live-style quantitative risk manager workflow. It combines portfolio monitoring, factor risk, structured news triage, and walk-forward strategy evidence into a three-screen web workstation.
 
-The project supports internship and portfolio research on **after-market risk explanation**, macro regime awareness, factor and portfolio risk, and strategy governance. It is **not** a production trading system.
+The current demo simulates a USD 1,000,000 strategy-guided ETF portfolio from **2025-01-02** to **2026-06-03**, evaluates **20 ETF strategy sleeves**, and presents a current manager-review candidate: **Energy Inflation Shock Rotation** (`XLE`, `USO`, `TIP`, `GLD`, `UUP`).
+
+The project supports internship and portfolio research on **after-market risk explanation**, macro regime awareness, factor and portfolio risk, and strategy governance. It is **not** a production trading system and does not execute trades.
+
+## Live Website / Deployment
+
+The dashboard is designed to be deployed as a normal website, so the reviewer can open it without your laptop running.
+
+- Local preview requires a local server, for example `python -m http.server 8630`.
+- Public always-open access requires deployment on Render, Railway, Fly, VPS, GitHub Pages, or Cloudflare Pages.
+- For Render deployment instructions, see [DEPLOY_NOW.md](DEPLOY_NOW.md).
+- For a boss-ready walkthrough, see [BOSS_DEMO_RUNBOOK.md](BOSS_DEMO_RUNBOOK.md).
+
+Recommended first hosted deployment mode:
+
+```text
+MARKET_DATA_MODE=none
+ENABLE_POLLING=true
+POLLING_INTERVAL_SECONDS=60
+NEWS_API_URL=https://news.tcx086.com/analysis/patterns
+```
+
+This serves stable committed market/risk/strategy snapshots and polls the friend news feed. OpenBB/yfinance cloud polling can be tested after the public URL works.
+
+## Dashboard Screens
+
+| Screen | Purpose | Link |
+|--------|---------|------|
+| Overview | Portfolio value, P&L, VaR/ES proxy, drawdown, risk limit usage, strategy decision map, selected sleeve preview | `web_dashboard/index.html` |
+| Market Monitor | Bloomberg-style ETF tape, top/worst movers, monitor-only assets, live polling status | `web_dashboard/market.html` |
+| Risk Factors | Barra-style ETF proxy factor risk, risk signals, allocation, factor matrix, news/event risk triage | `web_dashboard/risk.html` |
+| Strategies | Current strategy candidate, WFO evidence, selected sleeve holdings, backtest/WFO details, strategy playbook | `web_dashboard/strategies.html` |
+
+### Risk Factors
+
+![Risk dashboard](docs/screenshots/risk_dashboard.png)
+
+### Strategy Decision Board
+
+![Strategy dashboard](docs/screenshots/strategy_dashboard.png)
+
+## Operating Workflow
+
+```mermaid
+flowchart LR
+    A["OpenBB/yfinance ETF prices"] --> B["Raw + processed price panels"]
+    N["Friend news API"] --> O["Structured news triage"]
+    B --> C["Market monitor snapshot"]
+    B --> D["Portfolio metrics + VaR/ES proxies"]
+    B --> E["Barra-style ETF proxy factor model"]
+    B --> F["20 ETF sleeve backtests"]
+    F --> G["Rolling walk-forward evaluation"]
+    O --> H["News relevance: keywords, affected assets, strategies, confidence"]
+    C --> I["Overview + Market screen"]
+    D --> J["Risk Factors screen"]
+    E --> J
+    G --> K["Strategy Decision screen"]
+    H --> J
+    H --> K
+    I --> L["Human risk manager review"]
+    J --> L
+    K --> L
+```
+
+## Strategy Selection Logic
+
+The dashboard does **not** select a strategy from total return alone.
+
+Current decision hierarchy:
+
+1. **Current market fit:** Which ETF sleeves are consistent with today's market and factor moves?
+2. **Walk-forward evidence:** 5-year training window, 12-month out-of-sample test window, 3-month rolling step, 20 rolling windows.
+3. **Risk behavior:** drawdown, VaR proxy, factor concentration, risk limit usage.
+4. **News linkage:** headline relevance, affected tickers, affected strategies, confidence, and market confirmation.
+5. **Human review gate:** no automatic strategy switch or trade execution.
+
+Current selected sleeve:
+
+| Field | Value |
+|-------|-------|
+| Strategy | Energy Inflation Shock Rotation |
+| ETF sleeve | XLE, USO, TIP, GLD, UUP |
+| Thesis | Emphasize energy and inflation-linked exposures during commodity/inflation shocks |
+| Evidence | Rolling WFO support plus current commodity/energy market fit |
+| Governance | Manager review only; not an automatic trade |
+
+## What To Say In A Demo
+
+Short version:
+
+> This is a prototype ETF risk and strategy workstation. It separates market monitoring, factor risk, and strategy decision support into three screens. The strategy page does not rank by return alone; it combines current market fit, rolling walk-forward evidence, news relevance, drawdown behavior, and a human review gate.
+
+Important limitation:
+
+> This is OpenBB/yfinance prototype data and an observable ETF proxy factor model. It is not Bloomberg tick data, not commercial Barra, not investment advice, and not automated execution.
 
 ## What This System Is
 
