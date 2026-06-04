@@ -199,6 +199,7 @@
         { label: "Source", key: "loading_source" }
       ], 16);
       renderTable("risk-news-table", newsTriage.rows, [
+        { label: "Time", value: r => fmtTime(r.timestamp ?? r.published_at) },
         { label: "Signal", value: r => statusPill(r.warning_level ?? r.watch_level), html: true },
         { label: "Severity", value: r => fmtNum(r.severity, 1) },
         { label: "Keywords", value: r => (r.keywords ?? r.topics ?? []).join(", ") || "none" },

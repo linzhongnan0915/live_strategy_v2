@@ -27,6 +27,11 @@
       <div class="top-actions">
         <div class="control-chip">WFO First</div>
         <div class="control-chip">Human Review</div>
+        <label class="control-chip control-field">Review Sleeve
+          <select id="strategy-review-select">
+            <option value="">System candidate</option>
+          </select>
+        </label>
       </div>
     </div>
 
@@ -235,7 +240,12 @@
         market,
         news
       });
-      const selected = decisionRows[0] ?? dailyReview.find(row => Number(row.wfo_rank) === 1) ?? bestWfo;
+      populateStrategyReviewSelect(decisionRows);
+      const selectedId = byId("strategy-review-select")?.value ?? "";
+      const selected = (selectedId ? decisionRows.find(row => row.strategy_id === selectedId) : null)
+        ?? decisionRows[0]
+        ?? dailyReview.find(row => Number(row.wfo_rank) === 1)
+        ?? bestWfo;
       const selectedSummary = buildSelectedStrategySummary({
         selected,
         strategyLibrary,
@@ -246,7 +256,7 @@
       });
       setText("champion-name", selected.strategy_id ?? "N/A");
       byId("champion-name").className = "metric-value accent";
-      setText("champion-action", selected.action ?? "review candidate");
+      setText("champion-action", selectedId ? "manual review mode; no allocation change" : (selected.action ?? "review candidate"));
       const championToday = byId("champion-today");
       championToday.textContent = selectedSummary.avgToday === null ? "N/A" : fmtPct(selectedSummary.avgToday);
       championToday.className = `metric-value ${signedClass(selectedSummary.avgToday)}`;
@@ -254,7 +264,10 @@
       championNews.textContent = `${selectedSummary.newsImpact.level.toUpperCase()} ${fmtNum(selectedSummary.newsImpact.severity, 1)}`;
       championNews.className = `metric-value ${selectedSummary.newsImpact.level === "red" ? "neg" : selectedSummary.newsImpact.level === "green" ? "pos" : ""}`;
       setText("champion-news-reason", selectedSummary.newsImpact.reason);
-      renderList("champion-decision-list", selectedSummary.decisionBullets);
+      renderList("champion-decision-list", [
+        ...(selectedId ? ["Manual review override: this changes the analysis sleeve only; it does not change portfolio allocation."] : []),
+        ...selectedSummary.decisionBullets
+      ]);
       renderList("champion-evidence-list", selectedSummary.evidenceBullets);
       renderList("champion-preview-list", selectedSummary.previewBullets);
       setText("champion-risk-impact", selectedSummary.riskImpact);
@@ -277,6 +290,7 @@
         { label: "OOS max DD", value: r => evidenceBadge(r.oos_max_drawdown, "drawdown"), html: true }
       ], 10);
       renderTable("champion-news-table", selectedSummary.strategyNewsRows, [
+        { label: "Time", value: r => fmtTime(r.timestamp ?? r.published_at) },
         { label: "Signal", value: r => statusPill(r.warning_level ?? r.watch_level), html: true },
         { label: "Keywords", value: r => (r.keywords ?? r.topics ?? []).join(", ") || "none" },
         { label: "Affected ETFs", value: r => (r.affected_tickers ?? []).join(", ") || "none" },
@@ -385,6 +399,19 @@
         { label: "Risk controls", key: "risk_controls" }
       ], 20);
     }
+
+    function populateStrategyReviewSelect(rows) {
+      const select = byId("strategy-review-select");
+      if (!select || select.dataset.ready === "true") return;
+      const options = rows.slice(0, 20).map((row, index) => {
+        const label = `#${index + 1} ${row.strategy_id}`;
+        return `<option value="${escapeHtml(row.strategy_id)}">${escapeHtml(label)}</option>`;
+      }).join("");
+      select.innerHTML = `<option value="">System candidate</option>${options}`;
+      select.dataset.ready = "true";
+      select.addEventListener("change", updateStrategies);
+    }
+
     startLoop(updateStrategies, 5);
   </script>
 </body>

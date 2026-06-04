@@ -1,15 +1,23 @@
 {
-  "generated_at_utc": "2026-06-04T14:10:54+00:00",
+  "generated_at_utc": "2026-06-04T14:38:20+00:00",
   "data_mode": "friend_api_macro_context",
   "official_risk_decision_allowed": false,
   "dxy": {
-    "status": "failed",
-    "error": "HTTP Error 500: Internal Server Error",
+    "generated_at_utc": "2026-06-04T14:38:19+00:00",
+    "status": "success",
+    "symbol": "DX.F",
+    "name": "US Dollar Index (DXY)",
+    "data_source": "STOOQ (DX.F)",
+    "current": 99.282,
+    "change": -0.1530000000000058,
+    "change_percent": -0.1538693618947109,
+    "previous": 99.435,
+    "date": "20260604",
     "official_risk_decision_allowed": false,
-    "note": "DXY endpoint unavailable; continue market/news monitoring."
+    "note": "DXY is macro factor context only; not an execution signal."
   },
   "upcoming_events": {
-    "generated_at_utc": "2026-06-04T14:10:54+00:00",
+    "generated_at_utc": "2026-06-04T14:38:20+00:00",
     "status": "success",
     "horizon_days": 14,
     "event_count": 6,

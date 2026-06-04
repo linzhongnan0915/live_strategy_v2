@@ -106,6 +106,19 @@ function fmtPct(value, digits = 2) {
   return `${n.toFixed(digits)}%`;
 }
 
+function fmtTime(value) {
+  if (!value) return "N/A";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return String(value).slice(0, 19);
+  return date.toLocaleString("en-US", {
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false
+  });
+}
+
 function fmtUnit(value, unit) {
   if (value === undefined || value === null || value === "N/A") return "N/A";
   const n = Number(value);

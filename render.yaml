@@ -8,9 +8,9 @@ services:
       - key: ENABLE_POLLING
         value: "true"
       - key: POLLING_INTERVAL_SECONDS
-        value: "60"
+        value: "30"
       - key: MARKET_DATA_MODE
-        value: "none"
+        value: "openbb"
       - key: NEWS_API_URL
         value: "https://news.tcx086.com/analysis/patterns"
       - key: FRIEND_API_BASE_URL

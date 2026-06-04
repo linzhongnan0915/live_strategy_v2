@@ -1,32 +1,224 @@
 {
-  "generated_at_utc": "2026-06-04T14:10:49+00:00",
+  "generated_at_utc": "2026-06-04T14:38:19+00:00",
   "status": "success",
   "data_mode": "news_monitor_friend_api",
   "api_url_configured": true,
-  "headline_count": 7,
-  "max_severity": 4.5,
+  "headline_count": 20,
+  "max_severity": 6.5,
   "urgent_review_count": 0,
-  "watch_count": 0,
-  "warning_count": 0,
+  "watch_count": 20,
+  "warning_count": 3,
   "urgent_warning_count": 0,
   "affected_strategies": [
     "inflation_protection_sleeve",
     "real_rates_duration_sleeve",
-    "risk_parity_etf_sleeve"
+    "risk_parity_etf_sleeve",
+    "usd_liquidity_stress_sleeve"
   ],
   "official_risk_decision_allowed": false,
   "note": "News severity is context for human review and strategy monitoring. It does not authorize execution.",
   "items": [
     {
       "timestamp": null,
-      "title": "Bitcoin selloff continues as prices slide below $63,000 for the first time since February",
+      "title": "When will Uttar Pradesh panchayat polls be held, mention the date: HC asks State Election Commission",
+      "summary": "Source count=5 level=high",
+      "url": "https://www.hindustantimes.com/cities/lucknow-news/when-will-uttar-pradesh-panchayat-polls-be-held-mention-the-date-hc-asks-state-election-commission-101780516370756.html",
+      "source": "Hindustan Times",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "election"
+      ],
+      "topics": [
+        "election",
+        "politics"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "No direct portfolio or strategy mapping; context only.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "How Does LA Count Election Ballots? It Begins With a Dog Sniff.",
+      "summary": "Source count=5 level=high",
+      "url": "https://www.nytimes.com/2026/06/03/us/elections/los-angeles-ballot-counting-dogs.html",
+      "source": "The New York Times",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "election"
+      ],
+      "topics": [
+        "election",
+        "politics"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "No direct portfolio or strategy mapping; context only.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Supreme Court allows Alabama to use GOP-friendly election map",
+      "summary": "Source count=5 level=high",
+      "url": "https://abcnews.com/Politics/supreme-court-allows-alabama-gop-election-map/story?id=133539423",
+      "source": "Abcnews.com",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "election"
+      ],
+      "topics": [
+        "election",
+        "politics"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "No direct portfolio or strategy mapping; context only.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Republican, Democratic strategists react to major election results in several states",
+      "summary": "Source count=5 level=high",
+      "url": "https://www.cbsnews.com/video/republican-democratic-strategists-react-to-major-election-results-in-several-states/",
+      "source": "CBS News",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "election"
+      ],
+      "topics": [
+        "election",
+        "politics"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "No direct portfolio or strategy mapping; context only.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Sotomayor Warns of \u2018Chaotic Election\u2019 in Supreme Court\u2019s Latest Redistricting Decision",
+      "summary": "Source count=5 level=high",
+      "url": "https://www.dailysignal.com/2026/06/03/sotomayor-warns-of-chaotic-election-in-supreme-courts-latest-redistricting-decision/",
+      "source": "Daily Signal",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "election"
+      ],
+      "topics": [
+        "election",
+        "politics"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "No direct portfolio or strategy mapping; context only.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Bitcoin Price Crash: BTC Nosedives 7% In One Day, Why Is Cryptocurrency Falling?",
       "summary": "Regulatory news directly impacts crypto markets impact within 1h (RELEASE) - BEARISH",
-      "url": "https://www.coindesk.com/markets/2026/06/04/bitcoin-selloff-continues-as-prices-slide-below-usd63-000-for-the-first-time-since-february",
+      "url": "https://www.news18.com/business/cryptocurrency/bitcoin-price-crash-btc-nosedives-7-in-one-day-why-is-cryptocurrency-falling-ws-l-10129379.html",
+      "source": "News18",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "crypto"
+      ],
+      "topics": [
+        "bearish",
+        "crypto",
+        "finance"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Bitcoin Price Plunges Below $62,000, Erasing Months Of Gains",
+      "summary": "Regulatory news directly impacts crypto markets impact within 1h (RELEASE) - BEARISH",
+      "url": "https://bitcoinmagazine.com/markets/bitcoin-price-plunges-below-62000-erasing-months-of-recovery-as-sell-off-accelerates",
+      "source": "Bitcoin Magazine",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "crypto"
+      ],
+      "topics": [
+        "bearish",
+        "crypto",
+        "finance"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Bitcoin briefly drops below $62,000 as $1.5 billion in crypto longs get wiped out",
+      "summary": "Regulatory news directly impacts crypto markets impact within 1h (RELEASE) - BEARISH",
+      "url": "https://www.coindesk.com/markets/2026/06/04/bitcoin-drops-below-usd62-000-as-usd1-5-billion-in-crypto-longs-get-wiped-out",
       "source": "CoinDesk",
       "published_at": null,
-      "severity": 4.5,
-      "watch_level": "info",
-      "warning_level": "info",
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
       "keywords": [
         "crypto"
       ],
@@ -42,19 +234,19 @@
       "strategy_impact": "none",
       "market_confirmations": [],
       "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
-      "confidence": 0.52,
+      "confidence": 0.59,
       "requires_human_review": false
     },
     {
       "timestamp": null,
-      "title": "Analyst Who Nailed Bitcoin 2025 Top Says He\u2019s Accumulating BTC Despite Expecting Lower Prices \u2013 Here\u2019s His Outlook",
+      "title": "Rare physical bitcoin worth $1.78 million gets cashed in after 12 years",
       "summary": "Regulatory news directly impacts crypto markets impact within 1h (RELEASE) - BEARISH",
-      "url": "https://dailyhodl.com/2026/06/03/analyst-who-nailed-bitcoin-2025-top-says-hes-accumulating-btc-despite-expecting-lower-prices-heres-his-outlook/",
-      "source": "The Daily Hodl",
+      "url": "https://www.coindesk.com/markets/2026/06/03/rare-physical-bitcoin-worth-usd1-78-million-gets-cashed-in-after-12-years",
+      "source": "CoinDesk",
       "published_at": null,
-      "severity": 4.5,
-      "watch_level": "info",
-      "warning_level": "info",
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
       "keywords": [
         "crypto"
       ],
@@ -70,79 +262,182 @@
       "strategy_impact": "none",
       "market_confirmations": [],
       "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
-      "confidence": 0.52,
+      "confidence": 0.59,
       "requires_human_review": false
     },
     {
       "timestamp": null,
-      "title": "Fed's Warsh inherits economy increasingly squeezed by inflation",
+      "title": "Here\u2019s Why The Bitcoin Price Is Crashing And What To Expect Next",
+      "summary": "Regulatory news directly impacts crypto markets impact within 1h (RELEASE) - BEARISH",
+      "url": "http://www.newsbtc.com/news/bitcoin/why-bitcoin-price-is-crashing/",
+      "source": "newsBTC",
+      "published_at": null,
+      "severity": 6.5,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "crypto"
+      ],
+      "topics": [
+        "bearish",
+        "crypto",
+        "finance"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
+      "confidence": 0.59,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Bitcoin Price Crash: BTC Nosedives 7% In One Day, Why Is Cryptocurrency Falling?",
+      "summary": "Source count=4 level=elevated",
+      "url": "https://www.news18.com/business/cryptocurrency/bitcoin-price-crash-btc-nosedives-7-in-one-day-why-is-cryptocurrency-falling-ws-l-10129379.html",
+      "source": "News18",
+      "published_at": null,
+      "severity": 6.0,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "crypto"
+      ],
+      "topics": [
+        "crypto",
+        "finance"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
+      "confidence": 0.57,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Bitcoin Price Plunges Below $62,000, Erasing Months Of Gains",
+      "summary": "Source count=4 level=elevated",
+      "url": "https://bitcoinmagazine.com/markets/bitcoin-price-plunges-below-62000-erasing-months-of-recovery-as-sell-off-accelerates",
+      "source": "Bitcoin Magazine",
+      "published_at": null,
+      "severity": 6.0,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "crypto"
+      ],
+      "topics": [
+        "crypto",
+        "finance"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
+      "confidence": 0.57,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Bitcoin briefly drops below $62,000 as $1.5 billion in crypto longs get wiped out",
+      "summary": "Source count=4 level=elevated",
+      "url": "https://www.coindesk.com/markets/2026/06/04/bitcoin-drops-below-usd62-000-as-usd1-5-billion-in-crypto-longs-get-wiped-out",
+      "source": "CoinDesk",
+      "published_at": null,
+      "severity": 6.0,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "crypto"
+      ],
+      "topics": [
+        "crypto",
+        "finance"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
+      "confidence": 0.57,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Rare physical bitcoin worth $1.78 million gets cashed in after 12 years",
+      "summary": "Source count=4 level=elevated",
+      "url": "https://www.coindesk.com/markets/2026/06/03/rare-physical-bitcoin-worth-usd1-78-million-gets-cashed-in-after-12-years",
+      "source": "CoinDesk",
+      "published_at": null,
+      "severity": 6.0,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "crypto"
+      ],
+      "topics": [
+        "crypto",
+        "finance"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
+      "confidence": 0.57,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Here\u2019s Why The Bitcoin Price Is Crashing And What To Expect Next",
+      "summary": "Source count=4 level=elevated",
+      "url": "http://www.newsbtc.com/news/bitcoin/why-bitcoin-price-is-crashing/",
+      "source": "newsBTC",
+      "published_at": null,
+      "severity": 6.0,
+      "watch_level": "watch",
+      "warning_level": "watch",
+      "keywords": [
+        "crypto"
+      ],
+      "topics": [
+        "crypto",
+        "finance"
+      ],
+      "affected_asset_class": [],
+      "affected_tickers": [],
+      "affected_strategies": [],
+      "portfolio_impact": "context only",
+      "strategy_impact": "none",
+      "market_confirmations": [],
+      "reasoning": "Crypto-specific headline; current ETF portfolio has no direct crypto sleeve, so treat as context unless spillover appears.",
+      "confidence": 0.57,
+      "requires_human_review": false
+    },
+    {
+      "timestamp": null,
+      "title": "Will rising inflation bring good news of higher interest rate for FD investors in coming RBI MPC meeting on June 5",
       "summary": "High inflation (bearish), low inflation (bullish) impact within 3h (RELEASE) - NEUTRAL",
-      "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/feds-warsh-inherits-economy-increasingly-squeezed-by-inflation/articleshow/131494709.cms",
+      "url": "https://economictimes.indiatimes.com/wealth/save/rbi-mpc-june-5-repo-rate-fd-interest-rates-will-rising-inflation-bring-good-news-of-higher-interest-rate-for-fd-investors-in-coming-rbi-meeting/articleshow/131489156.cms",
       "source": "The Economic Times",
       "published_at": null,
-      "severity": 4.0,
-      "watch_level": "info",
-      "warning_level": "watch",
-      "keywords": [
-        "fed-rates",
-        "inflation"
-      ],
-      "topics": [
-        "economy",
-        "fed-rates",
-        "inflation",
-        "neutral"
-      ],
-      "affected_asset_class": [
-        "Commodity",
-        "FX",
-        "Fixed Income"
-      ],
-      "affected_tickers": [
-        "GLD",
-        "IEF",
-        "SHY",
-        "TIP",
-        "TLT",
-        "USO",
-        "UUP",
-        "XLE"
-      ],
-      "affected_strategies": [
-        "inflation_protection_sleeve",
-        "real_rates_duration_sleeve",
-        "risk_parity_etf_sleeve"
-      ],
-      "portfolio_impact": "portfolio-relevant",
-      "strategy_impact": "strategy-linked",
-      "market_confirmations": [
-        {
-          "ticker": "GLD",
-          "latest_return_pct": 1.01765166608756,
-          "latest_close": 412.0206909179688,
-          "reason": "large ETF move"
-        },
-        {
-          "ticker": "USO",
-          "latest_return_pct": -3.556719072218828,
-          "latest_close": 135.85000610351562,
-          "reason": "large ETF move"
-        }
-      ],
-      "reasoning": "Headline maps to portfolio or strategy exposure, but lacks enough market confirmation for escalation.",
-      "confidence": 0.68,
-      "requires_human_review": false
-    },
-    {
-      "timestamp": null,
-      "title": "RBI to hold rate on Friday, future hike will depend on inflation data: Gita Gopinath",
-      "summary": "High inflation (bearish), low inflation (bullish) impact within 3h (RELEASE) - NEUTRAL",
-      "url": "https://economictimes.indiatimes.com/news/economy/policy/rbi-to-hold-rate-on-friday-future-hike-will-depend-on-inflation-data-gita-gopinath/articleshow/131485928.cms",
-      "source": "The Times of India",
-      "published_at": null,
-      "severity": 4.0,
-      "watch_level": "info",
-      "warning_level": "watch",
+      "severity": 6.0,
+      "watch_level": "watch",
+      "warning_level": "warning",
       "keywords": [
         "inflation",
         "rates"
@@ -178,31 +473,143 @@
       "market_confirmations": [
         {
           "ticker": "GLD",
-          "latest_return_pct": 1.01765166608756,
-          "latest_close": 412.0206909179688,
+          "latest_return_pct": 0.8262424688090242,
+          "latest_close": 411.239990234375,
           "reason": "large ETF move"
         },
         {
           "ticker": "USO",
-          "latest_return_pct": -3.556719072218828,
-          "latest_close": 135.85000610351562,
+          "latest_return_pct": -3.3235800286435357,
+          "latest_close": 136.17840576171875,
           "reason": "large ETF move"
         }
       ],
-      "reasoning": "Headline maps to portfolio or strategy exposure, but lacks enough market confirmation for escalation.",
-      "confidence": 0.68,
-      "requires_human_review": false
+      "reasoning": "Headline is portfolio-relevant and has market confirmation; prepare human review.",
+      "confidence": 0.75,
+      "requires_human_review": true
     },
     {
       "timestamp": null,
-      "title": "Zimbabwean president hails UN Security Council election victory",
-      "summary": "Source count=3 level=emerging",
-      "url": "https://www.lokmattimes.com/international/zimbabwean-president-hails-un-security-council-election-victory/",
-      "source": "Lokmat Times",
+      "title": "Rajesh Exports: Sebi finds 97-99% revenue inflation, bars promoter from trading",
+      "summary": "High inflation (bearish), low inflation (bullish) impact within 3h (RELEASE) - NEUTRAL",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/rajesh-exports-sebi-finds-97-99-revenue-inflation-bars-promoter-from-trading/articleshow/131486429.cms",
+      "source": "The Times of India",
       "published_at": null,
-      "severity": 3.0,
-      "watch_level": "info",
-      "warning_level": "info",
+      "severity": 6.0,
+      "watch_level": "watch",
+      "warning_level": "warning",
+      "keywords": [
+        "inflation"
+      ],
+      "topics": [
+        "economy",
+        "inflation",
+        "neutral"
+      ],
+      "affected_asset_class": [
+        "Commodity",
+        "Fixed Income"
+      ],
+      "affected_tickers": [
+        "GLD",
+        "TIP",
+        "USO",
+        "XLE"
+      ],
+      "affected_strategies": [
+        "inflation_protection_sleeve",
+        "real_rates_duration_sleeve"
+      ],
+      "portfolio_impact": "portfolio-relevant",
+      "strategy_impact": "strategy-linked",
+      "market_confirmations": [
+        {
+          "ticker": "GLD",
+          "latest_return_pct": 0.8262424688090242,
+          "latest_close": 411.239990234375,
+          "reason": "large ETF move"
+        },
+        {
+          "ticker": "USO",
+          "latest_return_pct": -3.3235800286435357,
+          "latest_close": 136.17840576171875,
+          "reason": "large ETF move"
+        }
+      ],
+      "reasoning": "Headline is portfolio-relevant and has market confirmation; prepare human review.",
+      "confidence": 0.75,
+      "requires_human_review": true
+    },
+    {
+      "timestamp": null,
+      "title": "Williams: New tariffs unlikely to impact inflation significantly",
+      "summary": "High inflation (bearish), low inflation (bullish) impact within 3h (RELEASE) - NEUTRAL",
+      "url": "https://cryptobriefing.com/williams-new-tariffs-unlikely-to-impact-inflation-significantly/",
+      "source": "Crypto Briefing",
+      "published_at": null,
+      "severity": 6.0,
+      "watch_level": "watch",
+      "warning_level": "warning",
+      "keywords": [
+        "inflation",
+        "tariffs"
+      ],
+      "topics": [
+        "economy",
+        "inflation",
+        "neutral",
+        "tariffs"
+      ],
+      "affected_asset_class": [
+        "Commodity",
+        "Equity",
+        "FX",
+        "Fixed Income"
+      ],
+      "affected_tickers": [
+        "GLD",
+        "TIP",
+        "USO",
+        "UUP",
+        "XLB",
+        "XLE",
+        "XLI"
+      ],
+      "affected_strategies": [
+        "inflation_protection_sleeve",
+        "real_rates_duration_sleeve",
+        "usd_liquidity_stress_sleeve"
+      ],
+      "portfolio_impact": "portfolio-relevant",
+      "strategy_impact": "strategy-linked",
+      "market_confirmations": [
+        {
+          "ticker": "GLD",
+          "latest_return_pct": 0.8262424688090242,
+          "latest_close": 411.239990234375,
+          "reason": "large ETF move"
+        },
+        {
+          "ticker": "USO",
+          "latest_return_pct": -3.3235800286435357,
+          "latest_close": 136.17840576171875,
+          "reason": "large ETF move"
+        }
+      ],
+      "reasoning": "Headline is portfolio-relevant and has market confirmation; prepare human review.",
+      "confidence": 0.75,
+      "requires_human_review": true
+    },
+    {
+      "timestamp": null,
+      "title": "When will Uttar Pradesh panchayat polls be held, mention the date: HC asks State Election Commission",
+      "summary": "Topic gaining mainstream traction",
+      "url": "https://www.hindustantimes.com/cities/lucknow-news/when-will-uttar-pradesh-panchayat-polls-be-held-mention-the-date-hc-asks-state-election-commission-101780516370756.html",
+      "source": "Hindustan Times",
+      "published_at": null,
+      "severity": 6.0,
+      "watch_level": "watch",
+      "warning_level": "watch",
       "keywords": [
         "election"
       ],
@@ -217,44 +624,19 @@
       "strategy_impact": "none",
       "market_confirmations": [],
       "reasoning": "No direct portfolio or strategy mapping; context only.",
-      "confidence": 0.47,
+      "confidence": 0.57,
       "requires_human_review": false
     },
     {
       "timestamp": null,
-      "title": "Shalimar Zone backs KN Group in Lahore cricket elections 2026",
-      "summary": "Source count=3 level=emerging",
-      "url": "https://www.nation.com.pk/04-Jun-2026/shalimar-zone-backs-kn-group-lahore-cricket-elections-2026",
-      "source": "The Nation",
+      "title": "How Does LA Count Election Ballots? It Begins With a Dog Sniff.",
+      "summary": "Topic gaining mainstream traction",
+      "url": "https://www.nytimes.com/2026/06/03/us/elections/los-angeles-ballot-counting-dogs.html",
+      "source": "The New York Times",
       "published_at": null,
-      "severity": 3.0,
-      "watch_level": "info",
-      "warning_level": "info",
-      "keywords": [],
-      "topics": [
-        "election",
-        "politics"
-      ],
-      "affected_asset_class": [],
-      "affected_tickers": [],
-      "affected_strategies": [],
-      "portfolio_impact": "context only",
-      "strategy_impact": "none",
-      "market_confirmations": [],
-      "reasoning": "No direct portfolio or strategy mapping; context only.",
-      "confidence": 0.47,
-      "requires_human_review": false
-    },
-    {
-      "timestamp": null,
-      "title": "Xavier Becerra goes up slightly in new election results, Hilton still leads",
-      "summary": "Source count=3 level=emerging",
-      "url": "https://abc7.com/live-updates/california-primary-election-2026-voters-decide-key-races-governor-los-angeles-mayor-congressional-districts/19213908/entry/19230268/",
-      "source": "KABC-TV",
-      "published_at": null,
-      "severity": 3.0,
-      "watch_level": "info",
-      "warning_level": "info",
+      "severity": 6.0,
+      "watch_level": "watch",
+      "warning_level": "watch",
       "keywords": [
         "election"
       ],
@@ -269,7 +651,7 @@
       "strategy_impact": "none",
       "market_confirmations": [],
       "reasoning": "No direct portfolio or strategy mapping; context only.",
-      "confidence": 0.47,
+      "confidence": 0.57,
       "requires_human_review": false
     }
   ]

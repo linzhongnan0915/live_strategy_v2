@@ -624,7 +624,7 @@
         ...newsTriage.rows.slice(0, 4).map(row => ({
           level: row.decision.includes("human") ? "yellow" : row.watch_level,
           title: row.title,
-          meta: `${row.source ?? "source N/A"} | ${row.exposure} | confidence ${fmtNum(Math.min(0.88, 0.35 + Number(row.severity || 0) / 14), 2)}`,
+          meta: `${fmtTime(row.timestamp ?? row.published_at)} | ${row.source ?? "source N/A"} | ${row.exposure} | confidence ${fmtNum(Math.min(0.88, 0.35 + Number(row.severity || 0) / 14), 2)}`,
           right: row.decision
         }))
       ].slice(0, 7);
