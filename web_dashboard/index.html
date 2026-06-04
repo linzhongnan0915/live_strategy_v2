@@ -132,7 +132,7 @@
           <div id="stress-table"></div>
         </div>
         <div class="card">
-          <div class="section-title"><h2>Factor Exposures</h2><span class="small">Barra-style proxy, not Barra</span></div>
+          <div class="section-title"><h2>Factor Exposures</h2><span class="small">non-additive risk lens, not portfolio weights</span></div>
           <div id="factor-exposure-table"></div>
         </div>
         <div class="card">
@@ -800,22 +800,65 @@
         { label: "% PV", value: r => `<span class="neg">${fmtPct(r.impact / PORTFOLIO_BASE * 100)}</span>`, html: true }
       ], 8);
 
-      const factorRows = [
-        { factor: "Market beta", exposure: positions.filter(p => p.asset_class === "Equity").reduce((s, p) => s + p.target_weight, 0), risk: "Equity drawdown" },
-        { factor: "Interest rate", exposure: positions.filter(p => /rates|duration/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0), risk: "Duration shock" },
-        { factor: "Credit", exposure: positions.filter(p => /credit|debt/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0), risk: "Spread widening" },
-        { factor: "FX / USD", exposure: positions.filter(p => p.asset_class === "FX" || /usd|intl/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0), risk: "USD pressure" },
-        { factor: "Commodity", exposure: positions.filter(p => p.asset_class === "Commodity" || /energy|real_assets/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0), risk: "Oil/gold shock" },
-        { factor: "Volatility", exposure: Number(metrics.metrics?.["VIX level"] ?? 0) / 100, risk: "VIX regime" }
-      ].map(row => ({
+      const factorDraft = [
+        {
+          factor: "Market beta",
+          type: "portfolio exposure",
+          exposure: positions.filter(p => p.asset_class === "Equity").reduce((s, p) => s + p.target_weight, 0),
+          varContribution: positions.filter(p => p.asset_class === "Equity").reduce((s, p) => s + p.var95, 0),
+          risk: "Equity drawdown"
+        },
+        {
+          factor: "Rates / duration",
+          type: "portfolio exposure",
+          exposure: positions.filter(p => /rates|duration|inflation/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0),
+          varContribution: positions.filter(p => /rates|duration|inflation/.test(p.risk_bucket)).reduce((s, p) => s + p.var95, 0),
+          risk: "Duration or inflation-linked bond shock"
+        },
+        {
+          factor: "Credit",
+          type: "portfolio exposure",
+          exposure: positions.filter(p => /credit|debt/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0),
+          varContribution: positions.filter(p => /credit|debt/.test(p.risk_bucket)).reduce((s, p) => s + p.var95, 0),
+          risk: "Spread widening"
+        },
+        {
+          factor: "FX / USD",
+          type: "portfolio exposure",
+          exposure: positions.filter(p => p.asset_class === "FX" || /usd|intl/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0),
+          varContribution: positions.filter(p => p.asset_class === "FX" || /usd|intl/.test(p.risk_bucket)).reduce((s, p) => s + p.var95, 0),
+          risk: "USD pressure"
+        },
+        {
+          factor: "Commodity shock",
+          type: "commodity-sensitive exposure",
+          exposure: positions.filter(p => p.asset_class === "Commodity" || /energy|real_assets/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0),
+          varContribution: positions.filter(p => p.asset_class === "Commodity" || /energy|real_assets/.test(p.risk_bucket)).reduce((s, p) => s + p.var95, 0),
+          risk: "Oil/gold shock"
+        },
+        {
+          factor: "Volatility regime",
+          type: "market signal",
+          exposure: null,
+          signal: Number(metrics.metrics?.["VIX level"] ?? 0),
+          varContribution: 0,
+          risk: "VIX monitor, not held exposure"
+        }
+      ];
+      const factorRiskTotal = factorDraft.reduce((sum, row) => sum + Math.max(0, Number(row.varContribution) || 0), 0) || 1;
+      const factorRows = factorDraft.map(row => ({
         ...row,
-        _tooltip: `${row.factor}: exposure ${fmtPct(row.exposure * 100)} | risk lens: ${row.risk}`
+        displayExposure: row.exposure === null ? `VIX ${fmtNum(row.signal, 2)}` : fmtPct(row.exposure * 100),
+        riskShare: row.exposure === null ? "monitor" : fmtPct(Math.max(0, Number(row.varContribution) || 0) / factorRiskTotal * 100),
+        _tooltip: row.exposure === null
+          ? `${row.factor}: ${row.displayExposure}. This is a regime signal, not portfolio weight.`
+          : `${row.factor}: ${row.displayExposure} ${row.type}. Factor lenses can overlap, so these do not add to 100%. Risk share is normalized within this proxy table.`
       }));
       renderTable("factor-exposure-table", factorRows, [
         { label: "Factor", key: "factor" },
-        { label: "Exposure", value: r => fmtPct(r.exposure * 100) },
-        { label: "% of Risk", value: r => fmtPct(Math.min(42, Math.max(2, r.exposure * 60))) },
-        { label: "Risk", key: "risk" }
+        { label: "Signal / Exposure", key: "displayExposure" },
+        { label: "Risk share proxy", key: "riskShare" },
+        { label: "Interpretation", key: "risk" }
       ], 8);
 
       const corrRows = [
