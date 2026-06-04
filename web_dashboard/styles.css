@@ -515,6 +515,17 @@ th {
   z-index: 1;
 }
 
+tbody tr:hover {
+  background: rgba(78, 161, 255, 0.07);
+}
+
+td[title],
+tr[title],
+.bar-row[title],
+.heatmap-table td[title] {
+  cursor: help;
+}
+
 .table-wrap {
   max-height: 560px;
   overflow: auto;
@@ -531,6 +542,11 @@ th {
 .heatmap-table td:first-child,
 .heatmap-table th:first-child {
   text-align: left;
+}
+
+.heatmap-table td[title]:hover {
+  outline: 1px solid rgba(216, 236, 255, 0.55);
+  outline-offset: -1px;
 }
 
 .hm-green {
@@ -703,6 +719,14 @@ th {
   align-items: center;
   margin: 8px 0;
   font-size: 13px;
+}
+
+.bar-row:hover {
+  color: #d9ecff;
+}
+
+.bar-row:hover .bar-track {
+  border-color: rgba(78, 161, 255, 0.65);
 }
 
 .bar-track {

@@ -180,7 +180,8 @@ function renderTable(id, rows, columns, limit = 100) {
       const html = col.html ? raw : escapeHtml(raw);
       return `<td>${html}</td>`;
     }).join("");
-    return `<tr>${cells}</tr>`;
+    const rowTitle = row.tooltip ?? row._tooltip ?? "";
+    return `<tr title="${escapeHtml(rowTitle)}">${cells}</tr>`;
   }).join("");
   const head = columns.map(col => `<th>${escapeHtml(col.label)}</th>`).join("");
   target.innerHTML = `<div class="table-wrap"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
@@ -392,8 +393,9 @@ function renderBars(id, rows, maxRows = 12) {
     const value = Number(row.value) || 0;
     const width = Math.min(100, Math.abs(value) / max * 100);
     const sign = value < 0 ? "negative" : "positive";
+    const title = row.tooltip ?? `${row.name}: ${fmtPct(value)}`;
     return `
-      <div class="bar-row">
+      <div class="bar-row" title="${escapeHtml(title)}">
         <div>${escapeHtml(row.name)}</div>
         <div class="bar-track"><div class="bar ${sign}" style="width:${width}%"></div></div>
         <div class="${signedClass(value)}">${fmtPct(value)}</div>

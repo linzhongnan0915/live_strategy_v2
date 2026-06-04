@@ -493,7 +493,7 @@
       const body = rows.map(row => `<tr><td>${escapeHtml(row.name)}</td>${cols.map(col => {
         const value = Number(row[col]);
         const cls = value >= 20 ? "hm-red" : value >= 12 ? "hm-yellow" : "hm-green";
-        return `<td class="${cls}">${fmtPct(value)}</td>`;
+        return `<td class="${cls}" title="${escapeHtml(`${row.name} ${col}: ${fmtPct(value)} VaR bucket proxy`)}">${fmtPct(value)}</td>`;
       }).join("")}</tr>`).join("");
       target.innerHTML = `<table class="heatmap-table">${head}${body}</table><div class="small">Values represent approximate contribution to VaR buckets.</div>`;
     }
@@ -560,7 +560,11 @@
           <ul class="compact-list">${(preview.watch_items ?? []).map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
         </div>
       `;
-      renderTable("simulation-holdings-table", positions, [
+      const sleeveRows = positions.map(row => ({
+        ...row,
+        _tooltip: `${row.ticker}: ${row.asset_class} | ${row.risk_bucket} | market value ${money(row.market_value)} | today ${fmtPct(row.latest_return_pct)} | VaR ${money(row.var95)}`
+      }));
+      renderTable("simulation-holdings-table", sleeveRows, [
         { label: "ETF", key: "ticker" },
         { label: "Weight", value: r => fmtPct(Number(r.sleeve_weight ?? r.target_weight) * 100) },
         { label: "Market value", value: r => money(r.market_value) },
@@ -662,7 +666,10 @@
         { scenario: "Credit spread widening", description: "+150 bps IG / +300 bps HY", impact: -filteredPositions.filter(p => /credit|debt/.test(p.risk_bucket)).reduce((s, p) => s + p.market_value, 0) * 0.09 },
         { scenario: "USD rally", description: "+10% USD index", impact: -filteredPositions.filter(p => p.asset_class === "FX" || /intl|emerging/.test(p.risk_bucket)).reduce((s, p) => s + p.market_value, 0) * 0.05 },
         { scenario: "Commodity shock", description: "-20% oil / -15% metals", impact: -filteredPositions.filter(p => p.asset_class === "Commodity" || /energy|real_assets/.test(p.risk_bucket)).reduce((s, p) => s + p.market_value, 0) * 0.16 }
-      ];
+      ].map(row => ({
+        ...row,
+        _tooltip: `${row.scenario}: ${row.description} | estimated P&L impact ${money(row.impact)} (${fmtPct(row.impact / PORTFOLIO_BASE * 100)} of base portfolio)`
+      }));
       renderTable("stress-table", stressRows, [
         { label: "Scenario", key: "scenario" },
         { label: "Description", key: "description" },
@@ -677,7 +684,10 @@
         { factor: "FX / USD", exposure: positions.filter(p => p.asset_class === "FX" || /usd|intl/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0), risk: "USD pressure" },
         { factor: "Commodity", exposure: positions.filter(p => p.asset_class === "Commodity" || /energy|real_assets/.test(p.risk_bucket)).reduce((s, p) => s + p.target_weight, 0), risk: "Oil/gold shock" },
         { factor: "Volatility", exposure: Number(metrics.metrics?.["VIX level"] ?? 0) / 100, risk: "VIX regime" }
-      ];
+      ].map(row => ({
+        ...row,
+        _tooltip: `${row.factor}: exposure ${fmtPct(row.exposure * 100)} | risk lens: ${row.risk}`
+      }));
       renderTable("factor-exposure-table", factorRows, [
         { label: "Factor", key: "factor" },
         { label: "Exposure", value: r => fmtPct(r.exposure * 100) },
@@ -718,7 +728,11 @@
       renderAlerts(newsTriage, profileAlerts);
       renderAllocationPie("overview-allocation", groupAllocation(filteredPositions, "asset_class", "target_weight"), { label: "asset class allocation" });
       setText("allocation-caption", simulationReady ? `${money(snap.portfolioValue)} current selected sleeve` : "$1M simulated portfolio");
-      renderTable("top-positions", filteredPositions, [
+      const positionTableRows = filteredPositions.map(row => ({
+        ...row,
+        _tooltip: `${row.ticker}: ${row.asset_class} | ${row.risk_bucket} | weight ${fmtPct(Number(row.target_weight) * 100)} | market value ${money(row.market_value)} | P&L ${money(row.daily_pnl)} | VaR ${money(row.var95)} | utilization ${fmtPct(row.utilization * 100)}`
+      }));
+      renderTable("top-positions", positionTableRows, [
         { label: "Asset", key: "ticker" },
         { label: "Type", key: "asset_class" },
         { label: "Exposure", value: r => money(r.market_value) },
