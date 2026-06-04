@@ -174,7 +174,7 @@
         { label: "Close", value: r => fmtNum(r.close, 2) },
         { label: "Latest move", value: r => `<span class="${signedClass(r.ret)}">${fmtPct(r.ret)}</span>`, html: true },
         { label: "Date", key: "date" },
-        { label: "Timing", key: "timing" }
+        { label: "Timing", value: r => `<span title="${escapeHtml(timingTooltip(r.timing))}">${escapeHtml(timingLabel(r.timing))}</span>`, html: true }
       ], 12);
 
       renderTable("risk-signals", risk.signals, [

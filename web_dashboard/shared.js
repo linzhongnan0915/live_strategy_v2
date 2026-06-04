@@ -158,6 +158,23 @@ function signalClass(level) {
   return "";
 }
 
+function timingLabel(value) {
+  const v = String(value ?? "").toLowerCase();
+  if (v === "newer_than_official_eod") return "Live";
+  if (v === "official_eod_aligned") return "EOD";
+  if (v === "stale_vs_official_eod") return "Stale";
+  if (!v || v === "undefined" || v === "null") return "N/A";
+  return value;
+}
+
+function timingTooltip(value) {
+  const v = String(value ?? "").toLowerCase();
+  if (v === "newer_than_official_eod") return "Latest observation is newer than the official EOD anchor; live monitor context only.";
+  if (v === "official_eod_aligned") return "Latest observation matches the official EOD anchor.";
+  if (v === "stale_vs_official_eod") return "Latest observation is older than the official EOD anchor; verify data freshness.";
+  return "Timing status from market monitor.";
+}
+
 function scoreBadge(value) {
   const n = Number(value);
   if (!Number.isFinite(n)) return `<span class="score-badge low">N/A</span>`;

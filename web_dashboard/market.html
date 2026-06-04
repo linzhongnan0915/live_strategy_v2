@@ -117,7 +117,7 @@
         { label: "Close", value: r => fmtNum(r.latest_close) },
         { label: "Return", value: r => `<span class="${signedClass(r.latest_return_pct)}">${fmtPct(r.latest_return_pct)}</span>`, html: true },
         { label: "Date", key: "latest_date" },
-        { label: "Timing", key: "timing_status" }
+        { label: "Timing", value: r => `<span title="${escapeHtml(timingTooltip(r.timing_status))}">${escapeHtml(timingLabel(r.timing_status))}</span>`, html: true }
       ];
       renderTable("top-movers", [...investable].sort((a, b) => Number(b.latest_return_pct) - Number(a.latest_return_pct)), columns, 8);
       renderTable("worst-movers", [...investable].sort((a, b) => Number(a.latest_return_pct) - Number(b.latest_return_pct)), columns, 8);
