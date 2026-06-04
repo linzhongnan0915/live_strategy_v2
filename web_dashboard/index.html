@@ -79,6 +79,19 @@
         </div>
       </section>
 
+      <section class="focus-lens-grid section">
+        <div class="card lens-card">
+          <div class="metric-label">Risk Profile Lens</div>
+          <div id="risk-profile-lens-title" class="framework-main">...</div>
+          <div id="risk-profile-lens-detail" class="metric-sub"></div>
+        </div>
+        <div class="card lens-card">
+          <div class="metric-label">Asset Class Focus</div>
+          <div id="asset-focus-title" class="framework-main">...</div>
+          <div id="asset-focus-detail" class="metric-sub"></div>
+        </div>
+      </section>
+
       <section class="overview-decision-map section">
         <a class="decision-step-card" href="#market-risk-section">
           <span class="step-number">1</span>
@@ -191,9 +204,39 @@
   <script>
     const PORTFOLIO_BASE = 1000000;
     const RISK_PROFILES = {
-      conservative: { label: "Conservative", varLimit: 100000, equityLimit: 0.55, drawdownLimit: -0.08, warning: 0.70, critical: 0.90 },
-      balanced: { label: "Balanced", varLimit: 24000, equityLimit: 0.65, drawdownLimit: -0.12, warning: 0.80, critical: 1.00 },
-      aggressive: { label: "Aggressive", varLimit: 32000, equityLimit: 0.75, drawdownLimit: -0.18, warning: 0.90, critical: 1.15 }
+      conservative: {
+        label: "Conservative",
+        varLimit: 100000,
+        equityLimit: 0.45,
+        drawdownLimit: -0.08,
+        warning: 0.65,
+        critical: 0.85,
+        heatmapScale: 1.18,
+        posture: "Defensive review first",
+        detail: "Tighter equity, drawdown, and VaR tolerance. Strategy changes require stronger confirmation and human review."
+      },
+      balanced: {
+        label: "Balanced",
+        varLimit: 140000,
+        equityLimit: 0.60,
+        drawdownLimit: -0.12,
+        warning: 0.80,
+        critical: 1.00,
+        heatmapScale: 1.00,
+        posture: "Balanced risk budget",
+        detail: "Standard risk budget. Strategy review can proceed when market signals, WFO evidence, and news/risk checks agree."
+      },
+      aggressive: {
+        label: "Aggressive",
+        varLimit: 200000,
+        equityLimit: 0.75,
+        drawdownLimit: -0.18,
+        warning: 0.90,
+        critical: 1.15,
+        heatmapScale: 0.86,
+        posture: "Higher risk tolerance",
+        detail: "Higher VaR/equity tolerance and looser drawdown gate. This allows more offensive review, not automatic trading."
+      }
     };
     const BUCKET_VOL = {
       core_equity: 0.014,
@@ -287,8 +330,10 @@
     function simulationSnapshot(simulation, positions, riskProfile) {
       const current = simulation.current ?? {};
       const portfolioValue = Number(current.portfolio_value) || PORTFOLIO_BASE;
-      const dailyPnl = Number(current.daily_pnl) || 0;
-      const dailyReturn = Number(current.daily_return) || dailyPnl / portfolioValue;
+      const livePositionPnl = positions.reduce((sum, row) => sum + (Number(row.daily_pnl) || 0), 0);
+      const hasLivePositionMove = positions.some(row => Number.isFinite(Number(row.latest_return_pct)));
+      const dailyPnl = hasLivePositionMove ? livePositionPnl : Number(current.daily_pnl) || 0;
+      const dailyReturn = portfolioValue ? dailyPnl / portfolioValue : Number(current.daily_return) || 0;
       const var95 = Math.sqrt(positions.reduce((sum, row) => sum + row.var95 ** 2, 0)) * 1.22;
       const es95 = var95 * 1.32;
       const maxDrawdown = Number(current.max_drawdown) || 0;
@@ -307,8 +352,10 @@
     function selectedRiskProfile() {
       const key = byId("risk-profile")?.value ?? "conservative";
       const base = RISK_PROFILES[key] ?? RISK_PROFILES.conservative;
-      const customLimit = Number(byId("risk-limit-input")?.value);
-      return { ...base, key, varLimit: Number.isFinite(customLimit) && customLimit > 0 ? customLimit : base.varLimit };
+      const limitInput = byId("risk-limit-input");
+      const customLimit = Number(limitInput?.value);
+      const hasCustomLimit = limitInput?.dataset.userEdited === "true";
+      return { ...base, key, varLimit: hasCustomLimit && Number.isFinite(customLimit) && customLimit > 0 ? customLimit : base.varLimit };
     }
 
     function selectedAssetClass() {
@@ -425,6 +472,33 @@
       }));
     }
 
+    function latestMarketDate(market, status, metrics) {
+      const dates = [
+        status.latest_observed_date,
+        market.latest_observed_date,
+        market.official_eod_date,
+        metrics.as_of_date,
+        ...(market.items ?? []).map(row => row.latest_date)
+      ].filter(Boolean).map(String);
+      if (!dates.length) return "N/A";
+      return dates.sort().at(-1);
+    }
+
+    function assetFocusSummary(positions, filteredPositions, riskProfile) {
+      const selected = selectedAssetClass();
+      const focusRows = selected === "all" ? positions : filteredPositions;
+      const rows = focusRows.length ? focusRows : positions;
+      const weight = rows.reduce((sum, row) => sum + (Number(row.target_weight) || 0), 0);
+      const pnl = rows.reduce((sum, row) => sum + (Number(row.daily_pnl) || 0), 0);
+      const var95 = rows.reduce((sum, row) => sum + (Number(row.var95) || 0), 0);
+      const topBucket = groupSum(rows, "risk_bucket", "var95").sort((a, b) => b.value - a.value)[0]?.name ?? "N/A";
+      return {
+        title: selected === "all" ? "Full portfolio lens" : `${selected} focus lens`,
+        detail: `${fmtPct(weight * 100)} weight | live P&L ${money(pnl)} | VaR proxy ${money(var95)} | top risk bucket ${topBucket}. Heatmap remains full portfolio; this filter drills into allocation, positions, and stress exposure.`,
+        profile: `${riskProfile.posture}: ${riskProfile.detail}`
+      };
+    }
+
     function renderLineChart(id, rows, options = {}) {
       const target = byId(id);
       if (!target || !rows.length) return;
@@ -440,6 +514,16 @@
       const area = `${path} L${scaleX(rows.length - 1)},${height - pad} L${pad},${height - pad} Z`;
       const tickIndices = [...new Set([0, Math.floor((rows.length - 1) * 0.25), Math.floor((rows.length - 1) * 0.5), Math.floor((rows.length - 1) * 0.75), rows.length - 1])]
         .filter(index => index >= 0 && index < rows.length);
+      const tickCount = 5;
+      const yTicks = Array.from({ length: tickCount }, (_, index) => {
+        const value = min + (max - min) * index / Math.max(1, tickCount - 1);
+        const y = scaleY(value);
+        const label = `${fmtNum(value, 1)}%`;
+        return `
+          <line class="chart-grid" x1="${pad}" y1="${y}" x2="${width - pad}" y2="${y}"></line>
+          <text class="chart-y-label" x="${pad - 7}" y="${y + 3}" text-anchor="end">${escapeHtml(label)}</text>
+        `;
+      }).join("");
       const xTicks = tickIndices.map(index => {
         const x = scaleX(index);
         const label = rows[index]?.label ?? "";
@@ -453,11 +537,18 @@
         const x = scaleX(i);
         const y = scaleY(Number(row.value));
         const tooltip = row.tooltip ?? `${row.label}\n${options.title ?? "Value"}: ${fmtPct(row.value)}`;
-        return `<circle class="chart-hover-point" cx="${x}" cy="${y}" r="7" data-tip="${escapeHtml(tooltip)}"></circle>`;
+        return `
+          <g class="chart-hover-group">
+            <line class="chart-crosshair" x1="${x}" y1="${pad}" x2="${x}" y2="${height - pad}"></line>
+            <line class="chart-crosshair" x1="${pad}" y1="${y}" x2="${width - pad}" y2="${y}"></line>
+            <circle class="chart-hover-point" cx="${x}" cy="${y}" r="7" data-tip="${escapeHtml(tooltip)}"></circle>
+          </g>
+        `;
       }).join("");
       target.innerHTML = `
         <svg class="svg-chart terminal-chart" viewBox="0 0 ${width} ${height}">
           <path d="${area}" fill="${options.area ?? "rgba(45, 140, 255, 0.16)"}"></path>
+          ${yTicks}
           ${xTicks}
           <path d="${path}" fill="none" stroke="${options.color ?? "#2d8cff"}" stroke-width="2.2"></path>
           <line class="chart-axis" x1="${pad}" y1="${height - pad}" x2="${width - pad}" y2="${height - pad}"></line>
@@ -491,7 +582,8 @@
       });
     }
 
-    function riskHeatmapRows(positions) {
+    function riskHeatmapRows(positions, riskProfile) {
+      const scale = Number(riskProfile?.heatmapScale) || 1;
       const families = [
         { name: "Equities", test: p => p.asset_class === "Equity" },
         { name: "Rates", test: p => /rates|duration|inflation/.test(p.risk_bucket) },
@@ -502,7 +594,7 @@
       ];
       return families.map(family => {
         const subset = positions.filter(family.test);
-        const risk = subset.reduce((sum, row) => sum + row.var95, 0) / Math.max(1, positions.reduce((sum, row) => sum + row.var95, 0));
+        const risk = subset.reduce((sum, row) => sum + row.var95, 0) / Math.max(1, positions.reduce((sum, row) => sum + row.var95, 0)) * scale;
         return { name: family.name, low: Math.max(2, risk * 12), moderate: Math.max(8, risk * 28), high: Math.max(4, risk * 38), veryHigh: Math.max(1, risk * 18) };
       });
     }
@@ -517,7 +609,7 @@
         const cls = value >= 20 ? "hm-red" : value >= 12 ? "hm-yellow" : "hm-green";
         return `<td class="${cls}" title="${escapeHtml(`${row.name} ${col}: ${fmtPct(value)} VaR bucket proxy`)}">${fmtPct(value)}</td>`;
       }).join("")}</tr>`).join("");
-      target.innerHTML = `<table class="heatmap-table">${head}${body}</table><div class="small">Values represent approximate contribution to VaR buckets.</div>`;
+      target.innerHTML = `<table class="heatmap-table">${head}${body}</table><div class="small">Values represent approximate contribution to VaR buckets. Risk style changes policy tolerance, not actual holdings.</div>`;
     }
 
     function renderAlerts(newsTriage, riskSignals) {
@@ -556,6 +648,9 @@
         renderTable("simulation-holdings-table", [], []);
         return;
       }
+      const liveSleeveReturn = positions.length
+        ? positions.reduce((sum, row) => sum + (Number(row.latest_return_pct) || 0) * (Number(row.sleeve_weight ?? row.target_weight) || 0), 0)
+        : Number(current.daily_return) * 100;
       currentNode.innerHTML = `
         <div class="decision-card">
           <div class="metric-label">Selected strategy</div>
@@ -564,7 +659,7 @@
           <div class="decision-grid">
             <div><span>Total return</span><strong class="pos">${fmtPct(Number(current.total_return) * 100)}</strong></div>
             <div><span>Max drawdown</span><strong class="neg">${fmtPct(Number(current.max_drawdown) * 100)}</strong></div>
-            <div><span>Today return</span><strong class="${signedClass(current.daily_return)}">${fmtPct(Number(current.daily_return) * 100)}</strong></div>
+            <div><span>Live sleeve move</span><strong class="${signedClass(liveSleeveReturn)}">${fmtPct(liveSleeveReturn)}</strong></div>
           </div>
           <p><strong>Why this sleeve:</strong> ${escapeHtml(current.current_strategy_objective ?? "N/A")}</p>
           <p><strong>Signal:</strong> ${escapeHtml(current.core_signal ?? "N/A")}</p>
@@ -645,12 +740,13 @@
         : portfolioSnapshot(rows, backtest.items ?? [], riskProfile);
       const risk = calculateRiskSignals(market, news, metrics);
       const newsTriage = buildNewsTriage(news, market);
-      const asOf = simulation.as_of_date ?? market.official_eod_date ?? status.latest_observed_date ?? metrics.as_of_date ?? "N/A";
+      const liveAsOf = latestMarketDate(market, status, metrics);
+      const strategyAsOf = simulation.as_of_date ?? metrics.as_of_date ?? "N/A";
 
-      setText("date-chip", `As of ${asOf}`);
+      setText("date-chip", `Live ${liveAsOf}`);
       setText("overview-subtitle", simulationReady
-        ? `As of ${asOf} | invested ${simulation.simulation_start_actual} | no-look-ahead monthly strategy simulation`
-        : `As of ${asOf} | source: ${market.data_mode ?? "snapshot"} | $1,000,000 simulated ETF portfolio`
+        ? `Live monitor ${liveAsOf} | strategy simulation ${strategyAsOf} | invested ${simulation.simulation_start_actual} | no-look-ahead monthly strategy simulation`
+        : `Live monitor ${liveAsOf} | source: ${market.data_mode ?? "snapshot"} | $1,000,000 simulated ETF portfolio`
       );
       setText("portfolio-value", money(snap.portfolioValue));
       const valueDelta = byId("portfolio-change");
@@ -669,7 +765,12 @@
       util.textContent = fmtPct(utilPct);
       util.className = `metric-value ${utilPct >= 90 ? "neg" : utilPct >= 70 ? "warn" : "pos"}`;
       byId("risk-util-bar").style.width = `${Math.min(100, utilPct)}%`;
-      byId("risk-util-sub").textContent = `${riskProfile.label} profile | limit ${money(riskProfile.varLimit)}`;
+      byId("risk-util-sub").textContent = `${riskProfile.label} profile | limit ${money(riskProfile.varLimit)} | equity gate ${fmtPct(riskProfile.equityLimit * 100)}`;
+      const focus = assetFocusSummary(positions, filteredPositions, riskProfile);
+      setText("risk-profile-lens-title", `${riskProfile.label}: ${riskProfile.posture}`);
+      setText("risk-profile-lens-detail", `${riskProfile.detail} Current utilization ${fmtPct(utilPct)} vs warning ${fmtPct(riskProfile.warning * 100)} / critical ${fmtPct(riskProfile.critical * 100)}.`);
+      setText("asset-focus-title", focus.title);
+      setText("asset-focus-detail", focus.detail);
 
       const perfPath = simulationReady ? performancePathFromSimulation(simulation) : demoPath(snap.dailyReturn);
       const ddPath = simulationReady ? drawdownPathFromSimulation(simulation) : drawdownsFromPath(perfPath);
@@ -680,7 +781,7 @@
       const chartMaxDrawdown = simulationReady ? Number(simulation.current.max_drawdown) * 100 : Math.min(...ddPath.map(x => x.value));
       renderLineChart("drawdown-chart", ddPath, { color: "#ff5164", area: "rgba(255, 81, 100, 0.18)", title: simulationReady ? "Simulation drawdown" : "Drawdown proxy", footer: `Max ${fmtPct(chartMaxDrawdown)}` });
       setText("drawdown-label", `max ${fmtPct(chartMaxDrawdown)}`);
-      renderHeatmap("risk-heatmap", riskHeatmapRows(filteredPositions.length ? filteredPositions : positions));
+      renderHeatmap("risk-heatmap", riskHeatmapRows(positions, riskProfile));
 
       const stressRows = [
         { scenario: "Equity selloff", description: "-20% global equities", impact: -filteredPositions.filter(p => p.asset_class === "Equity").reduce((s, p) => s + p.market_value, 0) * 0.20 },
@@ -778,6 +879,8 @@
         { item: "Risk profile", value: `${riskProfile.label}; VaR limit ${money(riskProfile.varLimit)}; equity limit ${fmtPct(riskProfile.equityLimit * 100)}` },
         { item: "VaR / ES", value: "95% prototype ETF bucket volatility proxy; not production VaR" },
         { item: "Strategy decisions", value: "Human review only; WFO/backtest evidence is decision support, not execution" },
+        { item: "Live monitor date", value: liveAsOf },
+        { item: "Strategy simulation date", value: strategyAsOf },
         { item: "Last update", value: market.generated_at_utc ?? status.generated_at_utc ?? "N/A" }
       ], [{ label: "Item", key: "item" }, { label: "Value", key: "value" }], 20);
     }
@@ -785,8 +888,23 @@
       window.addEventListener("DOMContentLoaded", () => {
         installFastChartTooltip();
         const node = byId(id);
-        if (node) node.addEventListener("change", updateOverview);
-        if (id === "risk-limit-input" && node) node.addEventListener("input", updateOverview);
+        if (!node) return;
+        if (id === "risk-profile") {
+          node.addEventListener("change", () => {
+            const input = byId("risk-limit-input");
+            const profile = RISK_PROFILES[node.value] ?? RISK_PROFILES.conservative;
+            if (input && input.dataset.userEdited !== "true") input.value = profile.varLimit;
+            updateOverview();
+          });
+        } else {
+          node.addEventListener("change", updateOverview);
+        }
+        if (id === "risk-limit-input") {
+          node.addEventListener("input", () => {
+            node.dataset.userEdited = "true";
+            updateOverview();
+          });
+        }
       });
     });
     startLoop(updateOverview, 5);

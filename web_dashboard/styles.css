@@ -255,6 +255,16 @@ h1 {
   min-height: 104px;
 }
 
+.focus-lens-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 10px;
+}
+
+.lens-card {
+  min-height: 88px;
+}
+
 .overview-decision-map {
   display: grid;
   grid-template-columns: repeat(4, minmax(160px, 1fr));
@@ -952,6 +962,23 @@ tr[title],
   stroke-width: 1;
 }
 
+.chart-crosshair {
+  opacity: 0;
+  stroke: rgba(216, 236, 255, 0.48);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  pointer-events: none;
+}
+
+.chart-hover-group:hover .chart-crosshair {
+  opacity: 1;
+}
+
+.chart-y-label {
+  fill: var(--muted);
+  font-size: 10px;
+}
+
 .chart-hover-point {
   fill: rgba(255, 255, 255, 0.01);
   stroke: transparent;
@@ -1032,6 +1059,7 @@ tr[title],
     grid-template-columns: repeat(3, 1fr);
   }
   .kpi-grid,
+  .focus-lens-grid,
   .overview-decision-map,
   .overview-grid-main,
   .overview-grid-mid,
