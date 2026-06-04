@@ -285,11 +285,6 @@ h1 {
     linear-gradient(145deg, #101c2b, #0b1724);
 }
 
-.decision-step-card.focus {
-  border-color: rgba(78, 161, 255, 0.82);
-  box-shadow: 0 0 0 1px rgba(45, 140, 255, 0.12), var(--shadow);
-}
-
 .step-number {
   width: 28px;
   height: 28px;
